@@ -153,8 +153,7 @@ class ThemeScreen extends StatelessWidget {
                           // 버튼이 클릭되었을 때의 동작 추가
                           print('Button clicked!');
                         },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue, // 버튼 색상
+                        style: ElevatedButton.styleFrom( // 버튼 색상 지웠음 확인해보기
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(10.0), // 모서리를 둥글게 만듭니다.

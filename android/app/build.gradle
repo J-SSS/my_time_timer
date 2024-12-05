@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -24,7 +25,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.mtt.my_time_timer"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion flutter.compileSdkVersion // compileSdk = flutter.compileSdkVersion로 변경 필요?
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -33,7 +34,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     sourceSets {
@@ -45,10 +46,18 @@ android {
         applicationId "com.mtt.my_time_timer"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        /* 최신버전은 아래와 같음. 비교해보기
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        */
     }
 
     buildTypes {
@@ -62,8 +71,6 @@ android {
 
 flutter {
     source '../..'
-    compileSdkVersion = 33
-    minSdkVersion = 22
 }
 
 dependencies {}

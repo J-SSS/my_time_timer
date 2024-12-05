@@ -49,9 +49,11 @@ class TimerController extends ChangeNotifier {
   get remainTime => _remainTime;
 
   set setSetupTime(int setupTime) {
-    this._setupTime = setupTime;
-    this._remainTime = setupTime;
-    notifyListeners();
+    if(this._setupTime != setupTime || this._remainTime != setupTime) {
+      this._setupTime = setupTime;
+      this._remainTime = setupTime;
+      notifyListeners();
+    }
   }
 
   // 안쓰는 것으로 추정
