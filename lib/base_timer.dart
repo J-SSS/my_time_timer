@@ -8,6 +8,7 @@ import 'package:my_time_timer/provider/app_config.dart';
 import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/repository/timer_repository.dart';
+import 'package:my_time_timer/widgets/my_app_bar.dart';
 
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,6 @@ import 'package:my_time_timer/widgets/battery_type.dart';
 import 'package:my_time_timer/list_drawer.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
 
 class ProviderTest  extends StatelessWidget{
   ProviderTest(){
@@ -88,31 +88,12 @@ class MyTimeTimer extends StatelessWidget {
     AppManager.log('메인 생성');
     // 초기화
     context.read<TimerViewModel>().loadPreset();
-
     late Size mainSize = MediaQuery.sizeOf(context);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {}); // print('초기화');
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      // print('초기화');
-    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('My Time Timer'),
-        centerTitle: true,
-        toolbarHeight: mainSize.height / 10,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => setting_screen.SettingScreen()),
-              );
-            },
-            icon: Icon(Icons.settings),
-            color: Colors.grey,
-          )
-        ],
-      ),
+      appBar: MyAppBar(mainSize: mediaSize),
       drawer: ListDrawer(), // 보조 화면
       body: Center(
         child: Column(
