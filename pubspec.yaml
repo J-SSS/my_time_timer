@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: ^2.0.12
   flutter_icons_null_safety: ^1.1.0
   fluttertoast: ^8.0.7
+  carousel_slider: ^5.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
