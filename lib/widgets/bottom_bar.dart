@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/base_timer.dart';
 import 'package:my_time_timer/screen/on_timer_screen.dart' as on_timer_screen;
-import 'package:my_time_timer/screen/theme_screen.dart' as theme_screen;
+import 'package:my_time_timer/screen/select_theme_screen.dart' as theme_screen;
 import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config.dart';
@@ -21,9 +21,11 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
   late Timer _timer; // 타이머
   var _time = 60; // 실제 늘어날 시간
   var _isPause = false;
+  late Size safeSize;
 
   @override
   Widget build(BuildContext context) {
+    safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     return Stack(
       children: <Widget>[
         SizedBox( /** 배경 영역 */
@@ -75,7 +77,7 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
                       // _reset();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => theme_screen.ThemeScreen()),
+                        MaterialPageRoute(builder: (context) => theme_screen.SelectThemeScreen(safeSize : safeSize)),
                         // MaterialPageRoute(builder: (context) => setting_screen.MySettingScreen()),
                       );
                     },

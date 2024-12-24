@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+import 'package:my_time_timer/provider/app_config.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
-import 'package:my_time_timer/screen/theme_screen.dart' as theme_screen;
+import 'package:my_time_timer/screen/select_theme_screen.dart' as theme_screen;
 import 'dart:math' as math;
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -128,6 +129,7 @@ class _PresetWidgetState extends State<PresetWidget> {
   List<String> items = ['- 피자타입', '- 배터리타입'];
   bool isExpanded = false; // ExpansionTile의 초기 상태
   List<String> expandedKey = [];
+  late Size safeSize;
 
   // int _expandedTileIndex = -1; // 현재 열려 있는 타일의 인덱스를 저장
 
@@ -143,6 +145,7 @@ class _PresetWidgetState extends State<PresetWidget> {
 
   @override
   Widget build(BuildContext context) {
+    safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     print('타일사이즈 : ${widget.mediaSize}');
     _folderPreset = context.watch<TimerViewModel>().preset!.folderPreset;
     _timerPreset = context.watch<TimerViewModel>().preset!.timerPreset;
@@ -280,7 +283,7 @@ class _PresetWidgetState extends State<PresetWidget> {
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => theme_screen.SelectThemeScreen()));
+                                MaterialPageRoute(builder: (context) => theme_screen.SelectThemeScreen(safeSize : safeSize)));
                           },
                           icon: Icon(
                             Icons.add,

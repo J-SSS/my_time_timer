@@ -24,7 +24,7 @@ class OnTimerScreen extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: () {
           isVisible = false;
-          context.read<AppConfigListener>().setOnTimerBottomView = true;
+          context.read<AppConfigController>().setOnTimerBottomView = true;
           print('터치');
           // utils.showOverlayBottomBar(context);
           // setState(() {
@@ -62,7 +62,7 @@ class OnTimerScreen extends StatelessWidget {
 }
 
 // Visibility(
-// visible: context.watch<AppConfigListener>().isOnTimerBottomViewYn,
+// visible: context.watch<AppConfigController>().isOnTimerBottomViewYn,
 // child:  Container(
 // width: MediaQuery.of(context).size.width,
 // height: 150,
@@ -120,7 +120,7 @@ class _onTimerBottomBarState extends State<OnTimerBottomBar> with WidgetsBinding
   Widget build(BuildContext context) {
 
     return Visibility(
-      // visible: context.watch<AppConfigListener>().isOnTimerBottomViewYn,
+      // visible: context.watch<AppConfigController>().isOnTimerBottomViewYn,
       visible: true,
       child: Container(
         width: MediaQuery.of(context).size.width,
