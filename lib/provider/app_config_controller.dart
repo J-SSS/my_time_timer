@@ -59,23 +59,21 @@ class AppConfigController with ChangeNotifier {
   get safeSize => _safeSize;
 
   set setMediaQuery(MediaQueryData mediaQuery){
-    if(mediaQuery.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 추가하기
-      // Orientation.portrait: 세로 방향
-      // Orientation.landscape: 가로 방향
-      // this.painterSize = mediaQuery.size.width * 0.85;
-    } else {
-      // this.painterSize = mediaQuery.size.height * 0.85;
-    }
-
     this._mediaQuery = mediaQuery; // 쓰는중
     this._size = mediaQuery.size;
     this._padding = mediaQuery.padding;
 
     /*안전영역 계산*/
     this._safeHeight = mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom - 56; // 56은 AppBar 기본 높이
-    this._safeWidth = mediaQuery.size.width;
-    // todo 가로세로별 계산도 추가하기
-
+    this._safeWidth = mediaQuery.size.width - mediaQuery.padding.left - mediaQuery.padding.right;
     this._safeSize = Size(_safeHeight,_safeHeight);
+
+    if(mediaQuery.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 필요시 추가
+      // Orientation.portrait: 세로 방향
+      // Orientation.landscape: 가로 방향
+      // this.painterSize = mediaQuery.size.width * 0.85;
+    } else {
+      // this.painterSize = mediaQuery.size.height * 0.85;
+    }
   }
 }
