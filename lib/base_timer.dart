@@ -3,7 +3,7 @@ import 'package:my_time_timer/main.dart';
 import 'dart:developer';
 
 import 'package:my_time_timer/provider/timer_controller.dart';
-import 'package:my_time_timer/provider/app_config.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 
 import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/base_timer.dart';
 import 'dart:developer';
 
-import 'package:my_time_timer/provider/app_config.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 
 /** 원형 타입에서 클릭 위치를 1/60 시간 단위로 변환 */

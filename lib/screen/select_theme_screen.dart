@@ -3,7 +3,7 @@ import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../provider/app_config.dart';
+import '../provider/app_config_controller.dart';
 import 'create_theme_screen.dart';
 
 

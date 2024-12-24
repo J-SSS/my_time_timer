@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
-import 'package:my_time_timer/provider/app_config.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/screen/select_theme_screen.dart' as theme_screen;
 import 'dart:math' as math;

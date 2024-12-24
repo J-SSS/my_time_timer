@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_time_timer/utils/timer_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
-import 'package:my_time_timer/provider/app_config.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 
 class BatteryType extends StatefulWidget {
   bool isOnTimer = false;

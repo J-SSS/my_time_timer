@@ -7,7 +7,7 @@ import 'package:my_time_timer/screen/on_timer_screen.dart' as on_timer_screen;
 import 'package:my_time_timer/screen/select_theme_screen.dart' as theme_screen;
 import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
 import 'package:my_time_timer/provider/timer_controller.dart';
-import 'package:my_time_timer/provider/app_config.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 
 
 class ButtomBarWidget extends StatefulWidget{
