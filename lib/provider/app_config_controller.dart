@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+enum TimeUnit { sec, min, hour }
 
 class AppConfigController with ChangeNotifier {
   BuildContext? context;
@@ -31,7 +32,18 @@ class AppConfigController with ChangeNotifier {
   // final double totalHeight = statusBarHeight + appBarHeight;
 
 
+  /* createTimer 에서 쓸 값 */
+  int _timeUnit = 0; // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+  // _ItemBtnMaxTime 최대 시간
+  // _ItemBtnRemainTime 남은 시간 표시
+  //_ItemBtnTimerColor  색상
+  // _ItemBtnAlarmType 무음/진동/알람
 
+  get timeUnit => _timeUnit;
+  set setTimeUnit(int val){
+    this._timeUnit = val;
+    notifyListeners();
+  }
 
   bool isOnTimerBottomViewYn = false;
 
@@ -48,7 +60,6 @@ class AppConfigController with ChangeNotifier {
 
       // myTimer.cancel();
     }
-
   }
 
   get mediaQuery => _mediaQuery;
@@ -59,18 +70,17 @@ class AppConfigController with ChangeNotifier {
   get safeSize => _safeSize;
 
   set setMediaQuery(MediaQueryData mediaQuery){
-    this._mediaQuery = mediaQuery; // 쓰는중
+    this._mediaQuery = mediaQuery;
     this._size = mediaQuery.size;
     this._padding = mediaQuery.padding;
 
     /*안전영역 계산*/
     this._safeHeight = mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom - 56; // 56은 AppBar 기본 높이
     this._safeWidth = mediaQuery.size.width - mediaQuery.padding.left - mediaQuery.padding.right;
-    this._safeSize = Size(_safeHeight,_safeHeight);
+    this._safeSize = Size(_safeWidth,_safeHeight);
 
-    if(mediaQuery.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 필요시 추가
-      // Orientation.portrait: 세로 방향
-      // Orientation.landscape: 가로 방향
+    // Orientation.portrait: 세로 방향, Orientation.landscape: 가로 방향
+    if(mediaQuery.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 필요 시 추가
       // this.painterSize = mediaQuery.size.width * 0.85;
     } else {
       // this.painterSize = mediaQuery.size.height * 0.85;

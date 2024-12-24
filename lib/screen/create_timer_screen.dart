@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/screen/select_item_screen.dart';
 
 import '../provider/timer_controller.dart';
 import '../widgets/pizza_type.dart';
 
-class CreateThemeScreen extends StatelessWidget {
+class CreateTimerScreen extends StatelessWidget {
+  final Size safeSize;
+  CreateTimerScreen(this.safeSize, {super.key});
+
   @override
   Widget build(BuildContext context) {
+    print('빌드');
+    print(safeSize.width);
+    print(safeSize.height);
+    print(safeSize.height * 0.7);
     return Scaffold(
         appBar: AppBar(
           title: Text('타이틀을 입력 하세요.'),
-          toolbarHeight: MediaQuery.of(context).size.height / 10,
+          // toolbarHeight: 56,
           centerTitle: true,
         ),
         body: Center(
@@ -20,7 +28,7 @@ class CreateThemeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    height: MediaQuery.of(context).size.height * (6 / 10),
+                    height: safeSize.height * 0.7,
                     child: Center(
                       child: Stack(
                         children: [
@@ -36,12 +44,12 @@ class CreateThemeScreen extends StatelessWidget {
                       ),
                     )),
                 SizedBox(
-                    height: MediaQuery.of(context).size.height * (2.0 / 10),
+                    height: safeSize.height * 0.3,
                     child: Column(
                       children: [
                         Container(
-                          width: 320.0,
-                          height: 60.0,
+                          width: safeSize.width * 0.85,
+                          height: safeSize.height * 0.125,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(50.0),
@@ -59,21 +67,25 @@ class CreateThemeScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              _buildItemButton(context),
-                              _buildItemButton(context),
-                              _buildItemButton(context),
-                              _buildItemButton(context),
-                              _buildItemButton(context),
-                              _buildItemButton(context),
+                              // _ItemBtnTimeUnit(context), // 시간 단위
+                              // _ItemBtnMaxTime(context), // 최대 시간
+                              // _ItemBtnRemainTime(context), // 남은 시간 표시
+                              // _ItemBtnTimerColor(context), // 색상(3단)
+                              // _ItemBtnAlarmType(context), // 무음/진동/알람
+                              _ItemBtn(context,"A"), // 시간 단위
+                              _ItemBtn(context,"B"), // 최대 시간
+                              _ItemBtn(context,"C"), // 남은 시간 표시
+                              _ItemBtn(context,"D"), // 색상(3단)
+                              _ItemBtn(context,"E"), // 무음/진동/알람
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: 25,
+                          height: safeSize.height * 0.02,
                         ),
                         Container(
-                          width: 95.0,
-                          height: 50.0,
+                          width: safeSize.width * 0.3,
+                          height: safeSize.height * 0.08,
                           color: Colors.transparent, // Container의 배경색
                           child: ElevatedButton(
                             onPressed: () {
@@ -89,7 +101,7 @@ class CreateThemeScreen extends StatelessWidget {
                             child: Text(
                               'O K',
                               style: TextStyle(
-                                color: Colors.white, // 텍스트 색상
+                                color: Colors.grey, // 텍스트 색상
                                 fontSize: 20.0,
                               ),
                             ),
@@ -101,21 +113,58 @@ class CreateThemeScreen extends StatelessWidget {
             )));
   }
 
-  Widget _buildItemButton(BuildContext context) {
+  Widget _ItemBtn(BuildContext context, String type) {
+    // A 시간 단위
+    // B 최대 시간
+    // C 남은 시간 표시
+    // D 색상(3단)
+    // E 무음/진동/알람
+    String btnType = type;
+
     return Material(
-      color: Colors.transparent,
+      color: Colors.grey.withOpacity(0.2),
       shape: CircleBorder(), // 동그랗게 그림자를 만듭니다.
       child: InkWell(
-        borderRadius: BorderRadius.circular(50.0),
+        borderRadius: BorderRadius.circular(40),
         onTap: () {
           CustomDialog.show(context);
         },
         child: Icon(
           Icons.add_circle_rounded,
-          color: Colors.grey.withOpacity(0.2),
-          size: 50,
+          color: Colors.grey.withOpacity(0.5),
+          size: safeSize.height * 0.125 * 0.55,
+        ),
+      ),
+    );
+  }
+  Widget _ItemBtnTimeUnit(BuildContext context) {
+    int idx = context.select((AppConfigController a) => a.timeUnit);
+    return Material(
+      color: Colors.grey.withOpacity(0.2),
+      shape: CircleBorder(),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(40),
+        onTap: () {
+          idx = (idx + 1) % 3;
+          context.read<AppConfigController>().setTimeUnit = idx;
+          // print(TimeUnit.values[idx].name);
+          // context.select((AppConfigController a) => a.timeUnit)
+        },
+        child: Container(
+          width: 40, // 가로 크기
+          height: 40, // 세로 크기
+          alignment: Alignment.center, // 텍스트를 중앙에 배치
+          child: Text(
+            TimeUnit.values[context.select((AppConfigController a) => a.timeUnit)].name,
+            style: TextStyle(
+              color: Colors.grey, // 텍스트 색상
+              fontSize: 13, // 텍스트 크기
+              fontWeight: FontWeight.bold, // 텍스트 두께
+            ),
+          ),
         ),
       ),
     );
   }
 }
+
