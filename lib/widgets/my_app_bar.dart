@@ -3,13 +3,12 @@ import 'package:my_time_timer/screen/setting_screen.dart';
 
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Size mainSize;
+  final Size safeSize;
 
-  MyAppBar({required this.mainSize, Key? key}) : super(key: key);
+  MyAppBar({required this.safeSize, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // print(mainSize.height / 10);
     return AppBar(
       title: Text('My Time Timer'),
       centerTitle: true,
@@ -30,5 +29,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(mainSize.height / 10);
+  Size get preferredSize => const Size.fromHeight(56);
 }

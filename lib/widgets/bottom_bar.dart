@@ -10,14 +10,15 @@ import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
 
-class ButtomBarWidget extends StatefulWidget{
-  const ButtomBarWidget({super.key});
+class BottomBarWidget extends StatefulWidget{
+  final Size safeSize;
+  const BottomBarWidget({super.key, required this.safeSize});
 
   @override
-  State<StatefulWidget> createState() => _ButtomBarWidgetState();
+  State<StatefulWidget> createState() => _BottomBarWidgetState();
 }
 
-class _ButtomBarWidgetState extends State<ButtomBarWidget>{
+class _BottomBarWidgetState extends State<BottomBarWidget>{
   late Timer _timer; // 타이머
   var _time = 60; // 실제 늘어날 시간
   var _isPause = false;
@@ -28,16 +29,12 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
     safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     return Stack(
       children: <Widget>[
-        SizedBox( /** 배경 영역 */
-          width: 300,
-          height: 150,
-        ),
         Positioned( /** 상단 반원 영역 */
-            left : 105,
-            top: 5,
+            left : safeSize.width * 0.39,
+            top: 0,
             child: Container(
-              width: 100,
-              height: 100,
+              width: safeSize.width * 0.22,
+              height: safeSize.width * 0.22,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(50.00),
@@ -46,16 +43,17 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
                     color: Colors.black26.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset: Offset(0, -0),
+                    offset: Offset(0, 0),
                   ),
                 ],
               ),
             )
         ),
         Positioned( /** 하단 사각 영역 */
-          top: 50,
-          child:  Container(
-              width: 300,
+          top: safeSize.width * 0.1,
+          left: safeSize.width * 0.1,
+          child: Container(
+              width: safeSize.width * 0.8,
               height: 80,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -84,12 +82,12 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10.0),
-                      fixedSize: Size(70.0, 70.0),
+                      fixedSize: Size(65.0, 65.0),
                     ),
                     child:  Image.asset(
                       'assets/icon/btm_theme.png',
-                      width: 45.0,
-                      height: 45.0,
+                      // width: 45.0,
+                      // height: 45.0,
                     ),
                   ),
                   SizedBox(width: 100,),
@@ -100,12 +98,12 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(10.0),
-                      fixedSize: Size(70.0, 70.0),
+                      fixedSize: Size(65.0, 65.0),
                     ),
                     child:  Image.asset(
                       'assets/icon/${context.select((TimerController t) => t.loopBtn)}.png',
-                      width: 45.0,
-                      height: 45.0,
+                      // width: 45.0,
+                      // height: 45.0,
                     ),
                   ),
                 ],
@@ -113,11 +111,11 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
           ),
         ),
         Positioned( /** 재생버튼 */
-            left : 110,
-            top: 10,
+            left : safeSize.width * 0.39,
+            top: 0,
             child: Container(
-              width: 90,
-              height: 90,
+              width: safeSize.width * 0.22,
+              height: safeSize.width * 0.22,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(50.00),
@@ -138,8 +136,8 @@ class _ButtomBarWidgetState extends State<ButtomBarWidget>{
                 ),
                 child:  Image.asset(
                   'assets/icon/${context.select((TimerController t) => t.playBtn)}.png',
-                  width: 120.0,
-                  height: 120.0,
+                  // width: safeSize.width,
+                  // height: 120.0,
                 ),
               ),
             )
