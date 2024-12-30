@@ -91,31 +91,46 @@ int clickToMin2(Offset clickPoint, Size size) {
   return angleToMin;
 }
 
-/** 설정한 시간을 Overlay 위젯으로 표시 */
-void showOverlayText(BuildContext context) {
-  OverlayEntry overlayEntry;
+// OverlayEntry? overlayEntryTime;
+// OverlayEntry? overlayEntry;
 
-  overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: MediaQuery.of(context).size.height / 2,
-      left: MediaQuery.of(context).size.width / 2 - 50.0,
-      child: Material(
+const TextStyle overlayTextStyle = TextStyle(color: Colors.white, fontSize: 25 * 1, fontWeight: FontWeight.bold);
+
+OverlayEntry? _overlayEntryTime; // 오버레이를 저장할 변수
+Timer? _timerForTime; // 타이머를 저장할 변수
+Timer? _overlayEntryTimer; // 타이머를 저장할 변수
+
+/** 설정한 시간을 Overlay 위젯으로 표시 */
+void showOverlayText(BuildContext context, Size size, String msg) {
+  TextPainter textPainter = getTextPainter("${msg} mins",TextStyle(
+      color: Colors.white,
+      fontSize: 25,
+      fontWeight: FontWeight.bold));
+
+  // print(textPainter.);
+  /* 기존 overlayEntry 있으면 삭제 */
+  if(_overlayEntryTime != null){
+    _overlayEntryTime?.remove();
+    _overlayEntryTime = null;
+    _timerForTime?.cancel();
+  }
+
+  /* 새 overlayEntry 등록 */
+  _overlayEntryTime = OverlayEntry(
+    builder: (context) => Center(
+      child: Material( // todo Material 제거해도될듯
         color: Colors.transparent,
         child: Container(
-          width: 120.0,
-          height: 60.0,
+          width: size.width * 0.35,
+          height: size.height * 0.07,
           decoration: BoxDecoration(
-            color: Colors.blueGrey.withOpacity(0.01),
+            color: Colors.blueGrey.withOpacity(1),
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
-              context.select(
-                  (TimerController t) => t.setupTime.toString() + " mins"),
-              style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+              "${msg} mins",
+              style: overlayTextStyle,
             ),
           ),
         ),
@@ -123,56 +138,83 @@ void showOverlayText(BuildContext context) {
     ),
   );
 
-  Overlay.of(context).insert(overlayEntry);
-
-  // 1초 후에 OverlayEntry를 제거하여 텍스트를 사라지게 함
-  Future.delayed(Duration(milliseconds: 500), () {
-    overlayEntry.remove();
+  Overlay.of(context).insert(_overlayEntryTime!);
+  _timerForTime = Timer(Duration(milliseconds: 500), () {
+    _overlayEntryTime?.remove();
+    _overlayEntryTime = null;
   });
+
+
+  // 업데이트 시 `overlayEntry.markNeedsBuild()` 호출
+  // overlayEntry.markNeedsBuild();
 }
 
-// CarouselSlider(
-//     options: CarouselOptions(
-//       height: 500,
-//       aspectRatio: 16 / 9, // 화면 비율(16/9)
-//       viewportFraction: 1.0, // 페이지 차지 비율(0.8)
-//       // autoPlay: false, // 자동 슬라이드(false)
-//       // autoPlayInterval: const Duration(seconds: 4), // 자동 슬라이드 주기(4seconds)
-//       onPageChanged: ((index, reason) {
-//         // 페이지가 슬라이드될 때의 기능 정의
-//         print('미디어쿼리');
-//         print(MediaQuery.of(context).size);
-//       }),
-//     ),
-//     items: ['pizza', 'battery'].map((type) {
-//       return Builder(
-//         builder: (BuildContext context) {
-//           return Padding(
-//               padding: EdgeInsets.fromLTRB(
-//                   10.0, 5.0, 10.0, 5.0), //좌 상 우 하
-//               child: Container(
-//                   width: MediaQuery.of(context).size.width,
-//                   margin: EdgeInsets.symmetric(horizontal: 5.0),
-//                   decoration: BoxDecoration(
-//                       color: Colors.white,
-//                       borderRadius: BorderRadius.circular(15.0),
-//                       boxShadow: [
-//                         BoxShadow(
-//                           color: Colors.black26.withOpacity(0.1),
-//                           spreadRadius: 1,
-//                           blurRadius: 5,
-//                           offset: Offset(0, 3), // 음영의 위치 조절
-//                         ),
-//                       ]),
-//                   child: Center(
-//                     child: Stack(children: [
-//                       pizzaTypeBase(),
-//                       pizzaType(),
-//                     ]),
-//                   )));
-//         },
-//       );
-//     }).toList()),
+/** TextPainter 얻기 */
+TextPainter getTextPainter(String text, TextStyle style) {
+  // TextSpan 생성
+  TextSpan textSpan = TextSpan(text: text, style: style);
+
+  // TextPainter 생성 및 설정
+  TextPainter textPainter = TextPainter(
+    text: textSpan,
+    textDirection: TextDirection.ltr, // 텍스트 방향
+  );
+  // 텍스트 레이아웃 계산
+  textPainter.layout();
+  // painter.layout(maxWidth: 200); // 최대 너비를 설정
+  return textPainter;
+}
+
+
+/** 정보를 Overlay 위젯으로 표시 */
+void showOverlayInfo(BuildContext context, Size size, String msg) {
+  TextPainter textPainter = getTextPainter("${msg} mins",TextStyle(
+      color: Colors.white,
+      fontSize: 25,
+      fontWeight: FontWeight.bold));
+
+  // print(textPainter.);
+  /* 기존 overlayEntry 있으면 삭제 */
+  if(_overlayEntryTime != null){
+    _overlayEntryTime?.remove();
+    _overlayEntryTime = null;
+    _timerForTime?.cancel();
+  }
+
+  /* 새 overlayEntry 등록 */
+  _overlayEntryTime = OverlayEntry(
+    builder: (context) => Center(
+      child: Material( // todo Material 제거해도될듯
+        color: Colors.transparent,
+        child: Container(
+          width: size.width * 0.35,
+          height: size.height * 0.07,
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.withOpacity(1),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Center(
+            child: Text(
+              "${msg} mins",
+              style: overlayTextStyle,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Overlay.of(context).insert(_overlayEntryTime!);
+  _timerForTime = Timer(Duration(milliseconds: 500), () {
+    _overlayEntryTime?.remove();
+    _overlayEntryTime = null;
+  });
+
+
+  // 업데이트 시 `overlayEntry.markNeedsBuild()` 호출
+  // overlayEntry.markNeedsBuild();
+}
+
 
 // // 제네릭 함수를 사용하여 특정 타입의 위젯을 찾기
 // T? findWidgetByKey<T>(BuildContext context, Key key) {
@@ -181,9 +223,7 @@ void showOverlayText(BuildContext context) {
 
 
 
-
 //   final customTimer = CustomTimer(duration: Duration(seconds: 5));
-//
 //   customTimer.start();
 //
 //   // 3초 후에 타이머 일시 정지
