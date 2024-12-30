@@ -36,17 +36,13 @@ class OnTimerScreen extends StatelessWidget {
               Positioned(
                 top: 200,
                 left: 30,
-                child: PizzaTypeBase(
-                  size: Size(350, 350),
-                ),
+                child: PizzaTypeBase(),
               ),
               Positioned(
                 top: 200,
                 left: 30,
                 child: PizzaType(
-                    size: Size(350, 350),
-                    isOnTimer: true,
-                    setupTime: context.read<TimerController>().setupTime),
+                    isOnTimer: true)
               ),
               Positioned(
                 bottom: 0,

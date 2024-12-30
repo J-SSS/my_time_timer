@@ -117,8 +117,8 @@ class MyTimeTimer extends StatelessWidget {
             SizedBox(
                 height: safeSize.height * 0.7,
                 child: Center(
-                  // child: TimerLoader().timerLoader(context, "pizza")
-                  child: TimerLoader().timerLoader(context, "battery")
+                  child: TimerLoader().timerLoader(context, "pizza")
+                  // child: TimerLoader().timerLoader(context, "battery")
                 )),
             SizedBox(
               height: safeSize.height * 0.2,

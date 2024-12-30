@@ -13,55 +13,53 @@ class TimerLoader {
 
   Widget timerLoader(BuildContext context, String type){
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+    int? beforeTime;
     if(type == "pizza"){
       return GestureDetector(
         onPanUpdate: (point) {
-          utils.showOverlayText(context);
           Offset clickPoint = point.localPosition;
-          int clickToMin = utils.angleToMin(clickPoint, Size(350, 350));
-          context.read<TimerController>().setSetupTime = clickToMin;
+          int clickToMin = utils.angleToMin(clickPoint, safeSize);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToMin)){
+            utils.showOverlayText(context,safeSize,clickToMin.toString());
+            context.read<TimerController>().setSetupTime = clickToMin;
+            beforeTime = clickToMin;
+          }
         },
         child: Stack(children: [
-          PizzaTypeBase(size: Size(350, 350)),
+          PizzaTypeBase(),
           PizzaType(
-            size: Size(350, 350),
             isOnTimer: false,
-            setupTime: context.read<TimerController>().setupTime,
           ),
         ]),
       );
     } else if(type == "battery"){
       return GestureDetector(
         onPanUpdate: (point) {
-          utils.showOverlayText(context);
           Offset clickPoint = point.localPosition;
-          int clickToMin = utils.clickToMin2(clickPoint, safeSize);
-          context.read<TimerController>().setSetupTime = clickToMin;
+          int clickToMin = utils.angleToMin(clickPoint, safeSize);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToMin)){
+            utils.showOverlayText(context,safeSize,clickToMin.toString());
+            context.read<TimerController>().setSetupTime = clickToMin;
+            beforeTime = clickToMin;
+          }
         },
         child: Stack(children: [
-          BatteryTypeBase(
-              size: Size(safeSize.width, safeSize.height)),
-          BatteryType(
-              size: Size(safeSize.width, safeSize.height),
-              isOnTimer: false,
-              setupTime:
-              context.read<TimerController>().setupTime),
+          BatteryTypeBase(),
+          BatteryType(isOnTimer: false)
         ]),
       );
     } else {
       return GestureDetector(
         onPanUpdate: (point) {
-          utils.showOverlayText(context);
           Offset clickPoint = point.localPosition;
           int clickToMin = utils.angleToMin(clickPoint, Size(350, 350));
+          utils.showOverlayText(context,safeSize,clickToMin.toString());
           context.read<TimerController>().setSetupTime = clickToMin;
         },
         child: Stack(children: [
-          PizzaTypeBase(size: Size(350, 350)),
+          PizzaTypeBase(),
           PizzaType(
-            size: Size(350, 350),
             isOnTimer: false,
-            setupTime: context.read<TimerController>().setupTime,
           ),
         ]),
       );

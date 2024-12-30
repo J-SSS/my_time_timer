@@ -8,11 +8,8 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 
 class PizzaType extends StatefulWidget {
   bool isOnTimer = false;
-  int setupTime;
-  Size size;
-  // bool isPlaying =
 
-  PizzaType({super.key,required this.size, required this.isOnTimer, required this.setupTime});
+  PizzaType({super.key, required this.isOnTimer});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,8 +23,9 @@ class _PizzaTypeState extends State<PizzaType> {
   @override
   Widget build(BuildContext context) {
     // print('피자타입 ${widget.isOnTimer}');
+    Size safeSize = context.read<AppConfigController>().safeSize;
     return CustomPaint(
-      size: widget.size, // 원하는 크기로 지정
+      size: safeSize, // 원하는 크기로 지정
       painter: PizzaTypePainter(
         angleToMin: widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
       ),
@@ -47,7 +45,7 @@ class PizzaTypePainter extends CustomPainter {
     Paint paint = Paint()
     ..color = Colors.red
     // ..color = Color(0xFF56B5B7) // 진한 민트
-      // ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
+    //   ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
       ..style = PaintingStyle.fill; // 채우기로 변경
 
     double centerX = size.width / 2;
@@ -104,9 +102,7 @@ class PizzaTypePainter extends CustomPainter {
 }
 
 class PizzaTypeBase extends StatefulWidget {
-  Size size;
-
-  PizzaTypeBase({required this.size});
+  const PizzaTypeBase({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -117,8 +113,9 @@ class PizzaTypeBase extends StatefulWidget {
 class _PizzaTypeStateBase extends State<PizzaTypeBase> {
   @override
   Widget build(BuildContext context) {
+    Size safeSize = context.read<AppConfigController>().safeSize;
     return CustomPaint(
-      size: widget.size, // 원하는 크기로 지정
+      size: safeSize, // 원하는 크기로 지정
       painter: pizzaTypeBasePainter(
         context: context,
       ),
