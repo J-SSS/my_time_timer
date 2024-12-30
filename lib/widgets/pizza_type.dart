@@ -45,9 +45,9 @@ class PizzaTypePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-    // ..color = Colors.red
+    ..color = Colors.red
     // ..color = Color(0xFF56B5B7) // 진한 민트
-      ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
+      // ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
       ..style = PaintingStyle.fill; // 채우기로 변경
 
     double centerX = size.width / 2;

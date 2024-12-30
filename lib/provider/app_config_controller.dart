@@ -27,6 +27,10 @@ class AppConfigController with ChangeNotifier {
       platformBrightness	시스템의 현재 밝기 모드 (Brightness.light 또는 Brightness.dark).
    */
 
+  /**
+   * 시스템 설정에 따라 텍스트 크기가 변하는 것 막기
+   * fontSize: 16 * MediaQuery.of(context).textScaleFactor, // 고정 크기
+   */
   // final double statusBarHeight = MediaQuery.of(context).padding.top; // 상태바 높이
   // final double appBarHeight = AppBar().preferredSize.height;         // AppBar 높이
   // final double totalHeight = statusBarHeight + appBarHeight;
@@ -34,10 +38,10 @@ class AppConfigController with ChangeNotifier {
 
   /* createTimer 에서 쓸 값 */
   int _timeUnit = 0; // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-  // _ItemBtnMaxTime 최대 시간
-  // _ItemBtnRemainTime 남은 시간 표시
-  //_ItemBtnTimerColor  색상
-  // _ItemBtnAlarmType 무음/진동/알람
+  // _maxTime 최대 시간
+  // _remainTime 남은 시간 표시
+  //_timerColor  색상
+  // _alarmType 무음/진동/알람
 
   get timeUnit => _timeUnit;
   set setTimeUnit(int val){

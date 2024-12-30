@@ -9,6 +9,7 @@ import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/repository/timer_repository.dart';
 import 'package:my_time_timer/widgets/my_app_bar.dart';
+import 'package:my_time_timer/widgets/timer_loader.dart';
 
 import 'package:provider/provider.dart';
 
@@ -73,76 +74,58 @@ class MyTimeTimer extends StatelessWidget {
 // GlobalKey 생성
   // final GlobalKey<_PizzaTypeState> pizzaTypeKey = GlobalKey<_PizzaTypeState>();
 
-  late Size mediaSize;
-
   @override
   Widget build(BuildContext context) {
     AppManager.log('메인 생성', type : 'T');
-
     context.read<AppConfigController>().setMediaQuery = MediaQuery.of(context); // 미디어 쿼리 자주 호출하면 안됨
-    mediaSize = MediaQuery.sizeOf(context); // MediaQuery.of(context);랑 다름
+    Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
 
-    // print(AppBar().preferredSize.height); // AppBar 높이 확인
+    // print(MyAppBar(mainSize: safeSize).preferredSize.height); // AppBar 높이 확인
     // AppManager.log('앱 사이즈 확인');
 
     // 초기화
     context.read<TimerViewModel>().loadPreset();
-    late Size mainSize = MediaQuery.sizeOf(context);
+
     /**
      * 현재 프레임이 끝난 후, 위젯 트리가 완전히 렌더링된 뒤 실행
      * UI와 충돌하는 것 방지(ex.이전 스크롤 위치로 이동..)
      */
     WidgetsBinding.instance.addPostFrameCallback((_) {}); // print('초기화');
 
+
+    /**
+     * 테마 선택 후 OK 버튼
+     * 타이머 생성 시 버튼
+     * 한글 & 영어 폰트
+     * 테마 종류
+     * OnBackInvokedCallback is not enabled for the application. 검색해보기
+     * 즉석타이머에 시분전환
+     * 백그라운드 실행은 flutter_workmanager사용해야함(아이솔레이트는 불완전)
+     */
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: MyAppBar(mainSize: mediaSize),
+      appBar: MyAppBar(safeSize: safeSize),
       drawer: ListDrawer(), // 보조 화면
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox( // 임시
+              height: safeSize.height * 0.05,
+            ),
             SizedBox(
-                height: mainSize.height * (6 / 10),
+                height: safeSize.height * 0.7,
                 child: Center(
-                  child:
-                  // GestureDetector(
-                  //   onPanUpdate: (point) {
-                  //     utils.showOverlayText(context);
-                  //     Offset clickPoint = point.localPosition;
-                  //     int clickToMin = utils.angleToMin(clickPoint, Size(350, 350));
-                  //     context.read<TimerController>().setSetupTime = clickToMin;
-                  //   },
-                  //   child: Stack(children: [
-                  //     PizzaTypeBase(size: Size(350, 350)),
-                  //     PizzaType(
-                  //       size: Size(350, 350),
-                  //       isOnTimer: false,
-                  //       setupTime: context.read<TimerController>().setupTime,
-                  //     ),
-                  //   ]),
-                  // ),
-                  GestureDetector(
-                    onPanUpdate: (point) {
-                      utils.showOverlayText(context);
-                      Offset clickPoint = point.localPosition;
-                      int clickToMin = utils.clickToMin2(clickPoint, mediaSize);
-                      context.read<TimerController>().setSetupTime = clickToMin;
-                    },
-                    child: Stack(children: [
-                      BatteryTypeBase(
-                          size: Size(mainSize.width, mainSize.height)),
-                      BatteryType(
-                          size: Size(mainSize.width, mainSize.height),
-                          isOnTimer: false,
-                          setupTime:
-                          context.read<TimerController>().setupTime),
-                    ]),
-                  ),
+                  // child: TimerLoader().timerLoader(context, "pizza")
+                  child: TimerLoader().timerLoader(context, "battery")
                 )),
             SizedBox(
-              height: mainSize.height * (2.0 / 10),
-              child: ButtomBarWidget(),
+              height: safeSize.height * 0.2,
+              child: BottomBarWidget(safeSize: safeSize),
+            ),
+            SizedBox( // 임시
+              height: safeSize.height * 0.05,
             ),
           ],
         ),

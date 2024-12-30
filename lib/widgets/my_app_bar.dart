@@ -10,7 +10,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('My Time Timer'),
+      // title: Text('기본 타이머'),
       centerTitle: true,
       toolbarHeight: 56, // material의 기본 규격
       actions: [

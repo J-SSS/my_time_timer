@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/screen/select_item_screen.dart';
+import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
 import '../provider/timer_controller.dart';
+import '../widgets/battery_type.dart';
 import '../widgets/pizza_type.dart';
+import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
   final Size safeSize;
@@ -14,12 +17,11 @@ class CreateTimerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('빌드');
-    print(safeSize.width);
-    print(safeSize.height);
-    print(safeSize.height * 0.7);
+    print("가로 : ${safeSize.width}, 세로 : ${safeSize.height}");
+    // print(safeSize.height * 0.7);
     return Scaffold(
         appBar: AppBar(
-          title: Text('타이틀을 입력 하세요.'),
+          title: Text('내 리스트_1'),
           // toolbarHeight: 56,
           centerTitle: true,
         ),
@@ -28,28 +30,18 @@ class CreateTimerScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    height: safeSize.height * 0.7,
+                    height: safeSize.height * 0.8,
                     child: Center(
-                      child: Stack(
-                        children: [
-                          PizzaTypeBase(
-                            size: Size(350, 350),
-                          ),
-                          PizzaType(
-                              size: Size(350, 350),
-                              isOnTimer: false,
-                              setupTime:
-                              context.read<TimerController>().setupTime),
-                        ],
-                      ),
+                        child: TimerLoader().timerLoader(context, "pizza")
+                      // child: TimerLoader().timerLoader(context, "battery")
                     )),
                 SizedBox(
-                    height: safeSize.height * 0.3,
+                    height: safeSize.height * 0.2,
                     child: Column(
                       children: [
                         Container(
                           width: safeSize.width * 0.85,
-                          height: safeSize.height * 0.125,
+                          height: safeSize.height * 0.1,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(50.0),
@@ -72,16 +64,16 @@ class CreateTimerScreen extends StatelessWidget {
                               // _ItemBtnRemainTime(context), // 남은 시간 표시
                               // _ItemBtnTimerColor(context), // 색상(3단)
                               // _ItemBtnAlarmType(context), // 무음/진동/알람
-                              _ItemBtn(context,"A"), // 시간 단위
-                              _ItemBtn(context,"B"), // 최대 시간
-                              _ItemBtn(context,"C"), // 남은 시간 표시
-                              _ItemBtn(context,"D"), // 색상(3단)
-                              _ItemBtn(context,"E"), // 무음/진동/알람
+                              _ItemBtn(context,"timeUnit"), // 시간 단위
+                              _ItemBtn(context,"maxTime"), // 최대 시간
+                              _ItemBtn(context,"remainTime"), // 남은 시간 표시
+                              _ItemBtn(context,"timerColor"), // 색상(3단)
+                              _ItemBtn(context,"alarmType"), // 무음/진동/알람
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: safeSize.height * 0.02,
+                          // height: safeSize.height * 0.02,
                         ),
                         Container(
                           width: safeSize.width * 0.3,
@@ -99,7 +91,7 @@ class CreateTimerScreen extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              'O K',
+                              'SAVE',
                               style: TextStyle(
                                 color: Colors.grey, // 텍스트 색상
                                 fontSize: 20.0,
@@ -113,58 +105,104 @@ class CreateTimerScreen extends StatelessWidget {
             )));
   }
 
-  Widget _ItemBtn(BuildContext context, String type) {
-    // A 시간 단위
-    // B 최대 시간
-    // C 남은 시간 표시
-    // D 색상(3단)
-    // E 무음/진동/알람
-    String btnType = type;
+  Widget _ItemBtn(BuildContext context, String btnType) {
+    // timeUnit 시간 단위
+    // maxTime 최대 시간
+    // remainTime 남은 시간 표시
+    // timerColor 색상(3단)
+    // alarmType 무음/진동/알람
+
+    String type = btnType;
+    int idx = context.select((AppConfigController a) => a.timeUnit);
 
     return Material(
       color: Colors.grey.withOpacity(0.2),
       shape: CircleBorder(), // 동그랗게 그림자를 만듭니다.
       child: InkWell(
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(50),
         onTap: () {
-          CustomDialog.show(context);
-        },
-        child: Icon(
-          Icons.add_circle_rounded,
-          color: Colors.grey.withOpacity(0.5),
-          size: safeSize.height * 0.125 * 0.55,
-        ),
-      ),
-    );
-  }
-  Widget _ItemBtnTimeUnit(BuildContext context) {
-    int idx = context.select((AppConfigController a) => a.timeUnit);
-    return Material(
-      color: Colors.grey.withOpacity(0.2),
-      shape: CircleBorder(),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(40),
-        onTap: () {
-          idx = (idx + 1) % 3;
-          context.read<AppConfigController>().setTimeUnit = idx;
-          // print(TimeUnit.values[idx].name);
-          // context.select((AppConfigController a) => a.timeUnit)
+          switch (type){
+            case "timeUnit" : { // timeUnit 시간 단위
+              idx = (idx + 1) % 3;
+              context.read<AppConfigController>().setTimeUnit = idx;
+            }
+            case "maxTime" : { // maxTime 최대 시간
+
+            }
+            case "remainTime" : { // remainTime 남은 시간 표시
+
+            }
+            case "timerColor" : { // timerColor 색상(3단)
+
+            }
+            case "alarmType" : { // alarmType 무음/진동/알람
+
+            }
+            default : CustomDialog.show(context);
+          }
         },
         child: Container(
-          width: 40, // 가로 크기
-          height: 40, // 세로 크기
+          width: safeSize.height * 0.125 * 0.5, // 가로 크기 (높이의 반)
+          height: safeSize.height * 0.125 * 0.5, // 세로 크기
           alignment: Alignment.center, // 텍스트를 중앙에 배치
-          child: Text(
-            TimeUnit.values[context.select((AppConfigController a) => a.timeUnit)].name,
-            style: TextStyle(
-              color: Colors.grey, // 텍스트 색상
-              fontSize: 13, // 텍스트 크기
-              fontWeight: FontWeight.bold, // 텍스트 두께
-            ),
-          ),
+          child: _itemBtnIcon(context, type)
         ),
       ),
     );
   }
+
+  Widget _itemBtnIcon(BuildContext context, String btnType) {
+    switch (btnType){
+      case "timeUnit" : {
+        return Text(
+          TimeUnit.values[context.select((AppConfigController a) => a.timeUnit)].name,
+          style: TextStyle(
+            color: Colors.grey, // 텍스트 색상
+            fontSize: 16, // 텍스트 크기
+            fontWeight: FontWeight.bold, // 텍스트 두께
+          ),
+        );
+      }
+      case "maxTime" : { // maxTime 최대 시간
+        return Text(
+          "120",
+          style: TextStyle(
+            color: Colors.grey, // 텍스트 색상
+            fontSize: 16, // 텍스트 크기
+            fontWeight: FontWeight.bold, // 텍스트 두께
+          ),
+        );
+      }
+      case "remainTime" : { // remainTime 남은 시간 표시
+        return Icon(
+          Icons.textsms_outlined,
+          color: Colors.grey.withOpacity(0.5),
+          size: safeSize.height * 0.125 * 0.5,
+        );
+      }
+      case "timerColor" : { // timerColor 색상(3단)
+        return Icon(
+          Icons.color_lens,
+          color: Colors.grey.withOpacity(0.5),
+          size: safeSize.height * 0.125 * 0.5,
+        );
+      }
+      case "alarmType" : { // alarmType 무음/진동/알람
+        return Icon(
+          Icons.alarm,
+          color: Colors.grey.withOpacity(0.5),
+          size: safeSize.height * 0.125 * 0.5,
+        );
+      }
+      default : {
+        return Icon(
+          Icons.add_circle_rounded,
+          color: Colors.grey.withOpacity(0.5),
+          size: safeSize.height * 0.125 * 0.5,
+        );
+      }
+    }
+  }
+
 }
 
