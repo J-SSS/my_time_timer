@@ -133,7 +133,7 @@ class CreateTimerScreen extends StatelessWidget {
               context.read<AppConfigController>().setTimeUnit = idx;
             }
             case "maxTime" : { // maxTime 최대 시간
-
+// "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
             }
             case "remainTime" : { // remainTime 남은 시간 표시
 
