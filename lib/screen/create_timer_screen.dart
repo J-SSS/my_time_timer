@@ -29,13 +29,19 @@ class CreateTimerScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container( // 임시
+                  height: safeSize.height * 0.1,
+                  color: Colors.green.withOpacity(0.05),
+                ),
                 SizedBox(
-                    height: safeSize.height * 0.8,
+                    height: safeSize.height * 0.7,
                     child: Center(
                         child: TimerLoader().timerLoader(context, "pizza")
                       // child: TimerLoader().timerLoader(context, "battery")
                     )),
-                SizedBox(
+                Container(
+                    color: Colors.blue.withOpacity(0.05),// 임시
+                    width: safeSize.width,
                     height: safeSize.height * 0.2,
                     child: Column(
                       children: [
