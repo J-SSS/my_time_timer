@@ -9,6 +9,8 @@ import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
+import '../utils/timer_utils.dart';
+
 
 class BottomBarWidget extends StatefulWidget{
   final Size safeSize;
@@ -94,6 +96,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                   TextButton( /** 우버튼 */
                     onPressed: () {
                       context.read<TimerController>().setLoopBtn = 'set';
+                      showOverlayInfo(context,safeSize,"메시지");
                     },
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),

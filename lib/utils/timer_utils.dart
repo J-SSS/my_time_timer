@@ -124,8 +124,8 @@ void showOverlayText(BuildContext context, Size size, String msg) {
           width: size.width * 0.35,
           height: size.height * 0.07,
           decoration: BoxDecoration(
-            color: Colors.blueGrey.withOpacity(1),
-            borderRadius: BorderRadius.circular(15.0),
+            color: Colors.blueGrey.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Center(
             child: Text(
@@ -190,12 +190,12 @@ void showOverlayInfo(BuildContext context, Size size, String msg) {
           width: size.width * 0.35,
           height: size.height * 0.07,
           decoration: BoxDecoration(
-            color: Colors.blueGrey.withOpacity(1),
-            borderRadius: BorderRadius.circular(15.0),
+            color: Colors.blueGrey.withOpacity(0.7),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Center(
             child: Text(
-              "${msg} mins",
+              "${msg}",
               style: overlayTextStyle,
             ),
           ),
@@ -205,7 +205,7 @@ void showOverlayInfo(BuildContext context, Size size, String msg) {
   );
 
   Overlay.of(context).insert(_overlayEntryTime!);
-  _timerForTime = Timer(Duration(milliseconds: 500), () {
+  _timerForTime = Timer(Duration(milliseconds: 700), () {
     _overlayEntryTime?.remove();
     _overlayEntryTime = null;
   });
