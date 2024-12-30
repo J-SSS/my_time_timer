@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'My Time Timer',
           theme: ThemeData(
+              fontFamily: 'NanumSquareNeo'
             // expansionTileTheme: ExpansionTileThemeData(
             //   // tilePadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
             //   // childrenPadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),

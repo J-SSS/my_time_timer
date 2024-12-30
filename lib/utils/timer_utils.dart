@@ -94,7 +94,7 @@ int clickToMin2(Offset clickPoint, Size size) {
 // OverlayEntry? overlayEntryTime;
 // OverlayEntry? overlayEntry;
 
-const TextStyle overlayTextStyle = TextStyle(color: Colors.white, fontSize: 25 * 1, fontWeight: FontWeight.bold);
+const TextStyle overlayTextStyle = TextStyle(color: Colors.white, fontSize: 25 * 1, fontWeight: FontWeight.w800);
 
 OverlayEntry? _overlayEntryTime; // 오버레이를 저장할 변수
 Timer? _timerForTime; // 타이머를 저장할 변수

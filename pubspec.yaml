@@ -66,6 +66,20 @@ flutter:
   assets:
 #    - assets/img/
     - assets/icon/
+    - assets/fonts/
+  fonts:
+      - family: NanumSquareNeo
+        fonts:
+          - asset: assets/fonts/NanumSquareNeo-aLt.ttf
+            weight: 100
+          - asset: assets/fonts/NanumSquareNeo-bRg.ttf
+            weight: 300
+          - asset: assets/fonts/NanumSquareNeo-cBd.ttf
+            weight: 500
+          - asset: assets/fonts/NanumSquareNeo-dEb.ttf
+            weight: 700
+          - asset: assets/fonts/NanumSquareNeo-eHv.ttf
+            weight: 900
 
   # To add assets to your application, add an assets section, like this:
   # assets:
