@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_time_timer/base_timer.dart';
 
@@ -51,7 +52,12 @@ Future<void> main() async {
   // CustomBinding 사용 - 뭔지 모름
   CustomWidgetsBinding();
 
-  WidgetsFlutterBinding.ensureInitialized(); // jdi 찾아보기 : 비동기 환경에서 초기화를 보장한다?
+  WidgetsFlutterBinding.ensureInitialized(); // jdi 찾아보기 : 비동기 환경에서 초기화를 보장한다? // SystemChrome 설정 전에 호출
   final prefs = await SharedPreferences.getInstance();
-  runApp(MyApp(prefs: prefs));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, // 세로로 고정
+  ]).then((_) {
+    runApp(MyApp(prefs: prefs));
+  });
+  // runApp(MyApp(prefs: prefs));
 }
