@@ -53,9 +53,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
         ),
         Positioned( /** 하단 사각 영역 */
           top: safeSize.height * 0.2 * 0.25,
-          left: safeSize.width * 0.1,
+          left: safeSize.width * 0.2,
           child: Container(
-              width: safeSize.width * 0.8,
+              width: safeSize.width * 0.6,
               height: safeSize.height * 0.2 * 0.5,
               decoration: BoxDecoration(
                 color: Colors.white,
