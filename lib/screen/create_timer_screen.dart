@@ -31,7 +31,7 @@ class CreateTimerScreen extends StatelessWidget {
               children: [
                 Container( // 임시
                   height: safeSize.height * 0.1,
-                  color: Colors.green.withOpacity(0.05),
+                  color: Colors.green.withOpacity(0.15),
                 ),
                 SizedBox(
                     height: safeSize.height * 0.7,
@@ -40,7 +40,7 @@ class CreateTimerScreen extends StatelessWidget {
                       // child: TimerLoader().timerLoader(context, "battery")
                     )),
                 Container(
-                    color: Colors.blue.withOpacity(0.05),// 임시
+                    color: Colors.blue.withOpacity(0.15),// 임시
                     width: safeSize.width,
                     height: safeSize.height * 0.2,
                     child: Column(

@@ -114,17 +114,17 @@ class MyTimeTimer extends StatelessWidget {
           children: [
             Container( // 임시
               height: safeSize.height * 0.1,
-              color: Colors.green.withOpacity(0.05),
+              color: Colors.green.withOpacity(0.15),
             ),
             SizedBox(
                 height: safeSize.height * 0.7,
                 child: Center(
-                  // child: TimerLoader().timerLoader(context, "pizza")
-                  child: TimerLoader().timerLoader(context, "battery")
+                  child: TimerLoader().timerLoader(context, "pizza")
+                  // child: TimerLoader().timerLoader(context, "battery")
                 )),
             Container(
               height: safeSize.height * 0.2,
-              color: Colors.blue.withOpacity(0.05),
+              color: Colors.blue.withOpacity(0.15),
               child: BottomBarWidget(safeSize: safeSize),
             ),
           ],
