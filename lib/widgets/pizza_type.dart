@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
@@ -5,6 +7,14 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
+
+// double 타입 소수점 n자리 까지
+extension DoubleExtension on double {
+  double toFixed(int fractionDigits) {
+    double mod = pow(10.0, fractionDigits).toDouble();
+    return ((this * mod).round()) / mod; // 버림
+  }
+}
 
 class PizzaType extends StatefulWidget {
   bool isOnTimer = false;
@@ -24,6 +34,7 @@ class _PizzaTypeState extends State<PizzaType> {
   Widget build(BuildContext context) {
     // print('피자타입 ${widget.isOnTimer}');
     Size safeSize = context.read<AppConfigController>().safeSize;
+    // print(safeSize);
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: PizzaTypePainter(
@@ -48,15 +59,20 @@ class PizzaTypePainter extends CustomPainter {
     //   ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
       ..style = PaintingStyle.fill; // 채우기로 변경
 
+    // print("페인터 내부 사이즈 : " + size.toString());
+
     double centerX = size.width / 2;
     double centerY = size.height / 2;
     double radius = size.width / 2;
 
     double startAngle = -math.pi / 2; // 12시 방향에서 시작
-
-    var sweepAngle = (2 * math.pi) / 60 * angleToMin!;
-
-    if (sweepAngle == 0.0 || sweepAngle == 2 * math.pi) {
+    // print(startAngle);
+    var sweepAngle = (2 * math.pi) / 60 * angleToMin;
+    // print(sweepAngle);
+    // print(2 * math.pi);
+    
+    if (sweepAngle == 0.0 || sweepAngle.toFixed(2) == (2 * math.pi).toFixed(2)) {
+      // print('여기');
       // 시간 꽉 채우는 경우
       Offset center = Offset(size.width / 2, size.height / 2);
       canvas.drawCircle(center, radius, paint);

@@ -49,7 +49,7 @@ class BatteryTypePainter extends CustomPainter {
     double sizeW = size.width;
 
     double strokeW = (sizeH * 0.03).floorToDouble(); // 선 굵기 3프로
-    double paddingL = (sizeH * 0.15).floorToDouble(); // 시간 부분 패딩 사이즈
+    double paddingL = (sizeW * 0.15).floorToDouble(); // 시간 부분 패딩 사이즈
 
     double netH = sizeH - (strokeW * 3); // 배경 여백 밑 테두리 제외한 높이 좌표
     double netLength = sizeH - (strokeW * 6); // 상, 하 여백 밑 테두리 제외한 빈공간 절대높이
@@ -154,8 +154,8 @@ class BatteryTypeBasePainter extends CustomPainter {
     double sizeW = size.width;
 
     double strokeW = (sizeH * 0.03).floorToDouble(); // 선 굵기 3프로
-    double paddingL = (sizeH * 0.15).floorToDouble(); // 시간 부분 패딩 사이즈
-    double paddingHeadL = (sizeH * 0.30).floorToDouble(); // +극 부분 패딩 사이즈
+    double paddingL = (sizeW * 0.15).floorToDouble(); // 시간 부분 패딩 사이즈
+    double paddingHeadL = (sizeW * 0.35).floorToDouble(); // +극 부분 패딩 사이즈
     double paddingBaseL = paddingL-strokeW; // 테두리 부분 패딩 사이즈
 
     double width = size.width;

@@ -9,16 +9,16 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 
 /** 원형 타입에서 클릭 위치를 1/60 시간 단위로 변환 */
-int angleToMin(Offset clickPoint, Size size) {
-  int angleToMin;
+int clickToTimePizza(Offset clickPoint, Size size, int maxUnit) {
 
-  double centerX = size.width / 2;
-  double centerY = size.height / 2;
+  double centerX = (size.width - (size.width * 0.075).roundToDouble() * 2) / 2; // 좌우패딩 7.5%씩 보정
+  double centerY = size.height * 0.7 / 2; // 중간 섹션 높이 70& 보정
   double radius = size.width / 2;
+  // 페인터 내부 사이즈 : Size(349.4, 486.4)
+  // print("계산 : ${(size.width - (size.width * 0.075).roundToDouble() * 2)},${size.height * 0.7}");
 
   double startAngle = -math.pi / 2; // 12시 방향에서 시작
-  double clickAngle =
-  math.atan2(clickPoint.dy - centerY, clickPoint.dx - centerX);
+  double clickAngle = math.atan2(clickPoint.dy - centerY, clickPoint.dx - centerX);
   double sweepAngle;
 
   // print(2 * math.pi/60); // 0.10471975511965977
@@ -38,16 +38,17 @@ int angleToMin(Offset clickPoint, Size size) {
     sweepAngle = clickAngle - startAngle;
   }
 
-  angleToMin = (sweepAngle / (2 * math.pi / 60)).floor();
-  angleToMin == 0 ? angleToMin = 60 : angleToMin;
+  int angleToUnit;
+  angleToUnit = (sweepAngle / (2 * math.pi / maxUnit)).floor(); //
+  angleToUnit == 0 ? angleToUnit = maxUnit : angleToUnit;
 
-  return angleToMin;
+  return angleToUnit;
 }
 
-int clickToMin2(Offset clickPoint, Size size) {
+int clickToTimeBattery(Offset clickPoint, Size size, int maxUnit) {
   int angleToMin;
 
-  double sizeH = size.height * 0.6;
+  double sizeH = size.height * 0.7;
   double strokeW = (sizeH * 0.03).floorToDouble(); // 선 굵기 3프로
 
   double netH = sizeH - (strokeW * 3); // 배경 여백 밑 테두리 제외한 높이 좌표

@@ -80,6 +80,7 @@ class MyTimeTimer extends StatelessWidget {
     AppManager.log('메인 생성', type : 'T');
     context.read<AppConfigController>().setMediaQuery = MediaQuery.of(context); // 미디어 쿼리 자주 호출하면 안됨
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+    double mainLRPadding = (safeSize.width * 0.075).roundToDouble(); // 가로 411 기준 약 31
 
     // print(MyAppBar(mainSize: safeSize).preferredSize.height); // AppBar 높이 확인
     // AppManager.log('앱 사이즈 확인');
@@ -92,17 +93,6 @@ class MyTimeTimer extends StatelessWidget {
      * UI와 충돌하는 것 방지(ex.이전 스크롤 위치로 이동..)
      */
     WidgetsBinding.instance.addPostFrameCallback((_) {}); // print('초기화');
-
-
-    /**
-     * 테마 선택 후 OK 버튼
-     * 타이머 생성 시 버튼
-     * 한글 & 영어 폰트
-     * 테마 종류
-     * OnBackInvokedCallback is not enabled for the application. 검색해보기
-     * 즉석타이머에 시분전환
-     * 백그라운드 실행은 flutter_workmanager사용해야함(아이솔레이트는 불완전)
-     */
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -118,9 +108,12 @@ class MyTimeTimer extends StatelessWidget {
             ),
             SizedBox(
                 height: safeSize.height * 0.7,
-                child: Center(
-                  child: TimerLoader().timerLoader(context, "pizza")
-                  // child: TimerLoader().timerLoader(context, "battery")
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
+                  child: Center(
+                    // child: TimerLoader().timerLoader(context, "pizza")
+                    child: TimerLoader().timerLoader(context, "battery")
+                  ),
                 )),
             Container(
               height: safeSize.height * 0.2,

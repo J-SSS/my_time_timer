@@ -18,11 +18,11 @@ class TimerLoader {
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
-          int clickToMin = utils.angleToMin(clickPoint, safeSize);
-          if(beforeTime == null || (beforeTime != null && beforeTime != clickToMin)){
-            utils.showOverlayText(context,safeSize,clickToMin.toString());
-            context.read<TimerController>().setSetupTime = clickToMin;
-            beforeTime = clickToMin;
+          int clickToTime = utils.clickToTimePizza(clickPoint, safeSize, 60);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToTime)){
+            utils.showOverlayText(context,safeSize,clickToTime.toString());
+            context.read<TimerController>().setSetupTime = clickToTime;
+            beforeTime = clickToTime;
           }
         },
         child: Stack(children: [
@@ -36,11 +36,11 @@ class TimerLoader {
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
-          int clickToMin = utils.angleToMin(clickPoint, safeSize);
-          if(beforeTime == null || (beforeTime != null && beforeTime != clickToMin)){
-            utils.showOverlayText(context,safeSize,clickToMin.toString());
-            context.read<TimerController>().setSetupTime = clickToMin;
-            beforeTime = clickToMin;
+          int clickToTime = utils.clickToTimeBattery(clickPoint, safeSize, 60);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToTime)){
+            utils.showOverlayText(context,safeSize,clickToTime.toString());
+            context.read<TimerController>().setSetupTime = clickToTime;
+            beforeTime = clickToTime;
           }
         },
         child: Stack(children: [
@@ -52,9 +52,9 @@ class TimerLoader {
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
-          int clickToMin = utils.angleToMin(clickPoint, Size(350, 350));
-          utils.showOverlayText(context,safeSize,clickToMin.toString());
-          context.read<TimerController>().setSetupTime = clickToMin;
+          int clickToTime = utils.clickToTimePizza(clickPoint, safeSize, 60);
+          utils.showOverlayText(context,safeSize,clickToTime.toString());
+          context.read<TimerController>().setSetupTime = clickToTime;
         },
         child: Stack(children: [
           PizzaTypeBase(),
