@@ -164,12 +164,11 @@ class BatteryTypeBasePainter extends CustomPainter {
     /**
      * 선 굵기 : 세로 길이의 3프로
      * 테두리 패딩 + 선굵기 = 시간 부분 패딩
-     * +극 부분은 선 굵기의 2배 높이, 배터리 하단에도 같은 만큼의 여유 공간을 부여한다
      */
 
     Rect rect = Rect.fromLTRB(paddingBaseL, strokeW * 2, width-paddingBaseL, size.height - strokeW * 2);
     RRect rRect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
-    Rect rectHead = Rect.fromLTRB(paddingHeadL, 0, width-paddingHeadL, strokeW * 2);
+    Rect rectHead = Rect.fromLTRB(paddingHeadL, strokeW * 0.7, width-paddingHeadL, strokeW * 1.51);
 
     canvas.drawRRect(rRect, paintBody..strokeWidth = strokeW);
     canvas.drawRect(rectHead, paintHead);
