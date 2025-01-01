@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:my_time_timer/base_timer.dart';
+import 'package:my_time_timer/my_app.dart';
 
 Future<void> main() async {
   CustomWidgetsBinding();  // CustomBinding 사용 - 뭔지 모름

@@ -53,15 +53,15 @@ class MyApp extends StatelessWidget {
             //   textColor: Colors.blue,
             // ),
           ),
-        home:  MyTimeTimer()),
+        home:  const MyAppMain()),
     );
   }
 }
 
 
 
-class MyTimeTimer extends StatelessWidget {
-  const MyTimeTimer({super.key});
+class MyAppMain extends StatelessWidget {
+  const MyAppMain({super.key});
 
 // GlobalKey 생성
   // final GlobalKey<_PizzaTypeState> pizzaTypeKey = GlobalKey<_PizzaTypeState>();

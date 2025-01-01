@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:provider/provider.dart';
-import 'package:my_time_timer/base_timer.dart';
+import 'package:my_time_timer/my_app.dart';
 import 'package:my_time_timer/screen/on_timer_screen.dart' as on_timer_screen;
 import 'package:my_time_timer/screen/select_theme_screen.dart' as theme_screen;
 import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
