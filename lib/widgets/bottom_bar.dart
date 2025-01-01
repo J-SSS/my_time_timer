@@ -9,8 +9,9 @@ import 'package:my_time_timer/screen/setting_screen.dart' as setting_screen;
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
+import '../utils/app_utils.dart';
 import '../utils/timer_utils.dart';
-
+import 'package:my_time_timer/utils/app_manager.dart';
 
 class BottomBarWidget extends StatefulWidget{
   final Size safeSize;

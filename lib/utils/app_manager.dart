@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class AppManager {
   // static late IsolateTimerRunner isolateTimer;
   // static IsolateTimerRunner isolateTimer = await IsolateTimerRunner.create();
-  static int safeSize2 = 1;
+  // static int safeSize2 = 1;
 
   /// 로그 출력용
   static void log(String message, {String? type}){

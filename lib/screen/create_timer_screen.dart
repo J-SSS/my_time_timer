@@ -4,8 +4,11 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/screen/select_item_screen.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
-
+import 'package:my_time_timer/utils/app_manager.dart' as appManager;
 import '../provider/timer_controller.dart';
+import '../utils/app_manager.dart';
+import '../utils/app_utils.dart';
+import '../utils/timer_utils.dart';
 import '../widgets/battery_type.dart';
 import '../widgets/pizza_type.dart';
 import '../widgets/timer_loader.dart';
@@ -247,6 +250,7 @@ class CreateTimerScreen extends StatelessWidget {
                                   SizedBox(width: 100,),
                                   TextButton( /** 우버튼 */
                                     onPressed: () {
+                                      showOverlayInfo(context,safeSize,"초기화");
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
