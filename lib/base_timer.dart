@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
+import 'package:my_time_timer/utils/app_manager.dart';
 
 import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
@@ -21,25 +22,13 @@ import 'package:my_time_timer/list_drawer.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProviderTest extends StatelessWidget{
-  ProviderTest(){
-    print('이게되네?');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(width: 200, height: 200, color: Colors.red,child: Text('dddddddddddddd'),);
-  }
-}
-
-
 class MyApp extends StatelessWidget {
   final SharedPreferences prefs;
-
   const MyApp({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
+
     MediaQueryData mediaQuery = MediaQuery.of(context);
     // print('크기 : ' + mediaQuery.size.toString()); // size	화면의 크기 (Size 객체로 가로와 세로 길이 포함).
     // print('방향 : ' + mediaQuery.orientation.toString()); // orientation	화면 방향 (Orientation.portrait 또는 Orientation.landscape).
@@ -72,6 +61,8 @@ class MyApp extends StatelessWidget {
 
 
 class MyTimeTimer extends StatelessWidget {
+  const MyTimeTimer({super.key});
+
 // GlobalKey 생성
   // final GlobalKey<_PizzaTypeState> pizzaTypeKey = GlobalKey<_PizzaTypeState>();
 

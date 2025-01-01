@@ -6,6 +6,8 @@ import 'package:my_time_timer/main.dart';
 import 'dart:isolate';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
+import '../utils/app_manager.dart';
+
 
 class TimerController extends ChangeNotifier {
   // isolate 변수
