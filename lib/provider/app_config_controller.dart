@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 enum TimeUnit { sec, min, hour }
+enum RemainTimeStyle { none, hms, per }
 
 class AppConfigController with ChangeNotifier {
   BuildContext? context;
@@ -37,15 +38,23 @@ class AppConfigController with ChangeNotifier {
 
 
   /* createTimer 에서 쓸 값 */
-  int _timeUnit = 0; // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+  int _timeUnit = 0; /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
   // _maxTime 최대 시간
-  // _remainTime 남은 시간 표시
+  int _remainTimeStyle = 0; /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
   //_timerColor  색상
   // _alarmType 무음/진동/알람
 
+  /// 타이머 시간 단위
   get timeUnit => _timeUnit;
   set setTimeUnit(int val){
     this._timeUnit = val;
+    notifyListeners();
+  }
+
+  /// 남은 시간 표시 여부
+  get remainTimeStyle => _remainTimeStyle;
+  set setRemainTimeStyle(int val){
+    this._remainTimeStyle = val;
     notifyListeners();
   }
 
