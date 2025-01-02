@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:provider/provider.dart';
-import 'package:my_time_timer/screen/select_item_screen.dart';
+import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
 import '../widgets/timer_loader.dart';
@@ -146,7 +146,7 @@ class CreateTimerScreen extends StatelessWidget {
                                 children: [
                                   TextButton( /** 좌버튼 */
                                     onPressed: () {
-                                      CustomDialog.show(context,safeSize);
+                                      SelectColorDialog.show(context,safeSize);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -252,7 +252,7 @@ class CreateTimerScreen extends StatelessWidget {
             case "alarmType" : { // alarmType 무음/진동/알람
 
             }
-            default : CustomDialog.show(context, safeSize);
+            default : SelectColorDialog.show(context, safeSize);
           }
         },
         child: Container(

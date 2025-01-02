@@ -44,6 +44,58 @@ class AppConfigController with ChangeNotifier {
   //_timerColor  색상
   // _alarmType 무음/진동/알람
 
+
+
+  int _timerColorListSize = 0; /// 타이머 색상 리스트 (최대 5개)
+  List<int> _timerColorList = [0]; /// 타이머 색상 리스트 (최대 5개)
+  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
+
+  List<List<String>> _timerColorTextList =
+  [
+    // [],
+    // ["~100%"],
+    // ["~100%", "~50%"],
+    // [ "~100%", "~66%", "~33%"],
+    // [ "~100%", "~75%", "~50%", "~25%"],
+    // ["~100%", "~80%", "~60%", "~40%", "~20%"]
+    [],
+    ["~100%"],
+    ["~50%", "~100%"],
+    ["~33%", "~66%", "~100%"],
+    ["~25%","~50%","~75%", "~100%"],
+    ["~20%", "~40%", "~60%", "~80%", "~100%"],
+  ];
+
+  get timerColorList => _timerColorList;
+  get timerColorListSize => _timerColorListSize;
+  get timerColorData => _timerColorData;
+
+  set setTimerColorListSize(int idx){
+    _timerColorList.add(idx);
+    _timerColorListSize = _timerColorList.length;
+
+    _timerColorData.clear();
+    // print(_timerColorList.length);
+    print(_timerColorList);
+    for (var i = _timerColorList.length - 1; i >= 0; i--) {
+      _timerColorData.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorListSize][i]});
+
+      // print(_timerColorData[i]);
+    }
+
+    // print(this._timerColorListSize);
+    // this._timerColorList.add = val;
+
+    notifyListeners();
+  }
+  // set setTimerColorList(int val){
+  //   _timerColorList.add(val);
+  //   this._timerColorListSize = _timerColorList.length;
+  //   print(this._timerColorListSize);
+  //   // this._timerColorList.add = val;
+  //   notifyListeners();
+  // }
+
   /// 타이머 시간 단위
   get timeUnit => _timeUnit;
   set setTimeUnit(int val){
@@ -54,7 +106,7 @@ class AppConfigController with ChangeNotifier {
   /// 남은 시간 표시 여부
   get remainTimeStyle => _remainTimeStyle;
   set setRemainTimeStyle(int val){
-    this._remainTimeStyle = val;
+    _remainTimeStyle = val;
     notifyListeners();
   }
 
@@ -62,12 +114,12 @@ class AppConfigController with ChangeNotifier {
 
   set setOnTimerBottomView(bool bool){
     Timer myTimer;
-    this.isOnTimerBottomViewYn = true;
+    isOnTimerBottomViewYn = true;
     notifyListeners();
 
     if (bool) {
       myTimer = Timer(Duration(seconds: 3), () {
-        this.isOnTimerBottomViewYn = false;
+        isOnTimerBottomViewYn = false;
         notifyListeners();
       });
 
@@ -83,14 +135,14 @@ class AppConfigController with ChangeNotifier {
   get safeSize => _safeSize;
 
   set setMediaQuery(MediaQueryData mediaQuery){
-    this._mediaQuery = mediaQuery;
-    this._size = mediaQuery.size;
-    this._padding = mediaQuery.padding;
+    _mediaQuery = mediaQuery;
+    _size = mediaQuery.size;
+    _padding = mediaQuery.padding;
 
     /*안전영역 계산*/
-    this._safeHeight = mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom - 56; // 56은 AppBar 기본 높이
-    this._safeWidth = mediaQuery.size.width - mediaQuery.padding.left - mediaQuery.padding.right;
-    this._safeSize = Size(_safeWidth,_safeHeight);
+    _safeHeight = mediaQuery.size.height - mediaQuery.padding.top - mediaQuery.padding.bottom - 56; // 56은 AppBar 기본 높이
+    _safeWidth = mediaQuery.size.width - mediaQuery.padding.left - mediaQuery.padding.right;
+    _safeSize = Size(_safeWidth,_safeHeight);
 
     // Orientation.portrait: 세로 방향, Orientation.landscape: 가로 방향
     if(mediaQuery.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 필요 시 추가
