@@ -18,7 +18,7 @@ import 'package:my_time_timer/widgets/bottom_bar.dart';
 import 'package:my_time_timer/widgets/pizza_type.dart';
 import 'package:my_time_timer/widgets/battery_type.dart';
 
-import 'package:my_time_timer/list_drawer.dart';
+import 'package:my_time_timer/widgets/list_drawer.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:shared_preferences/shared_preferences.dart';
 
