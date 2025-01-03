@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
 import '../../utils/common_values.dart';
 
 
-class SelectColorDialog {
-  static void show(BuildContext context, Size safeSize) {
+class NumberPickerDialog {
+    void show(BuildContext context, Size safeSize) {
     double dialogInnerPadding = safeSize.width * 0.8 * 0.05;
     double dialogSafeWidth = safeSize.width * 0.8 - safeSize.width * 0.8 * 0.1;
     double dialogSafeHeight = safeSize.height * 0.7 * 0.8 - safeSize.width * 0.8 * 0.1;
@@ -50,57 +51,12 @@ class SelectColorDialog {
                   ),
                 ),
                 // 본문 2:1 비율 분할 (가로로 분할)
-                Row(
-                  children: [
-                    Container(
-                      color: Colors.transparent,
-                      width: dialogSafeWidth * 0.6,
-                      height: dialogSafeHeight * 0.8,
-                      child: Center(
-                          child: GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 50, // 셀의 최대 너비
-                          crossAxisSpacing: 15, // 열 사이 간격
-                          mainAxisSpacing: 15, // 행 사이 간격
-                          childAspectRatio: 1, // 가로:세로 비율
-                        ),
-                        itemCount: 9,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: colorList[index], // 배경색
-                            ),
-                            onPressed: () {
-                              if(size < 5){
-                                context.read<AppConfigController>().setTimerColorListSize = index;
-                              } else {
-
-                              }
-                            },
-                            child: null,
-                          );
-                        },
-                      )),
-                    ),
-                    Container(
-                      color: Colors.blue.withOpacity(0.1),
-                      width: dialogSafeWidth * 0.4,
-                      height: dialogSafeHeight * 0.8,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            _colorBtn(context)
-                            // for (var data in colorData)
-                            //   Text(data['colorIdx'].toString() + data['msg'].toString()), // 리스트의 각 요소를 Text로 변환
-
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                SizedBox(child: NumberPicker(
+                  value: 1,
+                  minValue: 0,
+                  maxValue: 100,
+                  onChanged: (value) => print('변경'),
+                ),),
                 Container(
                   color: Colors.green.withOpacity(0.1),
                   height: dialogSafeHeight * 0.1,

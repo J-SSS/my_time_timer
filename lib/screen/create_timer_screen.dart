@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
+import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
 import '../provider/timer_controller.dart';
@@ -240,6 +241,7 @@ class CreateTimerScreen extends StatelessWidget {
               context.read<AppConfigController>().setTimeUnit = idx;
             }
             case "maxTime" : { // maxTime 최대 시간
+              NumberPickerDialog().show(context,safeSize);
 // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
             }
             case "remainTimeStyle" : { // remainTime 남은 시간 표시
