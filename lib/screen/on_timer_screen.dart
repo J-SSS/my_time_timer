@@ -33,21 +33,21 @@ class OnTimerScreen extends StatelessWidget {
         child: Center(
           child: Stack(
             children: [
-              Positioned(
-                top: 200,
-                left: 30,
-                child: PizzaTypeBase(),
-              ),
-              Positioned(
-                top: 200,
-                left: 30,
-                child: PizzaType(
-                    isOnTimer: true)
-              ),
-              Positioned(
-                bottom: 0,
-                child: OnTimerBottomBar(key : keyTest),
-              ),
+              // Positioned(
+              //   top: 200,
+              //   left: 30,
+              //   child: PizzaTypeBase(),
+              // ),
+              // Positioned(
+              //   top: 200,
+              //   left: 30,
+              //   child: PizzaType(
+              //       isOnTimer: true)
+              // ),
+              // Positioned(
+              //   bottom: 0,
+              //   child: OnTimerBottomBar(key : keyTest),
+              // ),
             ],
           ),
         ),

@@ -27,10 +27,8 @@ class TimerLoader {
           }
         },
         child: Stack(children: [
-          PizzaTypeBase(),
-          PizzaType(
-            isOnTimer: false,
-          ),
+          PizzaTypeBase(safeSize: safeSize),
+          PizzaType(safeSize: safeSize, isOnTimer: false),
         ]),
       );
     } else if(type == "battery"){
@@ -45,8 +43,8 @@ class TimerLoader {
           }
         },
         child: Stack(children: [
-          BatteryTypeBase(),
-          BatteryType(isOnTimer: false)
+          BatteryTypeBase(safeSize: safeSize),
+          BatteryType(safeSize: safeSize, isOnTimer: false)
         ]),
       );
     } else {
@@ -58,12 +56,29 @@ class TimerLoader {
           context.read<TimerController>().setSetupTime = clickToTime;
         },
         child: Stack(children: [
-          PizzaTypeBase(),
-          PizzaType(
-            isOnTimer: false,
-          ),
+          PizzaTypeBase(safeSize: safeSize),
+          PizzaType(safeSize: safeSize, isOnTimer: false),
         ]),
       );
+    }
+  }
+
+  Widget sampleTimerLoader(BuildContext context, String type, Size cardSize){
+    if(type == "pizza"){
+      return Stack(children: [
+        PizzaTypeBase(safeSize: cardSize),
+        PizzaType(safeSize: cardSize, isOnTimer: false, timerType:"S"),
+      ]);
+    } else if(type == "battery"){
+      return Stack(children: [
+        BatteryTypeBase(safeSize: cardSize),
+        BatteryType(safeSize: cardSize, isOnTimer: false, timerType:"S")
+      ]);
+    } else {
+      return Stack(children: [
+        PizzaTypeBase(safeSize: cardSize),
+        PizzaType(safeSize: cardSize, isOnTimer: false, timerType:"S"),
+      ]);
     }
   }
 }

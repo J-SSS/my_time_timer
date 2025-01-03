@@ -6,8 +6,9 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 
 class BatteryType extends StatefulWidget {
   final bool isOnTimer;
-
-  const BatteryType({super.key, required this.isOnTimer});
+  Size safeSize;
+  String timerType;
+  BatteryType({required this.safeSize, super.key, required this.isOnTimer, this.timerType = "D"});
 
   @override
   State<StatefulWidget> createState() {
@@ -124,7 +125,8 @@ class BatteryTypePainter extends CustomPainter {
 }
 
 class BatteryTypeBase extends StatelessWidget{
-  const BatteryTypeBase({super.key});
+  Size safeSize;
+  BatteryTypeBase({required this.safeSize, super.key});
 
   @override
   Widget build(BuildContext context) {

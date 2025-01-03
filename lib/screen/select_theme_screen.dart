@@ -62,8 +62,8 @@ class SelectThemeScreen extends StatelessWidget {
                 items: [
                   // Text('Slide 1', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   // Container(color: Colors.blue, height: 400, child: Center(child: Text('Slide 3'))),
-                  SampleThemeWidget(title: '기본형', content: '', safeSize: safeSize),
-                  SampleThemeWidget(title: '배터리', content: '', safeSize: safeSize),
+                  SampleThemeWidget(title: '기본형', content: 'pizza', safeSize: safeSize),
+                  SampleThemeWidget(title: '배터리', content: 'battery', safeSize: safeSize),
                 ],
               ),
             ),
@@ -83,6 +83,9 @@ class SampleThemeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = 0.0;
+    double height = 0.0;
+    Size cardSize = Size(safeSize.width, safeSize.height * 0.8 * 0.6);
 
     return Card(
         elevation: 5,
@@ -118,7 +121,7 @@ class SampleThemeWidget extends StatelessWidget {
                       SizedBox(
                           height: safeSize.height * 0.8 * 0.6,
                           child: Center(
-                              child: TimerLoader().timerLoader(context, "pizza")
+                              child: TimerLoader().sampleTimerLoader(context, content, cardSize)
                             // child: TimerLoader().timerLoader(context, "battery")
                           )),
                     ],

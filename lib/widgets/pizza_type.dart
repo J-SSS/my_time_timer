@@ -18,8 +18,9 @@ extension DoubleExtension on double {
 
 class PizzaType extends StatefulWidget {
   bool isOnTimer = false;
-
-  PizzaType({super.key, required this.isOnTimer});
+  Size safeSize;
+  String timerType;
+  PizzaType({required this.safeSize, super.key, required this.isOnTimer, this.timerType = "D"});
 
   @override
   State<StatefulWidget> createState() {
@@ -118,7 +119,8 @@ class PizzaTypePainter extends CustomPainter {
 }
 
 class PizzaTypeBase extends StatefulWidget {
-  const PizzaTypeBase({super.key});
+  Size safeSize;
+  PizzaTypeBase({required this.safeSize,super.key});
 
   @override
   State<StatefulWidget> createState() {
