@@ -63,6 +63,28 @@ class TimerLoader {
     }
   }
 
+  /// 타이머 실행 시
+  Widget onTimer(BuildContext context, String type){
+    // Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+    Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈 초기화
+    if(type == "pizza"){
+      return Stack(children: [
+        PizzaTypeBase(safeSize: safeSize),
+        PizzaType(safeSize: safeSize, isOnTimer: false),
+      ]);
+    } else if(type == "battery"){
+      return Stack(children: [
+        BatteryTypeBase(safeSize: safeSize),
+        BatteryType(safeSize: safeSize, isOnTimer: false)
+      ]);
+    } else {
+      return Stack(children: [
+        PizzaTypeBase(safeSize: safeSize),
+        PizzaType(safeSize: safeSize, isOnTimer: false),
+      ]);
+    }
+  }
+
   Widget sampleTimerLoader(BuildContext context, String type, Size cardSize){
     if(type == "pizza"){
       return Stack(children: [

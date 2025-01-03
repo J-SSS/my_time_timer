@@ -1,60 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:my_time_timer/my_app.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
+import 'package:my_time_timer/widgets/timer_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/pizza_type.dart';
 
-
-class OnTimerScreen extends StatelessWidget {
-  bool isVisible = true;
-
-  final GlobalKey<_onTimerBottomBarState> keyTest = GlobalKey<_onTimerBottomBarState>();
+class OnTimerScreen extends StatefulWidget {
+  const OnTimerScreen({super.key});
 
   @override
+  State<OnTimerScreen> createState() => _OnTimerScreenState();
+}
+
+class _OnTimerScreenState extends State<OnTimerScreen> {
+  bool isVisible = true;
+  @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    print('빌드');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // print('온타이머'); // jdi : 본 위젯에 대한 콜백함수임
-      context.read<TimerController>().runTimer();
+      // context.read<TimerController>().runTimer();
     });
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive); // 상태 표시줄과 네비게이션 바 숨기기 (스와이프로 일시적으로 표시 가능)
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack); // 숨김 // GestureDetector에 덮혀있어서 수정해야함
+    // SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) async {
+    //   print(systemOverlaysAreVisible);
+    //   print('숨김중 터치');
+    //   Future.delayed(Duration(seconds: 2), () {
+    //     print('숨김중 터2치');
+    //     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+    //   });
+    // });
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); // 복원
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky); // 화면전환가능
+    // SystemUiMode.immersive: 상태 표시줄과 네비게이션 바 숨기기 (스와이프로 일시적으로 표시 가능).
+    // SystemUiMode.leanBack: 간단한 숨김 모드.
+    // SystemUiMode.edgeToEdge: 상태 표시줄과 네비게이션 바 복원.\
+
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
-          isVisible = false;
-          context.read<AppConfigController>().setOnTimerBottomView = true;
+          // isVisible = false;
+          // context.read<AppConfigController>().setOnTimerBottomView = true;
           print('터치');
           // utils.showOverlayBottomBar(context);
-          // setState(() {
-          //   });
+          setState(() {
+            !isVisible;
+            });
         },
         child: Center(
           child: Stack(
             children: [
-              // Positioned(
-              //   top: 200,
-              //   left: 30,
-              //   child: PizzaTypeBase(),
-              // ),
-              // Positioned(
-              //   top: 200,
-              //   left: 30,
-              //   child: PizzaType(
-              //       isOnTimer: true)
-              // ),
-              // Positioned(
-              //   bottom: 0,
-              //   child: OnTimerBottomBar(key : keyTest),
-              // ),
+              Positioned(
+                bottom: 0,
+                child: OnTimerBottomBar(),
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
 }
 
 // Visibility(
