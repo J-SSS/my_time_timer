@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:my_time_timer/my_app.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
+import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/widgets/timer_loader.dart';
@@ -19,8 +20,10 @@ class OnTimerScreen extends StatefulWidget {
 
 class _OnTimerScreenState extends State<OnTimerScreen> {
   bool isVisible = true;
+
   @override
   Widget build(BuildContext context) {
+    Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     print('빌드');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // print('온타이머'); // jdi : 본 위젯에 대한 콜백함수임
@@ -43,40 +46,40 @@ class _OnTimerScreenState extends State<OnTimerScreen> {
     // SystemUiMode.edgeToEdge: 상태 표시줄과 네비게이션 바 복원.\
 
     return Scaffold(
-      body: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {
-          // isVisible = false;
-          // context.read<AppConfigController>().setOnTimerBottomView = true;
-          print('터치');
-          // utils.showOverlayBottomBar(context);
-          setState(() {
-            !isVisible;
-            });
-        },
-        child: Center(
-          child: Stack(
-            children: [
-              Positioned(
-                bottom: 0,
-                child: OnTimerBottomBar(),
+      body: SafeArea(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            // isVisible = false;
+            // context.read<AppConfigController>().setOnTimerBottomView = true;
+            AppManager.log("온타이머 화면 터치", type: "G");
+            // utils.showOverlayBottomBar(context);
+            // setState(() {
+            //   !isVisible;
+            //   });
+          },
+          child: Container(
+            color: Colors.redAccent.withOpacity(0.11),
+            child: Stack(
+                children: [
+                  Positioned(
+                    top: 0,// todo 수정필요
+                    child: TimerLoader().onTimer(context, "battery")
+                    // child: TimerLoader().onTimer(context, "pizza")
+                  ),
+                  Positioned(
+                    bottom: 0,// todo 수정필요
+                    child: OnTimerBottomBar(),
+                  ),
+                ],
               ),
-            ],
-          ),
+          )
         ),
       ),
     );
   }
 }
 
-// Visibility(
-// visible: context.watch<AppConfigController>().isOnTimerBottomViewYn,
-// child:  Container(
-// width: MediaQuery.of(context).size.width,
-// height: 150,
-// color: Colors.green,
-// ),
-// )
 
 class OnTimerBottomBar extends StatefulWidget {
 
@@ -126,43 +129,107 @@ class _onTimerBottomBarState extends State<OnTimerBottomBar> with WidgetsBinding
 
   @override
   Widget build(BuildContext context) {
-
+    Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     return Visibility(
       // visible: context.watch<AppConfigController>().isOnTimerBottomViewYn,
       visible: true,
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 180, // jdi 높이 수정 필요함
-        color: Colors.grey.withOpacity(0.5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // print(widget.key);
-                context.read<TimerController>().runTimer();
+        color: Colors.blueGrey.withOpacity(0.2),
+        width: safeSize.width,
+        height: safeSize.height * 0.2,
+        child: Stack(
+          children: <Widget>[
+            Positioned( /** 하단 사각 영역 */
+              top: safeSize.height * 0.2 * 0.25,
+              left: safeSize.width * 0.225,
+              child: Container(
+                  width: safeSize.width * 0.55,
+                  height: safeSize.height * 0.2 * 0.5,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton( /** 좌버튼 */
+                        onPressed: () {
+                          Navigator.pop(context); // 닫기
+                          // _reset();
+                          // print(widget.key);
+                          //             context.read<TimerController>().runTimer();
+                          //
+                          //             // context.read<OnTimerListener>().setIsPlaying = false;
+                          //             // widget.key?.currentState?.testFunc();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: CircleBorder(),
+                          padding: EdgeInsets.all(10.0),
+                          fixedSize: Size(65.0, 65.0),
+                        ),
+                        child:  Image.asset(
+                          'assets/icon/btm_theme.png',
+                        ),
+                      ),
+                      TextButton( /** 우버튼 */
+                        onPressed: () {
 
-                // context.read<OnTimerListener>().setIsPlaying = false;
-                // widget.key?.currentState?.testFunc();
-              },
-              child: Text('시작'),
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: CircleBorder(),
+                          padding: EdgeInsets.all(10.0),
+                          fixedSize: Size(65.0, 65.0),
+                        ),
+                        child:  Image.asset(
+                          'assets/icon/${context.select((TimerController t) => t.loopBtn)}.png',
+                        ),
+                      ),
+                    ],
+                  )
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<TimerController>().cancelTimer();
-              },
-              child: Text('정지'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<TimerController>().cancelTimer();
-                Navigator.pop(context);
-              },
-              child: Text('닫기'),
+            Positioned( /** 재생버튼 */
+                left : safeSize.width * 0.4,
+                child: Container(
+                  width: safeSize.width * 0.2,
+                  height: safeSize.width * 0.2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.withOpacity(0.1),
+                        offset: const Offset(0, -1),
+                      ),
+                    ],
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      // _click(context);
+                      context.read<TimerController>().cancelTimer();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(10.0),
+                      // fixedSize: Size(90.0, 90.0),
+                    ),
+                    child:  Image.asset(
+                      'assets/icon/${context.select((TimerController t) => t.playBtn)}.png',
+                    ),
+                  ),
+                )
             ),
           ],
-        )
-
+        ),
       ),
     );
   }

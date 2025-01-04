@@ -69,7 +69,7 @@ class MyAppMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppManager.log('메인 생성', type : 'T');
+    AppManager.log('메인 생성', type : 'S');
     context.read<AppConfigController>().setMediaQuery = MediaQuery.of(context); // 미디어 쿼리 자주 호출하면 안됨
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     double mainLRPadding = (safeSize.width * 0.075).roundToDouble(); // 가로 411 기준 약 31
@@ -98,7 +98,8 @@ class MyAppMain extends StatelessWidget {
               height: safeSize.height * 0.1,
               color: Colors.green.withOpacity(0.15),
             ),
-            SizedBox(
+            Container(
+              color: Colors.blue.withOpacity(0.05),
                 height: safeSize.height * 0.7,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
@@ -107,9 +108,8 @@ class MyAppMain extends StatelessWidget {
                     child: TimerLoader().timerLoader(context, "battery")
                   ),
                 )),
-            Container(
+            SizedBox(
               height: safeSize.height * 0.2,
-              color: Colors.blue.withOpacity(0.15),
               child: BottomBarWidget(safeSize: safeSize),
             ),
           ],

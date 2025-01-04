@@ -9,15 +9,21 @@ class AppManager {
 
   /// 로그 출력용
   static void log(String message, {String? type}){
-    int length = (26 - message.length~/2);
-    String guideStr = '#' * length;
+    // int length = (30 - message.length~/2);
+    String guideStr = '#' * 5;
 
     switch(type){
-      case ('T') : {
-        return debugPrint('\x1B[33m[ $guideStr $message $guideStr ]\x1B[0m');
+      case ('S') : { // System
+        return debugPrint('\x1B[33m$guideStr System : $message $guideStr\x1B[0m');
+      }
+      case ('G') : { // Gesture
+        return debugPrint('\x1B[34m$guideStr Gesture : $message $guideStr\x1B[0m');
+      }
+      case ('B') : { // Build
+        return debugPrint('\x1B[32m$guideStr Build : $message $guideStr\x1B[0m');
       }
       default : {
-        return debugPrint('\x1B[31m[ $guideStr $message $guideStr ]\x1B[0m');
+        return debugPrint('\x1B[32m$guideStr AppLog : $message $guideStr\x1B[0m');
       }
     }
   }

@@ -65,8 +65,8 @@ class TimerLoader {
 
   /// 타이머 실행 시
   Widget onTimer(BuildContext context, String type){
-    // Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
-    Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈 초기화
+    Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+    // Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈 초기화
     if(type == "pizza"){
       return Stack(children: [
         PizzaTypeBase(safeSize: safeSize),

@@ -99,51 +99,31 @@ class CreateTimerScreen extends StatelessWidget {
                       ),
                     )),
                 Container(
-                    color: Colors.blue.withOpacity(0.15),// 임시
+                    // color: Colors.blue.withOpacity(0.15),// 임시
                     width: safeSize.width,
                     height: safeSize.height * 0.2,
                     child: Stack(
                       children: <Widget>[
-                        Positioned( /** 상단 반원 영역 */
-                            left : safeSize.width * 0.39,
-                            top: 0,
-                            child: Container(
-                              width: safeSize.width * 0.22,
-                              height: safeSize.width * 0.22,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(50.00),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 0),
-                                  ),
-                                ],
-                              ),
-                            )
-                        ),
                         Positioned( /** 하단 사각 영역 */
                           top: safeSize.height * 0.2 * 0.25,
-                          left: safeSize.width * 0.2,
+                          left: safeSize.width * 0.225,
                           child: Container(
-                              width: safeSize.width * 0.6,
-                              height: safeSize.height * 0.2 * 0.5,
+                              width: safeSize.width * 0.55,
+                              height: safeSize.height * 0.2 * 0.45,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(50.00),
+                                borderRadius: BorderRadius.circular(50),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black26.withOpacity(0.1),
+                                    color: Colors.blueGrey.withOpacity(0.1),
                                     spreadRadius: 1,
                                     blurRadius: 5,
-                                    offset: Offset(0, 3),
+                                    offset: const Offset(0, 3),
                                   ),
                                 ],
                               ),
                               child : Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton( /** 좌버튼 */
                                     onPressed: () {
@@ -160,17 +140,18 @@ class CreateTimerScreen extends StatelessWidget {
                                       padding: EdgeInsets.all(0.0),
                                       fixedSize: Size(50.0, 50.0),
                                     ),
-                                    child:  Image.asset(
+                                    child: Image.asset(
                                       'assets/icon/btn_color.png',
+                                      // width: 30,
+                                      // height: 30,
                                     ),
                                   ),
-                                  SizedBox(width: 100,),
                                   TextButton( /** 우버튼 */
                                     onPressed: () {
                                       showOverlayInfo(context,safeSize,"초기화");
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
+                                      shape: const CircleBorder(),
                                       padding: EdgeInsets.all(10.0),
                                       fixedSize: Size(55.0, 55.0),
                                     ),
@@ -183,14 +164,19 @@ class CreateTimerScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned( /** 재생버튼 */
-                            left : safeSize.width * 0.39,
-                            top: 0,
+                            left : safeSize.width * 0.4,
                             child: Container(
-                              width: safeSize.width * 0.22,
-                              height: safeSize.width * 0.22,
+                              width: safeSize.width * 0.2,
+                              height: safeSize.width * 0.2,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(50.00),
+                                borderRadius: BorderRadius.circular(50),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.blueGrey.withOpacity(0.1),
+                                    offset: const Offset(0, -1),
+                                  ),
+                                ],
                               ),
                               child: TextButton(
                                 onPressed: () {
@@ -198,13 +184,14 @@ class CreateTimerScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   shape: CircleBorder(),
+                                  // padding: EdgeInsets.all(13.0),
                                   padding: EdgeInsets.all(10.0),
-                                  fixedSize: Size(90.0, 90.0),
+                                  // fixedSize: Size(90.0, 90.0),
                                 ),
                                 child:  Image.asset(
-                                  'assets/icon/${context.select((TimerController t) => t.playBtn)}.png',
-                                  // width: safeSize.width,
-                                  // height: 120.0,
+                                  'assets/icon/btn_save.png',
+                                  // width: 200,
+                                  // height: 200.0,
                                 ),
                               ),
                             )

@@ -32,38 +32,18 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
     safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     return Stack(
       children: <Widget>[
-        Positioned( /** 상단 반원 영역 */
-            left : safeSize.width * 0.39,
-            top: 0,
-            child: Container(
-              width: safeSize.width * 0.22,
-              height: safeSize.width * 0.22,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(50.00),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0, 0),
-                  ),
-                ],
-              ),
-            )
-        ),
         Positioned( /** 하단 사각 영역 */
           top: safeSize.height * 0.2 * 0.25,
-          left: safeSize.width * 0.2,
+          left: safeSize.width * 0.225,
           child: Container(
-              width: safeSize.width * 0.6,
-              height: safeSize.height * 0.2 * 0.5,
+              width: safeSize.width * 0.55,
+              height: safeSize.height * 0.2 * 0.45,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(50.00),
+                borderRadius: BorderRadius.circular(50),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26.withOpacity(0.1),
+                    color: Colors.blueGrey.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 5,
                     offset: Offset(0, 3),
@@ -71,7 +51,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                 ],
               ),
               child : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton( /** 좌버튼 */
                     onPressed: () {
@@ -89,11 +69,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                     ),
                     child:  Image.asset(
                       'assets/icon/btm_theme.png',
-                      // width: 45.0,
-                      // height: 45.0,
                     ),
                   ),
-                  SizedBox(width: 100,),
                   TextButton( /** 우버튼 */
                     onPressed: () {
                       context.read<TimerController>().setLoopBtn = 'set';
@@ -106,8 +83,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                     ),
                     child:  Image.asset(
                       'assets/icon/${context.select((TimerController t) => t.loopBtn)}.png',
-                      // width: 45.0,
-                      // height: 45.0,
                     ),
                   ),
                 ],
@@ -115,14 +90,19 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
           ),
         ),
         Positioned( /** 재생버튼 */
-            left : safeSize.width * 0.39,
-            top: 0,
+            left : safeSize.width * 0.4,
             child: Container(
-              width: safeSize.width * 0.22,
-              height: safeSize.width * 0.22,
+              width: safeSize.width * 0.2,
+              height: safeSize.width * 0.2,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(50.00),
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, -1),
+                  ),
+                ],
               ),
               child: TextButton(
                 onPressed: () {
@@ -140,8 +120,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                 ),
                 child:  Image.asset(
                   'assets/icon/${context.select((TimerController t) => t.playBtn)}.png',
-                  // width: safeSize.width,
-                  // height: 120.0,
                 ),
               ),
             )
