@@ -3,6 +3,7 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
+import '../provider/create_timer_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
 import '../widgets/timer_loader.dart';
@@ -211,8 +212,8 @@ class CreateTimerScreen extends StatelessWidget {
     // alarmType 무음/진동/알람
 
     String type = btnType;
-    int idx = context.select((AppConfigController a) => a.timeUnit);
-    int idx2 = context.select((AppConfigController a) => a.remainTimeStyle);
+    int idx = context.select((CreateTimerController a) => a.timeUnit);
+    int idx2 = context.select((CreateTimerController a) => a.remainTimeStyle);
 
     return Material(
       color: Colors.transparent,
@@ -225,7 +226,7 @@ class CreateTimerScreen extends StatelessWidget {
           switch (type){
             case "timeUnit" : { // timeUnit 시간 단위
               idx = (idx + 1) % 3;
-              context.read<AppConfigController>().setTimeUnit = idx;
+              context.read<CreateTimerController>().setTimeUnit = idx;
             }
             case "maxTime" : { // maxTime 최대 시간
               NumberPickerDialog().show(context,safeSize);
@@ -233,7 +234,7 @@ class CreateTimerScreen extends StatelessWidget {
             }
             case "remainTimeStyle" : { // remainTime 남은 시간 표시
               idx2 = (idx2 + 1) % 3;
-              context.read<AppConfigController>().setRemainTimeStyle = idx2;
+              context.read<CreateTimerController>().setRemainTimeStyle = idx2;
             }
             case "timerColor" : { // timerColor 색상(3단)
 
@@ -258,7 +259,7 @@ class CreateTimerScreen extends StatelessWidget {
     switch (btnType){
       case "timeUnit" : {
         return Text(
-          TimeUnit.values[context.select((AppConfigController a) => a.timeUnit)].name,
+          TimeUnit.values[context.select((CreateTimerController a) => a.timeUnit)].name,
           style: TextStyle(
             color: Colors.blueGrey, // 텍스트 색상
             fontSize: 18, // 텍스트 크기
@@ -278,7 +279,7 @@ class CreateTimerScreen extends StatelessWidget {
       }
       case "remainTimeStyle" : { // remainTime 남은 시간 표시
         return  Text(
-          RemainTimeStyle.values[context.select((AppConfigController a) => a.remainTimeStyle)].name,
+          RemainTimeStyle.values[context.select((CreateTimerController a) => a.remainTimeStyle)].name,
           style: TextStyle(
             color: Colors.blueGrey, // 텍스트 색상
             fontSize: 14, // 텍스트 크기

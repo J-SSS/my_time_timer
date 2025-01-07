@@ -4,8 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-enum TimeUnit { sec, min, hour }
-enum RemainTimeStyle { none, hms, per }
+
 
 class AppConfigController with ChangeNotifier {
   BuildContext? context;
@@ -35,80 +34,6 @@ class AppConfigController with ChangeNotifier {
   // final double statusBarHeight = MediaQuery.of(context).padding.top; // 상태바 높이
   // final double appBarHeight = AppBar().preferredSize.height;         // AppBar 높이
   // final double totalHeight = statusBarHeight + appBarHeight;
-
-
-  /* createTimer 에서 쓸 값 */
-  int _timeUnit = 0; /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-  // _maxTime 최대 시간
-  int _remainTimeStyle = 0; /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-  //_timerColor  색상
-  // _alarmType 무음/진동/알람
-
-
-
-  int _timerColorListSize = 0; /// 타이머 색상 리스트 (최대 5개)
-  List<int> _timerColorList = [0]; /// 타이머 색상 리스트 (최대 5개)
-  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
-
-  List<List<String>> _timerColorTextList =
-  [
-    // [],
-    // ["~100%"],
-    // ["~100%", "~50%"],
-    // [ "~100%", "~66%", "~33%"],
-    // [ "~100%", "~75%", "~50%", "~25%"],
-    // ["~100%", "~80%", "~60%", "~40%", "~20%"]
-    [],
-    ["~100%"],
-    ["~50%", "~100%"],
-    ["~33%", "~66%", "~100%"],
-    ["~25%","~50%","~75%", "~100%"],
-    ["~20%", "~40%", "~60%", "~80%", "~100%"],
-  ];
-
-  get timerColorList => _timerColorList;
-  get timerColorListSize => _timerColorListSize;
-  get timerColorData => _timerColorData;
-
-  set setTimerColorListSize(int idx){
-    _timerColorList.add(idx);
-    _timerColorListSize = _timerColorList.length;
-
-    _timerColorData.clear();
-    // print(_timerColorList.length);
-    print(_timerColorList);
-    for (var i = _timerColorList.length - 1; i >= 0; i--) {
-      _timerColorData.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorListSize][i]});
-
-      // print(_timerColorData[i]);
-    }
-
-    // print(this._timerColorListSize);
-    // this._timerColorList.add = val;
-
-    notifyListeners();
-  }
-  // set setTimerColorList(int val){
-  //   _timerColorList.add(val);
-  //   this._timerColorListSize = _timerColorList.length;
-  //   print(this._timerColorListSize);
-  //   // this._timerColorList.add = val;
-  //   notifyListeners();
-  // }
-
-  /// 타이머 시간 단위
-  get timeUnit => _timeUnit;
-  set setTimeUnit(int val){
-    this._timeUnit = val;
-    notifyListeners();
-  }
-
-  /// 남은 시간 표시 여부
-  get remainTimeStyle => _remainTimeStyle;
-  set setRemainTimeStyle(int val){
-    _remainTimeStyle = val;
-    notifyListeners();
-  }
 
   bool isOnTimerBottomViewYn = false;
 

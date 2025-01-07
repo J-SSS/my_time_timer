@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
 import '../../utils/common_values.dart';
@@ -12,12 +13,13 @@ class SelectColorDialog {
 
     showDialog( // 여기서부터 리빌드됨
       context: context,
-      barrierDismissible: true, // 배경 터치로 닫기 여부
+      barrierDismissible: false, // 배경 터치로 닫기 여부
       builder: (BuildContext context) {
 
-      int size  = context.select((AppConfigController T) => T.timerColorListSize);
+      int size  = context.select((CreateTimerController T) => T.timerColorListSize);
       // List<int> items = context.read<AppConfigController>().timerColorList;
-      List<Map<String,String>> colorData = context.read<AppConfigController>().timerColorData;
+      List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
+      // List<Map<String,String>> colorData = context.select((AppConfigController T) => T.timerColorListSize);
 
         return Dialog(
           insetPadding: const EdgeInsets.all(0), // 기본값 변경 가능
@@ -49,7 +51,6 @@ class SelectColorDialog {
                     ],
                   ),
                 ),
-                // 본문 2:1 비율 분할 (가로로 분할)
                 Row(
                   children: [
                     Container(
@@ -73,7 +74,7 @@ class SelectColorDialog {
                             ),
                             onPressed: () {
                               if(size < 5){
-                                context.read<AppConfigController>().setTimerColorListSize = index;
+                                context.read<CreateTimerController>().setTimerColorListSize = index;
                               } else {
 
                               }
@@ -89,9 +90,18 @@ class SelectColorDialog {
                       height: dialogSafeHeight * 0.8,
                       child: Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _colorBtn(context)
+                            for (var data in colorData)
+                                _colorBtn(context, data),
+                            // if(size < 5){
+                            //
+                            // } else {
+                            //
+                            // }
+                            // _colorBtn(context),
                             // for (var data in colorData)
+                            //     _colorBtn(context, data),
                             //   Text(data['colorIdx'].toString() + data['msg'].toString()), // 리스트의 각 요소를 Text로 변환
 
 
@@ -108,10 +118,11 @@ class SelectColorDialog {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
+                        context.read<CreateTimerController>().assignTimerUIData();
                         Navigator.pop(context); // 다이얼로그 닫기
                         // Navigator.of(context).pop(); // 다이얼로그 닫기
                       },
-                      child: const Text('닫기'),
+                      child: const Text('저장'),
                     ),
                   ),
                 )
@@ -124,32 +135,41 @@ class SelectColorDialog {
     );
   }
 
-  static Widget _colorBtn(BuildContext context) {
+  static Widget _colorBtn(BuildContext context, Map<String,String> data) {
+    // print(data);
+    // print(data['colorIdx']);
+    // print(int.parse(data['colorIdx']!));
+    // I/flutter ( 3972): {index: 3, colorIdx: 7, msg: ~100%}
     return Row(
       mainAxisSize: MainAxisSize.min, // Row의 크기를 내용에 맞게 조정
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // 텍스트 주변 여백
+          width: 75,
+          height: 40,
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8), // 텍스트 주변 여백
           decoration: BoxDecoration(
-            color: Colors.blue, // 배경색
-            borderRadius: BorderRadius.circular(30), // 타원형 모양
+            color: colorList[int.parse(data['colorIdx']!)], // 배경색
+            borderRadius: BorderRadius.circular(20), // 타원형 모양
           ),
           child: Text(
-            'Oval Text', // 가운데 텍스트
+            data['msg']!, // 가운데 텍스트
             style: TextStyle(
               color: Colors.white, // 글씨 색
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
         ),
-        SizedBox(width: 8), // Oval과 X 아이콘 사이의 간격
         GestureDetector(
           onTap: () {
-            print('X Icon tapped!'); // 클릭 이벤트
+            // int trgtIndex = data['index']!
+            int trgtIndex = int.parse(data['index']!);
+            print(data['index']! + "삭제"); // 클릭 이벤트
+            context.read<CreateTimerController>().deleteTimerColorByIndex = trgtIndex;
           },
           child: Icon(
             Icons.close, // X 표시
-            color: Colors.grey, // 아이콘 색상
+            color: Colors.blueGrey, // 아이콘 색상
+            size: 25,
           ),
         ),
       ],

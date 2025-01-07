@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/main.dart';
+import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'dart:developer';
 
 import 'package:my_time_timer/provider/timer_controller.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TimerViewModel(TimerRepository(prefs)), lazy: false,), // shared preference
         ChangeNotifierProvider(create: (context) => TimerController(), lazy: false), // isolate timer
         ChangeNotifierProvider(create: (context) => AppConfigController()),
+        ChangeNotifierProvider(create: (context) => CreateTimerController()), // 타이머 생성 및 수정 화면
       ],
       child: MaterialApp(
         title: 'My Time Timer',

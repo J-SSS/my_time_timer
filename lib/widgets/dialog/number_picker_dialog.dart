@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
@@ -16,9 +17,9 @@ class NumberPickerDialog {
       barrierDismissible: true, // 배경 터치로 닫기 여부
       builder: (BuildContext context) {
 
-      int size  = context.select((AppConfigController T) => T.timerColorListSize);
+      int size  = context.select((CreateTimerController T) => T.timerColorListSize);
       // List<int> items = context.read<AppConfigController>().timerColorList;
-      List<Map<String,String>> colorData = context.read<AppConfigController>().timerColorData;
+      List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
 
         return Dialog(
           insetPadding: const EdgeInsets.all(0), // 기본값 변경 가능
