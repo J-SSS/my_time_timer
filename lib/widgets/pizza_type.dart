@@ -33,6 +33,8 @@ class _PizzaTypeState extends State<PizzaType> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget);
+    print(widget.timerType);
     // print('피자타입 ${widget.isOnTimer}');
     Size safeSize = context.read<AppConfigController>().safeSize;
     // print(safeSize);

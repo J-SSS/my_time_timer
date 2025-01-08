@@ -12,6 +12,7 @@ import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
 class TimerLoader {
 
+  /// 타이머 생성 및 수정 화면에서 사용
   Widget timerLoader(BuildContext context, String type){
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     int? beforeTime;
@@ -63,7 +64,7 @@ class TimerLoader {
     }
   }
 
-  /// 타이머 실행 시
+  /// 타이머 실행 중 사용
   Widget onTimer(BuildContext context, String type){
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     // Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈 초기화
@@ -85,6 +86,7 @@ class TimerLoader {
     }
   }
 
+  /// 테마 선택 화면용
   Widget sampleTimerLoader(BuildContext context, String type, Size cardSize){
     if(type == "pizza"){
       return Stack(children: [

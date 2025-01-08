@@ -4,10 +4,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-enum TimeUnit { sec, min, hour }
-enum RemainTimeStyle { none, hms, per }
-
 class CreateTimerController with ChangeNotifier {
+
   BuildContext? context;
 
   Map<String,String> _timerUIData = {};
@@ -110,6 +108,12 @@ class CreateTimerController with ChangeNotifier {
   get timeUnit => _timeUnit;
   set setTimeUnit(int val){
     this._timeUnit = val;
+    notifyListeners();
+  }
+
+  get maxTime => _maxTime;
+  set setMaxTime(int val){
+    this._maxTime = val;
     notifyListeners();
   }
 

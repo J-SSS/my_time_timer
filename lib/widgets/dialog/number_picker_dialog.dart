@@ -14,13 +14,15 @@ class NumberPickerDialog {
 
     showDialog( // 여기서부터 리빌드됨
       context: context,
-      barrierDismissible: true, // 배경 터치로 닫기 여부
+      barrierDismissible: false, // 배경 터치로 닫기 여부
       builder: (BuildContext context) {
 
       int size  = context.select((CreateTimerController T) => T.timerColorListSize);
       // List<int> items = context.read<AppConfigController>().timerColorList;
-      List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
+      // List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
 
+      // int timeValue = 1;
+      int timeValue  = context.select((CreateTimerController T) => T.maxTime);
         return Dialog(
           insetPadding: const EdgeInsets.all(0), // 기본값 변경 가능
           shape: RoundedRectangleBorder(
@@ -38,10 +40,10 @@ class NumberPickerDialog {
                   child: Row(
                     // 타이틀과 아이콘 영역
                     children: const [
-                      Icon(Icons.colorize_outlined),
+                      Icon(Icons.timelapse),
                       SizedBox(width: 8.0),
                       Text(
-                        "색상선택",
+                        "최대 시간 선택",
                         style: TextStyle(
                           color: Colors.blueGrey, // 텍스트 색상
                           fontSize: 18, // 텍스트 크기
@@ -51,12 +53,13 @@ class NumberPickerDialog {
                     ],
                   ),
                 ),
-                // 본문 2:1 비율 분할 (가로로 분할)
-                SizedBox(child: NumberPicker(
-                  value: 1,
-                  minValue: 0,
+                SizedBox(
+                  height: dialogSafeHeight * 0.8,
+                  child: NumberPicker(
+                  value: timeValue,
+                  minValue: 1,
                   maxValue: 100,
-                  onChanged: (value) => print('변경'),
+                  onChanged: (value) => context.read<CreateTimerController>().setMaxTime = value
                 ),),
                 Container(
                   color: Colors.green.withOpacity(0.1),

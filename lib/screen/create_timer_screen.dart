@@ -6,6 +6,7 @@ import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
 import '../provider/create_timer_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
+import '../utils/common_values.dart';
 import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
@@ -14,6 +15,7 @@ class CreateTimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Timer.a;
     double verticalDividerIndent = safeSize.height * 0.1 * 0.5 * 0.3;
     print('리빌드');
     print("가로 : ${safeSize.width}, 세로 : ${safeSize.height}");
