@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/utils/common_values.dart';
 
 import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
@@ -106,8 +107,8 @@ class MyAppMain extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                   child: Center(
-                    // child: TimerLoader().timerLoader(context, "pizza")
-                    child: TimerLoader().timerLoader(context, "battery")
+                    // child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.create)
+                    child: TimerLoader().timerLoader(context, "battery",TimerScreenType.create)
                   ),
                 )),
             SizedBox(

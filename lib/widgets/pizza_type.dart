@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
+import '../utils/common_values.dart';
+
 
 // double 타입 소수점 n자리 까지
 extension DoubleExtension on double {
@@ -19,8 +21,8 @@ extension DoubleExtension on double {
 class PizzaType extends StatefulWidget {
   bool isOnTimer = false;
   Size safeSize;
-  String timerType;
-  PizzaType({required this.safeSize, super.key, required this.isOnTimer, this.timerType = "D"});
+  TimerScreenType screenType;
+  PizzaType({required this.safeSize, super.key, required this.isOnTimer, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
@@ -33,15 +35,35 @@ class _PizzaTypeState extends State<PizzaType> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget);
-    print(widget.timerType);
-    // print('피자타입 ${widget.isOnTimer}');
+    int angleToMin = 0;
+    Map<String,dynamic> uiData = {};
+    uiData.addAll({
+      "timeUnit" : 1,
+      "maxTime" : "60",
+      "remainTimeStyle" : "1",
+      "alarmType" : "0",
+      "timerColorData" : "1",
+    });
+    if(widget.screenType == TimerScreenType.main){ // 메인 화면
+      angleToMin = context.select((TimerController T) => T.setupTime);
+    } else if(widget.screenType == TimerScreenType.timer) { // 타이머 작동 중
+      angleToMin = context.select((TimerController T) => T.remainTime);
+    }
+    else if(widget.screenType == TimerScreenType.theme) { // 테마 선택 화면
+      angleToMin = 45;
+    }
+    else if(widget.screenType == TimerScreenType.create) { // 타이머 디자인 화면
+      angleToMin = context.select((TimerController T) => T.setupTime);
+    }
+    // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
+    // print('피자타입 ${widget.screenType}');
     Size safeSize = context.read<AppConfigController>().safeSize;
     // print(safeSize);
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: PizzaTypePainter(
-        angleToMin: widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
+        angleToMin: angleToMin,
+        uiData : 1,
       ),
     );
   }
@@ -49,9 +71,11 @@ class _PizzaTypeState extends State<PizzaType> {
 
 class PizzaTypePainter extends CustomPainter {
   int angleToMin;
+  int uiData;
 
   PizzaTypePainter({
     required this.angleToMin,
+    required this.uiData,
   });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
+import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -14,6 +15,7 @@ class SelectThemeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppManager.log("테마선택", type: "B");
     return Scaffold(
       appBar: AppBar(
         title: Text('테마 선택'),

@@ -97,8 +97,8 @@ class CreateTimerScreen extends StatelessWidget {
                     child:  Padding(
                       padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                       child: Center(
-                          child: TimerLoader().timerLoader(context, "pizza")
-                        // child: TimerLoader().timerLoader(context, "battery")
+                          child: TimerLoader().timerLoader(context, "pizza", TimerScreenType.create)
+                        // child: TimerLoader().timerLoader(context, "battery", "C")
                       ),
                     )),
                 Container(

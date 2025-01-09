@@ -7,13 +7,14 @@ import 'package:provider/provider.dart';
 import '../provider/app_config_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
+import '../utils/common_values.dart';
 import 'battery_type.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
 class TimerLoader {
 
   /// 타이머 생성 및 수정 화면에서 사용
-  Widget timerLoader(BuildContext context, String type){
+  Widget timerLoader(BuildContext context, String type, TimerScreenType screenType){
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     int? beforeTime;
     if(type == "pizza"){
@@ -29,7 +30,7 @@ class TimerLoader {
         },
         child: Stack(children: [
           PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, isOnTimer: false),
+          PizzaType(safeSize: safeSize, isOnTimer: false, screenType: screenType,),
         ]),
       );
     } else if(type == "battery"){
@@ -58,7 +59,7 @@ class TimerLoader {
         },
         child: Stack(children: [
           PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, isOnTimer: false),
+          PizzaType(safeSize: safeSize, isOnTimer: false, screenType: screenType,),
         ]),
       );
     }
@@ -91,17 +92,17 @@ class TimerLoader {
     if(type == "pizza"){
       return Stack(children: [
         PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, isOnTimer: false, timerType:"S"),
+        PizzaType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme),
       ]);
     } else if(type == "battery"){
       return Stack(children: [
         BatteryTypeBase(safeSize: cardSize),
-        BatteryType(safeSize: cardSize, isOnTimer: false, timerType:"S")
+        BatteryType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme)
       ]);
     } else {
       return Stack(children: [
         PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, isOnTimer: false, timerType:"S"),
+        PizzaType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme),
       ]);
     }
   }

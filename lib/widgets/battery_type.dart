@@ -4,11 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
+import '../utils/common_values.dart';
+
 class BatteryType extends StatefulWidget {
   final bool isOnTimer;
   Size safeSize;
-  String timerType;
-  BatteryType({required this.safeSize, super.key, required this.isOnTimer, this.timerType = "D"});
+  TimerScreenType screenType;
+  BatteryType({required this.safeSize, super.key, required this.isOnTimer, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
@@ -23,10 +25,22 @@ class _BatteryTypeState extends State<BatteryType> {
   @override
   Widget build(BuildContext context) {
     Size safeSize = context.read<AppConfigController>().safeSize;
+    int setupTime = 0;
+    if(widget.screenType == TimerScreenType.main){ // 메인 화면
+      setupTime = context.select((TimerController T) => T.setupTime);
+    } else if(widget.screenType == TimerScreenType.timer) { // 타이머 작동 중
+      setupTime = context.select((TimerController T) => T.remainTime);
+    }
+    else if(widget.screenType == TimerScreenType.theme) { // 테마 선택 화면
+      setupTime = 45;
+    }
+    else if(widget.screenType == TimerScreenType.create) { // 타이머 디자인 화면
+      setupTime = context.select((TimerController T) => T.setupTime);
+    }
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: BatteryTypePainter(
-        setupTime: context.watch<TimerController>().setupTime
+        setupTime: setupTime
       ),
     );
   }
