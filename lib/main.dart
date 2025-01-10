@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +13,12 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // 세로로 고정
   ]).then((_) {
-    runApp(MyApp(prefs: prefs));
+    // runApp();
+    runApp(DevicePreview( // todo 찾아보기
+      // enabled: !kReleaseMode, // todo 찾아보기
+      enabled: false,
+      builder: (context) => MyApp(prefs: prefs), // Wrap your app
+    ),);
   });
   // runApp(MyApp(prefs: prefs));
 }

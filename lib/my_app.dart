@@ -107,8 +107,8 @@ class MyAppMain extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                   child: Center(
-                    // child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.create)
-                    child: TimerLoader().timerLoader(context, "battery",TimerScreenType.create)
+                    child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
+                    // child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
                   ),
                 )),
             SizedBox(
