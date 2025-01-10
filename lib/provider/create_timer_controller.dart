@@ -8,34 +8,56 @@ class CreateTimerController with ChangeNotifier {
 
   BuildContext? context;
 
-  Map<String,String> _timerUIData = {};
+  Map<String,dynamic> _timerUIData = {
+    "timeUnit" : 1, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+    "maxTime" : 60, // 최대 시간
+    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
+    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
+    "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
+  };
 
   /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
   int _timeUnit = 0;
 
   /// 최대 시간
-  int _maxTime = 0;
+  int _maxTime = 60;
 
   /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-  int _remainTimeStyle = 0;
+  int _remainTimeStyle = 1;
 
   /// 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
   int _alarmType = 0;
 
-  int _timerColorListSize = 0; /// 타이머 색상 리스트 (최대 5개)
-  List<int> _timerColorList = [0]; /// 타이머 색상 리스트 (최대 5개)
+  /// 타이머 색상 리스트 (최대 5개)
+  List<int> _timerColorList = [0];
+
+  int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
+
   List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
 
 
-  assignFunc(){
-    _timerUIData.addAll({
-      "timeUnit" : _timeUnit.toString(),
-      "maxTime" : _maxTime.toString(),
-      "remainTimeStyle" : _remainTimeStyle.toString(),
-      "alarmType" : _alarmType.toString(),
-      "timerColorData" : _timerColorData.toString(),
-    });
+  void assignTimerUIData(){
+    // print('asd');
+    _timerUIData = {
+      "timeUnit" : _timeUnit,
+      "maxTime" : _maxTime,
+      "remainTimeStyle" : _remainTimeStyle,
+      "alarmType" : _alarmType,
+      "timerColorList" : _timerColorList,
+    };
+    // print(_timerUIData);
+    // _timerUIData.addAll({
+    //   "timeUnit" : _timeUnit.toString(),
+    //   "maxTime" : _maxTime.toString(),
+    //   "remainTimeStyle" : _remainTimeStyle.toString(),
+    //   "alarmType" : _alarmType.toString(),
+    //   "timerColorList" : _timerColorList,
+    // });
+
+    notifyListeners();
   }
+
+  get timerUIData => _timerUIData;
 
   List<List<String>> _timerColorTextList =
   [
@@ -92,17 +114,7 @@ class CreateTimerController with ChangeNotifier {
     notifyListeners();
   }
 
-  void assignTimerUIData(){
 
-    print("저장");
-    notifyListeners();
-  }
-
-  set assignTimerUIData2(int a){
-
-    print("저장");
-    notifyListeners();
-  }
 
   /// 타이머 시간 단위
   get timeUnit => _timeUnit;

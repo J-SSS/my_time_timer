@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
+import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
@@ -17,8 +18,8 @@ class CreateTimerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Timer.a;
     double verticalDividerIndent = safeSize.height * 0.1 * 0.5 * 0.3;
-    print('리빌드');
-    print("가로 : ${safeSize.width}, 세로 : ${safeSize.height}");
+    AppManager.log("타이머생성",type: "B");
+    // print("가로 : ${safeSize.width}, 세로 : ${safeSize.height}");
     double mainLRPadding = (safeSize.width * 0.075).roundToDouble(); // 가로 411 기준 약 31
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -214,8 +215,8 @@ class CreateTimerScreen extends StatelessWidget {
     // alarmType 무음/진동/알람
 
     String type = btnType;
-    int idx = context.select((CreateTimerController a) => a.timeUnit);
-    int idx2 = context.select((CreateTimerController a) => a.remainTimeStyle);
+    int idxForTimeUnit = context.select((CreateTimerController a) => a.timeUnit);
+    int idxForRemainTimeStyle = context.select((CreateTimerController a) => a.remainTimeStyle);
 
     return Material(
       color: Colors.transparent,
@@ -227,16 +228,18 @@ class CreateTimerScreen extends StatelessWidget {
         onTap: () {
           switch (type){
             case "timeUnit" : { // timeUnit 시간 단위
-              idx = (idx + 1) % 3;
-              context.read<CreateTimerController>().setTimeUnit = idx;
+              idxForTimeUnit = (idxForTimeUnit + 1) % 3;
+              context.read<CreateTimerController>().setTimeUnit = idxForTimeUnit;
+              context.read<CreateTimerController>().assignTimerUIData();
             }
             case "maxTime" : { // maxTime 최대 시간
               NumberPickerDialog().show(context,safeSize);
 // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
             }
-            case "remainTimeStyle" : { // remainTime 남은 시간 표시
-              idx2 = (idx2 + 1) % 3;
-              context.read<CreateTimerController>().setRemainTimeStyle = idx2;
+            case "remainTimeStyle" : { // remainTime 남은 시간 표시 여부
+              idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
+              context.read<CreateTimerController>().setRemainTimeStyle = idxForRemainTimeStyle;
+              context.read<CreateTimerController>().assignTimerUIData();
             }
             case "timerColor" : { // timerColor 색상(3단)
 

@@ -13,6 +13,15 @@ const colorList = [
   Colors.indigoAccent,
 ];
 
+/// 진행도 비교용 값 리스트
+const colorAssignList = [
+  [0], // ["~100%"],
+  [50, 0], // ["~100%", "~50%"],
+  [66, 33, 0], // [ "~100%", "~66%", "~33%"]
+  [75, 50, 25, 0], // [ "~100%", "~75%", "~50%", "~25%"],
+  [80, 60, 40, 20, 0] // ["~100%", "~80%", "~60%", "~40%", "~20%"]
+];
+
 enum TimerStyle {a,b,c}
 enum TimerScreenType {main, timer, theme, create } /// 타이머 타입 (메인, 온타이머, 테마선택, 타이머 생성)
 enum TimeUnit { sec, min, hour } /// 시간 단위

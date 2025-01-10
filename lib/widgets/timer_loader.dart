@@ -30,7 +30,7 @@ class TimerLoader {
         },
         child: Stack(children: [
           PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, isOnTimer: false, screenType: screenType,),
+          PizzaType(safeSize: safeSize, screenType: screenType,),
         ]),
       );
     } else if(type == "battery"){
@@ -46,7 +46,7 @@ class TimerLoader {
         },
         child: Stack(children: [
           BatteryTypeBase(safeSize: safeSize),
-          BatteryType(safeSize: safeSize, isOnTimer: false)
+          BatteryType(safeSize: safeSize,)
         ]),
       );
     } else {
@@ -59,7 +59,7 @@ class TimerLoader {
         },
         child: Stack(children: [
           PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, isOnTimer: false, screenType: screenType,),
+          PizzaType(safeSize: safeSize, screenType: screenType),
         ]),
       );
     }
@@ -72,17 +72,17 @@ class TimerLoader {
     if(type == "pizza"){
       return Stack(children: [
         PizzaTypeBase(safeSize: safeSize),
-        PizzaType(safeSize: safeSize, isOnTimer: false),
+        PizzaType(safeSize: safeSize),
       ]);
     } else if(type == "battery"){
       return Stack(children: [
         BatteryTypeBase(safeSize: safeSize),
-        BatteryType(safeSize: safeSize, isOnTimer: false)
+        BatteryType(safeSize: safeSize)
       ]);
     } else {
       return Stack(children: [
         PizzaTypeBase(safeSize: safeSize),
-        PizzaType(safeSize: safeSize, isOnTimer: false),
+        PizzaType(safeSize: safeSize),
       ]);
     }
   }
@@ -92,17 +92,17 @@ class TimerLoader {
     if(type == "pizza"){
       return Stack(children: [
         PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme),
+        PizzaType(safeSize: cardSize, screenType:TimerScreenType.theme),
       ]);
     } else if(type == "battery"){
       return Stack(children: [
         BatteryTypeBase(safeSize: cardSize),
-        BatteryType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme)
+        BatteryType(safeSize: cardSize, screenType:TimerScreenType.theme)
       ]);
     } else {
       return Stack(children: [
         PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, isOnTimer: false, screenType:TimerScreenType.theme),
+        PizzaType(safeSize: cardSize, screenType:TimerScreenType.theme),
       ]);
     }
   }

@@ -7,10 +7,9 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import '../utils/common_values.dart';
 
 class BatteryType extends StatefulWidget {
-  final bool isOnTimer;
   Size safeSize;
   TimerScreenType screenType;
-  BatteryType({required this.safeSize, super.key, required this.isOnTimer, this.screenType = TimerScreenType.main});
+  BatteryType({required this.safeSize, super.key, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
