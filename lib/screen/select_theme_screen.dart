@@ -16,13 +16,15 @@ class SelectThemeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppManager.log("테마선택", type: "B");
+    int activeIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('테마 선택'),
       ),
       body: Column(
         children: [
-          SizedBox(
+          Container(
+            color: Colors.cyan.withOpacity(0.1),
             height: safeSize.height * 0.1,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical : 0, horizontal : 8.0),
@@ -51,24 +53,33 @@ class SelectThemeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: safeSize.height * 0.7,
+            height: safeSize.height * 0.8,
             child: Center(
               child: CarouselSlider(
                 options: CarouselOptions(
-                  height: safeSize.height * 0.7, // 슬라이더 높이
+                  // height: safeSize.height * 0.7, // 슬라이더 높이
                   autoPlay: false, // 자동 재생
                   enlargeCenterPage: true, // 현재 페이지 확대
-                  // aspectRatio: 16 / 9, // 슬라이더 비율 todo 이거 뭔지 확인해보기
+                  aspectRatio: 8 / 10, // CarouselSlider의 높이를 직접 지정하지 않아도, 가로:세로 비율이 유지
+                  // viewportFraction: 1, // 한 번에 보이는 화면의 비율
                   viewportFraction: 0.8, // 한 번에 보이는 화면의 비율
+                  onPageChanged: (index, reason) {
+                    activeIndex = index; // 애니메이션이 끝나고 이벤트 실행됨
+                    print(index);
+                  },
                 ),
                 items: [
-                  // Text('Slide 1', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                  // Container(color: Colors.blue, height: 400, child: Center(child: Text('Slide 3'))),
-                  SampleThemeWidget(title: '기본형', content: 'pizza', safeSize: safeSize),
-                  SampleThemeWidget(title: '배터리', content: 'battery', safeSize: safeSize),
+                  SampleThemeCard(title: '기본형', content: 'pizza', safeSize: safeSize, isActive : activeIndex == 0),
+                  SampleThemeCard(title: '배터리', content: 'battery', safeSize: safeSize, isActive : activeIndex == 1),
+                  SampleThemeCard(title: '타입C', content: 'battery', safeSize: safeSize, isActive : activeIndex == 2),
+                  SampleThemeCard(title: '타입D', content: 'battery', safeSize: safeSize, isActive : activeIndex == 3),
                 ],
               ),
             ),
+          ),
+          Container(
+            color: Colors.green.withOpacity(0.2),
+              height: safeSize.height * 0.1
           ),
         ],
       ),
@@ -76,18 +87,19 @@ class SelectThemeScreen extends StatelessWidget {
   }
 }
 
-class SampleThemeWidget extends StatelessWidget {
+class SampleThemeCard extends StatelessWidget {
   final String title;
   final String content;
   final Size safeSize;
+  final bool isActive;
 
-  SampleThemeWidget({required this.title, required this.content, required this.safeSize});
+  SampleThemeCard({required this.title, required this.content, required this.safeSize, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
-    double width = 0.0;
-    double height = 0.0;
     Size cardSize = Size(safeSize.width, safeSize.height * 0.8 * 0.6);
+
+    print('$title, $isActive'); // todo 가운데가 아니라 양옆에서 새로 만들어지는 카드
 
     return Card(
         elevation: 5,
@@ -100,18 +112,20 @@ class SampleThemeWidget extends StatelessWidget {
               );
             },
             child: Padding(
-                padding: const EdgeInsets.all(30),
-                child: Container(
-                  width: safeSize.width,
-                  height: safeSize.height * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.transparent,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
+              padding: const EdgeInsets.all(30),
+              child: Container(
+                width: safeSize.width,
+                height: safeSize.height * 0.8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.transparent,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1, // 상단 위젯: 2 비율
+                      child: Text(
                         title,
                         style: TextStyle(
                             fontSize: 20,
@@ -119,17 +133,19 @@ class SampleThemeWidget extends StatelessWidget {
                             color: Colors.blueGrey
                         ),
                       ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                          height: safeSize.height * 0.8 * 0.6,
-                          child: Center(
-                              child: TimerLoader().sampleTimerLoader(context, content, cardSize)
-                            // child: TimerLoader().timerLoader(context, "battery")
-                          )),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      flex: 9, // 하단 위젯: 3 비율
+                      child: Center(
+                          child: TimerLoader().sampleTimerLoader(context, content, cardSize)
+                        //       // child: TimerLoader().timerLoader(context, "battery")
+                      ),
+                    ),
+                  ],
                 ),
+              ),
             )
-        ));
+        )
+    );
   }
 }
