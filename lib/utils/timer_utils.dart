@@ -8,7 +8,27 @@ import 'dart:developer';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 
-/** 원형 타입에서 클릭 위치를 1/60 시간 단위로 변환 */
+/// 시간을 mm:ss 포멧 문자열로 변환
+String parseTimeString(int timeUnit, int setupTime){
+  String timeString = "";
+  if(timeUnit == 0){ /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+    // int mm = angleToMin ~/ 60;
+    // int ss = angleToMin % 60;
+
+    String mm = (setupTime ~/ 60).toString().padLeft(2,"0");
+    String ss = (setupTime % 60).toString().padLeft(2,"0");
+    if(timeUnit <= 59){
+      // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
+      timeString = "$mm:$ss";
+    } else {
+      timeString = "$mm:$ss";
+      // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
+    }
+  }
+  return timeString;
+}
+
+/// 원형 타입에서 클릭 위치를 1/60 시간 단위로 변환
 int clickToTimePizza(Offset clickPoint, Size size, int maxUnit) {
 
   double centerX = (size.width - (size.width * 0.075).roundToDouble() * 2) / 2; // 좌우패딩 7.5%씩 보정

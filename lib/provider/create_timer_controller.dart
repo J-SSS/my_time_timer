@@ -9,7 +9,7 @@ class CreateTimerController with ChangeNotifier {
   BuildContext? context;
 
   Map<String,dynamic> _timerUIData = {
-    "timeUnit" : 1, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
     "maxTime" : 60, // 최대 시간
     "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
     "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
