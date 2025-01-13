@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_time_timer/main.dart';
 import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'dart:developer';
@@ -9,6 +10,7 @@ import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/utils/common_values.dart';
 
 import 'package:my_time_timer/utils/isolate_timer.dart';
+import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/repository/timer_repository.dart';
 import 'package:my_time_timer/widgets/my_app_bar.dart';
@@ -30,14 +32,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    // print('크기 : ' + mediaQuery.size.toString()); // size	화면의 크기 (Size 객체로 가로와 세로 길이 포함).
-    // print('방향 : ' + mediaQuery.orientation.toString()); // orientation	화면 방향 (Orientation.portrait 또는 Orientation.landscape).
-    // print('패딩 : ' + mediaQuery.padding.toString()); // padding	디바이스의 안전 영역 패딩 (예: 노치 영역, 상태바, 하단 패딩 등).
-    // print('픽셀 밀도 : ' + mediaQuery.devicePixelRatio.toString()); // devicePixelRatio	픽셀 밀도 (1dp가 몇 픽셀인지).
-    // print('텍스트 스케일 : ' + mediaQuery.textScaleFactor.toString());  // textScaleFactor	시스템에서 설정된 텍스트 스케일 값.
-    // print('밝기 몯, : ' + mediaQuery.platformBrightness.toString());// platformBrightness	시스템의 현재 밝기 모드 (Brightness.light 또는 Brightness.dark).
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TimerViewModel(TimerRepository(prefs)), lazy: false,), // shared preference
@@ -63,7 +57,6 @@ class MyApp extends StatelessWidget {
 }
 
 
-
 class MyAppMain extends StatelessWidget {
   const MyAppMain({super.key});
 
@@ -72,7 +65,10 @@ class MyAppMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SizeUtil.to.init(context); // SizeUtil 초기화
+    SizeUtil().init(context); // SizeUtil 초기화
     AppManager.log('메인 생성', type : 'S');
+
     context.read<AppConfigController>().setMediaQuery = MediaQuery.of(context); // 미디어 쿼리 자주 호출하면 안됨
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
     double mainLRPadding = (safeSize.width * 0.075).roundToDouble(); // 가로 411 기준 약 31
@@ -88,7 +84,10 @@ class MyAppMain extends StatelessWidget {
      * UI와 충돌하는 것 방지(ex.이전 스크롤 위치로 이동..)
      */
     WidgetsBinding.instance.addPostFrameCallback((_) {}); // print('초기화');
-
+    // print(1.sw);
+    // print(1.sh);
+    // print(1.sp);
+    // print(MediaQuery.of(context).size);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(safeSize: safeSize),
@@ -98,7 +97,7 @@ class MyAppMain extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container( // 임시
-              height: safeSize.height * 0.1,
+              height: SizeUtil().sh1,
               color: Colors.green.withOpacity(0.15),
             ),
             Container(
@@ -107,8 +106,8 @@ class MyAppMain extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                   child: Center(
-                    child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
-                    // child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
+                    // child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
+                    child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
                   ),
                 )),
             SizedBox(

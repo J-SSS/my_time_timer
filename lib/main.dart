@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_time_timer/my_app.dart';
 
@@ -13,7 +14,20 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // 세로로 고정
   ]).then((_) {
-    // runApp();
+    // runApp(DevicePreview( // todo 찾아보기
+    //   // enabled: !kReleaseMode, // todo 찾아보기
+    //   enabled: false,
+    //   builder: (context) => ScreenUtilInit(
+    //     designSize: const Size(360, 690), // 기준 화면 크기
+    //     minTextAdapt: true,
+    //     splitScreenMode: true,
+    //     builder: (context, child) {
+    //       // print('??');
+    //       return MyApp(prefs: prefs);
+    //     },
+    //   ), // Wrap your app
+    // ),);
+
     runApp(DevicePreview( // todo 찾아보기
       // enabled: !kReleaseMode, // todo 찾아보기
       enabled: false,

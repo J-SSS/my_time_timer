@@ -12,7 +12,8 @@ const colorList = [
   Colors.grey,
   Colors.indigoAccent,
 ];
-
+// ..color = Color(0xFF56B5B7) // 진한 민트
+//   ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
 /// 진행도 비교용 값 리스트
 const colorAssignList = [
   [0], // ["~100%"],

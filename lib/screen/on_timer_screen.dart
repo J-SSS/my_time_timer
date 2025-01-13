@@ -162,13 +162,8 @@ class _onTimerBottomBarState extends State<OnTimerBottomBar> with WidgetsBinding
                     children: [
                       TextButton( /** 좌버튼 */
                         onPressed: () {
-                          Navigator.pop(context); // 닫기
-                          // _reset();
-                          // print(widget.key);
-                          //             context.read<TimerController>().runTimer();
-                          //
-                          //             // context.read<OnTimerListener>().setIsPlaying = false;
-                          //             // widget.key?.currentState?.testFunc();
+                          context.read<TimerController>().cancelTimer();
+                          // Navigator.pop(context); // 닫기
                         },
                         style: ElevatedButton.styleFrom(
                           shape: CircleBorder(),
@@ -213,8 +208,8 @@ class _onTimerBottomBarState extends State<OnTimerBottomBar> with WidgetsBinding
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // _click(context);
-                      context.read<TimerController>().cancelTimer();
+                      context.read<TimerController>().runTimer();
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

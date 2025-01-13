@@ -143,6 +143,8 @@ class BatteryTypeBase extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    // Size inf = Size(double.infinity, double.maxFinite);
+    // Size safeSize = inf;
     Size safeSize = context.read<AppConfigController>().safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
@@ -168,6 +170,8 @@ class BatteryTypeBasePainter extends CustomPainter {
     double sizeH = size.height;
     double sizeW = size.width;
 
+    // print(sizeW);
+
     double strokeW = (sizeH * 0.03).floorToDouble(); // 선 굵기 3프로
     double paddingL = (sizeW * 0.15).floorToDouble(); // 시간 부분 패딩 사이즈
     double paddingHeadL = (sizeW * 0.35).floorToDouble(); // +극 부분 패딩 사이즈
@@ -175,13 +179,14 @@ class BatteryTypeBasePainter extends CustomPainter {
 
     double width = size.width;
     double radius = strokeW; // 원하는 둥근 모서리 반지름
-
+    // print(sizeH);
     /**
      * 선 굵기 : 세로 길이의 3프로
      * 테두리 패딩 + 선굵기 = 시간 부분 패딩
      */
-
+    // print(size.height);
     Rect rect = Rect.fromLTRB(paddingBaseL, strokeW * 2, width-paddingBaseL, size.height - strokeW * 2);
+    // Rect rect = Rect.fromLTRB(0, 0, width, size.height);
     RRect rRect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
     Rect rectHead = Rect.fromLTRB(paddingHeadL, strokeW * 0.7, width-paddingHeadL, strokeW * 1.51);
 

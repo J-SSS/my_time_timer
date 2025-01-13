@@ -68,7 +68,9 @@ class TimerLoader {
   /// 타이머 실행 중 사용
   Widget onTimer(BuildContext context, String type){
     Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
-    // Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈 초기화
+    // Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈
+    // Size inf = Size(double.infinity, double.infinity);
+    // print(inf);
     if(type == "pizza"){
       return Stack(children: [
         PizzaTypeBase(safeSize: safeSize),
@@ -78,6 +80,8 @@ class TimerLoader {
       return Stack(children: [
         BatteryTypeBase(safeSize: safeSize),
         BatteryType(safeSize: safeSize)
+        // BatteryTypeBase(safeSize: inf),
+        // BatteryType(safeSize: inf)
       ]);
     } else {
       return Stack(children: [

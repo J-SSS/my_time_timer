@@ -124,8 +124,7 @@ class PizzaTypePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..style = PaintingStyle.fill; // 채우기로 변경
-    // ..color = Color(0xFF56B5B7) // 진한 민트
-    //   ..color = Color.fromRGBO(106, 211, 211, 1.0) // 민트
+
 
     int ratio = (setupTime / _maxTime * 100).round();
 
@@ -137,13 +136,17 @@ class PizzaTypePainter extends CustomPainter {
 
     double centerX = size.width / 2;
     double centerY = size.height / 2;
-    double radius = size.width / 2;
+    // double radius = size.width / 2;
+    double radius = size.width <= size.height ? size.width / 2 : size.height / 2;
 
     double startAngle = -math.pi / 2; // 12시 방향에서 시작
     var sweepAngle = (2 * math.pi) / 60 * setupTime;
     // todo 라디안법 찾아보기 2파이는 180도, 2파이r은 원의 둘레
 
-    
+    var sweepAngleOne = (2 * math.pi) / 60 * 1; // 한 칸당 각도
+    // print(startAngle);
+    // print(sweepAngleOne);
+
     if (sweepAngle == 0.0 || sweepAngle.toFixed(2) == (2 * math.pi).toFixed(2)) {
       // 시간 꽉 채우는 경우
       Offset center = Offset(size.width / 2, size.height / 2);
@@ -153,8 +156,6 @@ class PizzaTypePainter extends CustomPainter {
     } else {
       Path path = Path()
         ..moveTo(centerX, centerY) // 중심으로 이동
-        // ..lineTo(centerX + radius * math.cos(startAngle),
-        //     centerY + radius * math.sin(startAngle)) // 시작점으로 이동
         ..arcTo(
           Rect.fromCircle(center: Offset(centerX, centerY), radius: radius),
           startAngle,
@@ -162,8 +163,47 @@ class PizzaTypePainter extends CustomPainter {
           false,
         )
         ..close(); // 닫힌 도형으로 만듦
-
       canvas.drawPath(path, paint);
+
+      /// 링 타입
+      // var rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
+      // Path path = Path();
+      //
+      // for (var i = 0; i < setupTime; i++) {
+      //   path.moveTo(centerX, centerY); // 중심으로 이동
+      //   var startAngle2 = startAngle + sweepAngleOne * i + 0.02;
+      //   var sweepAngleOn2 = sweepAngleOne - 0.02;
+      //   path.arcTo(rect, startAngle2, sweepAngleOn2, false);
+      // }
+      // path.close(); // 닫힌 도형으로 만듦
+      // canvas.drawPath(path, paint);
+      //
+      //
+      // Paint innerPaint = Paint()
+      //   ..style = PaintingStyle.fill // 채우기로 변경
+      // ..color = Colors.white.withOpacity(0.8);
+      //
+      // Paint innerPaint2 = Paint()
+      //   ..style = PaintingStyle.fill // 채우기로 변경
+      //   ..color = Colors.white.withOpacity(0.8);
+      //
+      // Path path2 = Path()
+      //   ..moveTo(centerX, centerY) // 중심으로 이동
+      //   ..arcTo(
+      //     Rect.fromCircle(center: Offset(centerX, centerY), radius: radius / 10 * 8),
+      //     startAngle,
+      //     sweepAngle,
+      //     false,
+      //   )
+      //   ..close(); // 닫힌 도형으로 만듦
+      // canvas.drawPath(path2, paint);
+      // canvas.drawPath(path2, innerPaint);
+
+      // Paint innerPaint = Paint()
+      //   ..style = PaintingStyle.fill // 채우기로 변경
+      // ..color = Colors.white.withOpacity(0.7);
+      // canvas.drawCircle(Offset(centerX, centerY), radius / 10 * 7, innerPaint);
+      // canvas.drawCircle(Offset(centerX, centerY), radius / 2, innerPaint);
     }
 
     // 중심점
@@ -176,7 +216,7 @@ class PizzaTypePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
-    double innerRadius = size.width / 50;
+    double innerRadius = radius / 15;
 
     Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(center, innerRadius, innerPaint);
