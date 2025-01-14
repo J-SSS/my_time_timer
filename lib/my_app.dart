@@ -8,6 +8,7 @@ import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/utils/common_values.dart';
+import 'package:my_time_timer/utils/db_manager.dart';
 
 import 'package:my_time_timer/utils/isolate_timer.dart';
 import 'package:my_time_timer/utils/size_util.dart';
@@ -60,12 +61,8 @@ class MyApp extends StatelessWidget {
 class MyAppMain extends StatelessWidget {
   const MyAppMain({super.key});
 
-// GlobalKey 생성
-  // final GlobalKey<_PizzaTypeState> pizzaTypeKey = GlobalKey<_PizzaTypeState>();
-
   @override
   Widget build(BuildContext context) {
-    // SizeUtil.to.init(context); // SizeUtil 초기화
     SizeUtil().init(context); // SizeUtil 초기화
     AppManager.log('메인 생성', type : 'S');
 
@@ -77,7 +74,9 @@ class MyAppMain extends StatelessWidget {
     // AppManager.log('앱 사이즈 확인');
 
     // 초기화
-    context.read<TimerViewModel>().loadPreset();
+    // context.read<TimerViewModel>().loadPreset(); todo perfered 사용할 때 필요함 > 안할거같음
+    context.read<TimerViewModel>().loadPresetDb();
+    AppManager.log("SQLite 프리셋 초기화",type: "S");
 
     /**
      * 현재 프레임이 끝난 후, 위젯 트리가 완전히 렌더링된 뒤 실행
@@ -91,13 +90,12 @@ class MyAppMain extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(safeSize: safeSize),
-      drawer: ListDrawer(), // 보조 화면
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container( // 임시
-              height: SizeUtil().sh1,
+              height: SizeUtil().sh10,
               color: Colors.green.withOpacity(0.15),
             ),
             Container(

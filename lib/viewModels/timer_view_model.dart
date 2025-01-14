@@ -14,11 +14,19 @@ class TimerViewModel extends ChangeNotifier {
   PresetModel? _preset;
   PresetModel? get preset => _preset;
 
-  void testFunc(){
-    print('테스트');
+  /// mft_folder 및 mft_timer 테이블의 모든 데이터를 조회한다.
+  Future<void> loadPresetDb() async {
+    final loadedPreset = await _timerRepository.getPresetDb();
+    _preset = loadedPreset;
+    notifyListeners();
   }
 
 
+
+
+
+
+  /// deprecated
   Future<void> saveConfig(String id, String name) async {
     final newConfig = ConfigModel(id: id, name: name);
     await _timerRepository.saveConfig(newConfig);
@@ -26,6 +34,7 @@ class TimerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// deprecated
   Future<void> loadConfig() async {
     final loadedConfig = await _timerRepository.getConfig();
     _config = loadedConfig;
@@ -33,19 +42,35 @@ class TimerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// deprecated
   Future<void> clearConfig() async {
     await _timerRepository.clearConfig();
     _config = null;
     notifyListeners();
   }
 
+  /// deprecated
   Future<void> savePreset() async {
-    final newPreset = PresetModel(null,null);
+    final newPreset = PresetModel.fromSharedPreferences(null,null);
     await _timerRepository.savePreset(newPreset);
     _preset = newPreset;
     notifyListeners();
   }
 
+  /// deprecated
+  Future<void> addFolder(String folderName, String type) async {
+    if(type == 'F') { // 폴더 추가시
+      // _preset!.folderPreset?[UniqueKey().toString()]={'nodeName' : folderName};
+      _preset!.addFolderPreset(folderName);
+    } else { // 타이머 추가시
+
+    }
+    await _timerRepository.savePreset(_preset!);
+    print('에드프리셋 : ${_preset}');
+    notifyListeners();
+  }
+
+  /// deprecated
   Future<void> addPreset(String folderName, String type) async {
     if(type == 'F') { // 폴더 추가시
       // _preset!.folderPreset?[UniqueKey().toString()]={'nodeName' : folderName};
@@ -58,6 +83,7 @@ class TimerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// deprecated
   Future<void> deletePreset(String id, String type) async {
     if(type == 'F'){ // 폴더 삭제시
       _preset!.folderPreset?.remove(id);
@@ -84,19 +110,17 @@ class TimerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
+  /// deprecated
   Future<void> loadPreset() async {
      final loadedPreset = await _timerRepository.getPreset();
     _preset = loadedPreset;
     // print('로드프리셋 : ${loadedPreset?.preset}');
     notifyListeners();
   }
-
+  /// deprecated
   Future<void> clearPreset() async {
     await _timerRepository.clearPreset();
     _preset = null;
     notifyListeners();
   }
-
-
 }

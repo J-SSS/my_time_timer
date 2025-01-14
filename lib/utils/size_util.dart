@@ -8,16 +8,18 @@ import 'app_manager.dart';
 
 
 class SizeUtil {
-  // SizeUtil._();
-  SizeUtil._privateConstructor(); // private 생성자
+  // SizeUtil._2():param = 1;
+  SizeUtil._()
+      :param = 1; // private 생성자
 
   static SizeUtil? _instance;
 
   factory SizeUtil() {
-    _instance ??= SizeUtil._privateConstructor();
+    _instance ??= SizeUtil._();
     return _instance!;
   }
 
+  final int param;
   late double statusBarHeight; // Safe Area 상단 Inset
   late double bottomInset; // Safe Area 하단 Inset
   late double responsiveBottomInset; // 반응형 하단 Safe Area 하단 Inset
@@ -40,10 +42,20 @@ class SizeUtil {
 
 
   // 자주 쓰는 값
-  late double sh1;
-  late double sh2;
-  late double sh7;
-  late double sh8;
+  late double sh05;
+  late double sh10;
+  late double sh20;
+  late double sh70;
+  late double sh80;
+  late double sh90;
+
+  // 자주 쓰는 값
+  late double sw05;
+  late double sw10;
+  late double sw20;
+  late double sw70;
+  late double sw80;
+  late double sw90;
 
 
   // 비율로 처리했을 때 높이 넓이. (375 * 812) 기준
@@ -64,6 +76,8 @@ class SizeUtil {
     bottomInset = mQ.padding.bottom;
     responsiveBottomInset =  mQ.padding.bottom == 0 ? 16 : mQ.padding.bottom;
 
+    print(AppBar().preferredSize); // 별도 설정 안 할 경우 기본 사이즈
+
 
     // 디바이스 크기
     size = mQ.size;
@@ -75,10 +89,19 @@ class SizeUtil {
     sw = mQ.size.width - mQ.padding.left - mQ.padding.right;
     safeSize = Size(sw, sh);
 
-    sh1 = sh * 0.1;
-    sh2 = sh * 0.2;
-    sh7 = sh * 0.7;
-    sh8 = sh * 0.8;
+    sh05 = sh * 0.05;
+    sh10 = sh * 0.1;
+    sh20 = sh * 0.2;
+    sh70 = sh * 0.7;
+    sh80 = sh * 0.8;
+    sh90 = sh * 0.9;
+
+    sw05 = sw * 0.05;
+    sw10 = sw * 0.1;
+    sw20 = sw * 0.2;
+    sw70 = sw * 0.7;
+    sw80 = sw * 0.8;
+    sw90 = sw * 0.9;
 
     // Orientation.portrait: 세로 방향, Orientation.landscape: 가로 방향
     if(mQ.orientation ==  Orientation.portrait){ // todo 가로세로별 계산도 필요 시 추가
@@ -89,8 +112,11 @@ class SizeUtil {
 
 
   }
-
+  // static get layout => _instance;
+  static get get => SizeUtil();
   // static final SizeUtil to = SizeUtil._();
+  // static final SizeUtil layout = SizeUtil._();
+  // static final SizeUtil? layout = SizeUtil()._instance;
 }
 
 // FittedBox나 AutoSizeText로 공간에 맞춰 자동 축소/확대.

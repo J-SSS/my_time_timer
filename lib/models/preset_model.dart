@@ -3,21 +3,39 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 class PresetModel {
-  Map<String, Map<String, dynamic>>? preset = {};
+  List<Map<String, dynamic>>? _folderPresetDb = []; // 폴더(DB)
+  List<Map<String, dynamic>>? _timerPresetDb = []; // 타이머(DB)
 
+  get folderPresetDb => _folderPresetDb;
+  get timerPresetDb => _timerPresetDb;
+
+  PresetModel.list(folderData, timerData){
+    _folderPresetDb = folderData;
+    _timerPresetDb = timerData;
+  }
+
+  /// mft_folder 및 mft_timer 테이블의 모든 데이터를 조회한다.
+  factory PresetModel.fromDb(List<Map<String, dynamic>> folderData, List<Map<String, dynamic>>timerData) {
+    return PresetModel.list(folderData, timerData);
+  }
+
+
+/////////////////////////////////////////////////////////////
+
+
+  /// deprecated
   Map<String, Map<String, dynamic>>? _folderPreset = {}; // 폴더
   Map<String, Map<String, dynamic>>? _timerPreset = {}; // 타이머
-
-  get getPreset => preset;
-
   get folderPreset => _folderPreset;
   get timerPreset => _timerPreset;
 
-  PresetModel(folderPreset, timerPreset){
-    this._folderPreset = folderPreset ?? defaultFolderPreset();
-    this._timerPreset = timerPreset ?? defaultTimerPreset();
+  /// deprecated
+  PresetModel.fromSharedPreferences(folderPreset, timerPreset){ // SharedPreferences 사용하는 경우
+    _folderPreset = folderPreset ?? defaultFolderPreset();
+    _timerPreset = timerPreset ?? defaultTimerPreset();
   }
 
+  /// deprecated
   factory PresetModel.fromJson(Map<String, dynamic>? json) {
     if (json != null) {
       Map<String, Map<String, dynamic>>? _prefsFolderPreset = {};
@@ -30,12 +48,13 @@ class PresetModel {
         _prefsTimerPreset[key] = value;
       });
 
-      return PresetModel(_prefsFolderPreset,_prefsTimerPreset);
+      return PresetModel.fromSharedPreferences(_prefsFolderPreset,_prefsTimerPreset);
     } else {
-      return PresetModel(null, null);
+      return PresetModel.fromSharedPreferences(null, null);
     }
   }
 
+  /// deprecated
   String toJson() {
     return json.encode({
       'folderPreset': _folderPreset,
