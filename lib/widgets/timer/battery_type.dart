@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
-import '../utils/common_values.dart';
+import '../../utils/common_values.dart';
 
 class BatteryType extends StatefulWidget {
   Size safeSize;

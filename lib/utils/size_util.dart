@@ -43,6 +43,7 @@ class SizeUtil {
 
   // 자주 쓰는 값
   late double sh05;
+  late double sh075;
   late double sh10;
   late double sh20;
   late double sh70;
@@ -51,6 +52,7 @@ class SizeUtil {
 
   // 자주 쓰는 값
   late double sw05;
+  late double sw075;
   late double sw10;
   late double sw20;
   late double sw70;
@@ -90,6 +92,7 @@ class SizeUtil {
     safeSize = Size(sw, sh);
 
     sh05 = sh * 0.05;
+    sh075 = sh * 0.075;
     sh10 = sh * 0.1;
     sh20 = sh * 0.2;
     sh70 = sh * 0.7;
@@ -97,6 +100,7 @@ class SizeUtil {
     sh90 = sh * 0.9;
 
     sw05 = sw * 0.05;
+    sw075 = sw * 0.075;
     sw10 = sw * 0.1;
     sw20 = sw * 0.2;
     sw70 = sw * 0.7;

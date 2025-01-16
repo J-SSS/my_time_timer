@@ -20,10 +20,10 @@ import 'package:my_time_timer/widgets/timer_loader.dart';
 import 'package:provider/provider.dart';
 
 import 'package:my_time_timer/widgets/bottom_bar.dart';
-import 'package:my_time_timer/widgets/pizza_type.dart';
-import 'package:my_time_timer/widgets/battery_type.dart';
+import 'package:my_time_timer/widgets/timer/pizza_type.dart';
+import 'package:my_time_timer/widgets/timer/battery_type.dart';
 
-import 'package:my_time_timer/widgets/list_drawer.dart';
+
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -105,7 +105,8 @@ class MyAppMain extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                   child: Center(
                     // child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
-                    child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
+                    // child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
+                    child: TimerLoader().timerLoader(context, "pizzaB",TimerScreenType.main)
                   ),
                 )),
             SizedBox(

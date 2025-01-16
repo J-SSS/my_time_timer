@@ -9,7 +9,7 @@ import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/widgets/timer_loader.dart';
 import 'package:provider/provider.dart';
-import 'package:my_time_timer/widgets/pizza_type.dart';
+import 'package:my_time_timer/widgets/timer/pizza_type.dart';
 
 class OnTimerScreen extends StatefulWidget {
   const OnTimerScreen({super.key});

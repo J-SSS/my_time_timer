@@ -11,7 +11,7 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
-import '../utils/common_values.dart';
+import '../../utils/common_values.dart';
 
 
 // double 타입 소수점 n자리 까지
@@ -22,19 +22,19 @@ extension DoubleExtension on double {
   }
 }
 
-class PizzaType extends StatefulWidget {
+class PizzaTypeB extends StatefulWidget {
   Size safeSize;
   TimerScreenType screenType;
-  PizzaType({required this.safeSize, super.key, this.screenType = TimerScreenType.main});
+  PizzaTypeB({required this.safeSize, super.key, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
-    return _PizzaTypeState();
+    return _PizzaTypeBState();
   }
 }
 
-class _PizzaTypeState extends State<PizzaType> {
-  _PizzaTypeState();
+class _PizzaTypeBState extends State<PizzaTypeB> {
+  _PizzaTypeBState();
   Timer? _timer; // 타이머 객체
   int setupTime = 45;
 
@@ -125,18 +125,16 @@ class PizzaTypePainter extends CustomPainter {
     Paint paint = Paint()
       ..style = PaintingStyle.fill; // 채우기로 변경
 
-
     int ratio = (setupTime / _maxTime * 100).round();
 
     // 색상 지정
     int colorIdx = _timerColorList[assignColorIndex(ratio)];
-    paint.color = colorList[_timerColorList[colorIdx]];
+    paint.color = colorList[colorIdx];
 
     // print("페인터 내부 사이즈 : " + size.toString());
 
     double centerX = size.width / 2;
     double centerY = size.height / 2;
-    // double radius = size.width / 2;
     double radius = size.width <= size.height ? size.width / 2 : size.height / 2;
 
     double startAngle = -math.pi / 2; // 12시 방향에서 시작
@@ -151,77 +149,39 @@ class PizzaTypePainter extends CustomPainter {
       // 시간 꽉 채우는 경우
       Offset center = Offset(size.width / 2, size.height / 2);
       canvas.drawCircle(center, radius, paint);
-    } else if(sweepAngle < 0){
-
     } else {
-      Path path = Path()
+      var rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
+      Path path = Path();
+
+      for (var i = 0; i < setupTime; i++) {
+        path.moveTo(centerX, centerY); // 중심으로 이동
+        var startAngle2 = startAngle + sweepAngleOne * i + 0.02;
+        var sweepAngleOn2 = sweepAngleOne - 0.02;
+        path.arcTo(rect, startAngle2, sweepAngleOn2, false);
+      }
+      path.close(); // 닫힌 도형으로 만듦
+      canvas.drawPath(path, paint);
+
+      Paint innerPaint = Paint()
+        ..style = PaintingStyle.fill // 채우기로 변경
+      ..color = Colors.white.withOpacity(0.8);
+
+      Path path2 = Path()
         ..moveTo(centerX, centerY) // 중심으로 이동
         ..arcTo(
-          Rect.fromCircle(center: Offset(centerX, centerY), radius: radius),
+          Rect.fromCircle(center: Offset(centerX, centerY), radius: radius / 10 * 8),
           startAngle,
           sweepAngle,
           false,
         )
         ..close(); // 닫힌 도형으로 만듦
-      canvas.drawPath(path, paint);
+      // paint.color = paint.color.withOpacity(0.5);
 
-      /// 링 타입
-      // var rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
-      // Path path = Path();
-      //
-      // for (var i = 0; i < setupTime; i++) {
-      //   path.moveTo(centerX, centerY); // 중심으로 이동
-      //   var startAngle2 = startAngle + sweepAngleOne * i + 0.02;
-      //   var sweepAngleOn2 = sweepAngleOne - 0.02;
-      //   path.arcTo(rect, startAngle2, sweepAngleOn2, false);
-      // }
-      // path.close(); // 닫힌 도형으로 만듦
-      // canvas.drawPath(path, paint);
-      //
-      //
-      // Paint innerPaint = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      // ..color = Colors.white.withOpacity(0.8);
-      //
-      // Paint innerPaint2 = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      //   ..color = Colors.white.withOpacity(0.8);
-      //
-      // Path path2 = Path()
-      //   ..moveTo(centerX, centerY) // 중심으로 이동
-      //   ..arcTo(
-      //     Rect.fromCircle(center: Offset(centerX, centerY), radius: radius / 10 * 8),
-      //     startAngle,
-      //     sweepAngle,
-      //     false,
-      //   )
-      //   ..close(); // 닫힌 도형으로 만듦
-      // canvas.drawPath(path2, paint);
-      // canvas.drawPath(path2, innerPaint);
+      canvas.drawPath(path2, paint); // 칸 구분 없는 80% 사이즈 반투명 원으로 채움 // todo 한방에 그리도록 개선 필요
+      canvas.drawPath(path2, innerPaint); // 흰색 부분
 
-      // Paint innerPaint = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      // ..color = Colors.white.withOpacity(0.7);
-      // canvas.drawCircle(Offset(centerX, centerY), radius / 10 * 7, innerPaint);
-      // canvas.drawCircle(Offset(centerX, centerY), radius / 2, innerPaint);
+      canvas.drawCircle(Offset(centerX, centerY), radius / 10 * 6.5, innerPaint);
     }
-
-    // 중심점
-    Paint innerPaint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    Paint outerPaint = Paint()
-      ..color = Colors.black26
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.0;
-
-    double innerRadius = radius / 15;
-
-    Offset center = Offset(size.width / 2, size.height / 2);
-    canvas.drawCircle(center, innerRadius, innerPaint);
-    canvas.drawCircle(center, innerRadius, outerPaint);
-
 
     /// 남은 시간 표시
     if(_remainTimeStyle == 1){  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
@@ -240,13 +200,12 @@ class PizzaTypePainter extends CustomPainter {
       textPainter.layout(minWidth: 0, maxWidth: size.width);
 
       // 배경 박스 먼저 그리기
-      // const double padding = 15.0;
       double padding = size.width * 0.04;
       final textRect = Rect.fromLTWH(
         (size.width - textPainter.width) / 2 - padding,
-        (size.height - textPainter.height) / 2  + 70 - size.width * 0.02, // 상단 패딩
+        (size.height - textPainter.height) / 2 - padding, // 상단 패딩
         textPainter.width + padding * 2, // 텍스트 너비 + 좌우 패딩
-        textPainter.height + padding, // 텍스트 높이 + 상하 패딩
+        textPainter.height + padding * 2, // 텍스트 높이 + 상하 패딩
       );
 
       RRect textrRect = RRect.fromRectAndRadius(textRect, Radius.circular(15));
@@ -255,13 +214,11 @@ class PizzaTypePainter extends CustomPainter {
 
       final offset = Offset( // 텍스트 그릴 위치 계산
         (size.width - textPainter.width) / 2,  // 수평 중앙 정렬
-        (size.height - textPainter.height) / 2 + 70, // 수직 중앙 정렬
+        (size.height - textPainter.height) / 2, // 수직 중앙 정렬
       );
 
       textPainter.paint(canvas, offset); // 텍스트 그리기
     }
-
-
   }
 
   @override
@@ -270,33 +227,33 @@ class PizzaTypePainter extends CustomPainter {
   }
 }
 
-class PizzaTypeBase extends StatefulWidget {
+class PizzaTypeBaseB extends StatefulWidget {
   Size safeSize;
-  PizzaTypeBase({required this.safeSize,super.key});
+  PizzaTypeBaseB({required this.safeSize,super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _PizzaTypeStateBase();
+    return _PizzaTypeBStateBase();
   }
 }
 
-class _PizzaTypeStateBase extends State<PizzaTypeBase> {
+class _PizzaTypeBStateBase extends State<PizzaTypeBaseB> {
   @override
   Widget build(BuildContext context) {
     Size safeSize = context.read<AppConfigController>().safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
-      painter: pizzaTypeBasePainter(
+      painter: pizzaTypeBBasePainter(
         context: context,
       ),
     );
   }
 }
 
-class pizzaTypeBasePainter extends CustomPainter {
+class pizzaTypeBBasePainter extends CustomPainter {
   BuildContext context;
 
-  pizzaTypeBasePainter({required this.context});
+  pizzaTypeBBasePainter({required this.context});
 
   @override
   void paint(Canvas canvas, Size size) {

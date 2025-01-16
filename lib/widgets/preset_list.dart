@@ -60,7 +60,7 @@ class _PresetListState extends State<PresetList> {
           String folderName = item['folder_name'];
 
           // print('$folderName');
-          return ExpansionTile(
+          return ExpansionTile( // todo 사이즈 수정하기
             initiallyExpanded: false, // todo 초기값 수정
             key: Key('$folderId'),
             tilePadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
@@ -108,10 +108,10 @@ class _PresetListState extends State<PresetList> {
                   ],
                 )
               ],
-            )
+            ) // 타이틀 부분(열림)
                 : Row(mainAxisSize: MainAxisSize.min, children: [
               Text(folderName),
-            ]),
+            ]), // 타이틀 부분(닫힘)
             leading: expandedKey.contains(folderId)
                 ? Icon(
               MaterialCommunityIcons.folder_open_outline,
@@ -131,11 +131,24 @@ class _PresetListState extends State<PresetList> {
               });
             },
             children: <Widget>[ // 목록의 하위 요소들
-              SizedBox(
-                height: _timerPresetDb.where((item) {
-                  return item['folder_id'] == folderId;
-                }).length.toDouble() * SizeUtil.get.sh05 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
-                child: ReorderableListView(
+                Container( // 추가 버튼
+                    height: _timerPresetDb.where((item) {
+                          return item['folder_id'] == folderId;
+                        }).length.toDouble() * SizeUtil.get.sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
+                    width: SizeUtil.get.sw90,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                      BorderRadius.circular(25), // 원하는 곡선의 반지름 값 설정
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: ReorderableListView(
                     // physics: ClampingScrollPhysics(), // 스크롤 제약 조건 설정
                     // physics: NeverScrollableScrollPhysics(), // 스크롤 제약 조건 설정
                     padding: EdgeInsets.only(left: 16.0),
@@ -163,7 +176,7 @@ class _PresetListState extends State<PresetList> {
                         },
                         child: SizedBox(
                             key: Key(timerId.toString()),
-                            height: SizeUtil.get.sh05,
+                            height: SizeUtil.get.sh075,
                             child: Text(timerName,
                                 style: TextStyle(fontSize: 15), textAlign: TextAlign.start)
                         )
