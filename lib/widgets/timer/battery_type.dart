@@ -5,6 +5,7 @@ import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
 import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
 
 class BatteryType extends StatefulWidget {
   Size safeSize;
@@ -23,7 +24,7 @@ class _BatteryTypeState extends State<BatteryType> {
 
   @override
   Widget build(BuildContext context) {
-    Size safeSize = context.read<AppConfigController>().safeSize;
+    Size safeSize = SizeUtil.get.safeSize;
     int setupTime = 0;
     if(widget.screenType == TimerScreenType.main){ // 메인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
@@ -145,7 +146,7 @@ class BatteryTypeBase extends StatelessWidget{
   Widget build(BuildContext context) {
     // Size inf = Size(double.infinity, double.maxFinite);
     // Size safeSize = inf;
-    Size safeSize = context.read<AppConfigController>().safeSize;
+    Size safeSize = SizeUtil.get.safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: BatteryTypeBasePainter(

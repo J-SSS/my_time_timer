@@ -12,6 +12,8 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
 import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
+import '../../viewModels/timer_view_model.dart';
 
 
 // double 타입 소수점 n자리 까지
@@ -70,11 +72,36 @@ class _PizzaTypeState extends State<PizzaType> {
       uiData = context.select((CreateTimerController T) => T.timerUIData);
       print(uiData);
     }
+
+    late List<Map<String, dynamic>> _folderPresetDb;
+    late List<Map<String, dynamic>> _timerPresetDb;
+    // _folderPresetDb = context.watch<TimerViewModel>().preset!.folderPresetDb;
+    // _timerPresetDb = context.watch<TimerViewModel>().preset!.timerPresetDb;
+
     // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');
-    // print(setupTime);
-    Size safeSize = context.read<AppConfigController>().safeSize;
-    // print(safeSize);
+    Size safeSize = SizeUtil.get.safeSize;
+
+    // return FutureBuilder(
+    //     future: TimerViewModel().loadPresetDb3(),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         return CircularProgressIndicator();
+    //       } else {
+    //         final data = snapshot.data;
+    //         return Text('Result: $data');
+    //         return CustomPaint(
+    //           size: safeSize,
+    //           // size: Size(double.infinity,double.infinity), // 원하는 크기로 지정
+    //           painter: PizzaTypePainter(
+    //             setupTime: setupTime,
+    //             uiData: uiData,
+    //           ),
+    //         );
+    //       }
+    // });
+
+
     return CustomPaint(
       size: safeSize,
       // size: Size(double.infinity,double.infinity), // 원하는 크기로 지정
@@ -283,7 +310,7 @@ class PizzaTypeBase extends StatefulWidget {
 class _PizzaTypeStateBase extends State<PizzaTypeBase> {
   @override
   Widget build(BuildContext context) {
-    Size safeSize = context.read<AppConfigController>().safeSize;
+    Size safeSize = SizeUtil.get.safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: pizzaTypeBasePainter(

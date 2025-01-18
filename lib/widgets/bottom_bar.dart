@@ -10,6 +10,7 @@ import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
 import '../utils/app_utils.dart';
+import '../utils/size_util.dart';
 import '../utils/timer_utils.dart';
 import 'package:my_time_timer/utils/app_manager.dart';
 
@@ -29,7 +30,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
 
   @override
   Widget build(BuildContext context) {
-    safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+    safeSize = SizeUtil.get.safeSize;
     return Stack(
       children: <Widget>[
         Positioned( /** 하단 사각 영역 */
@@ -74,7 +75,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                   TextButton( /** 우버튼 */
                     onPressed: () {
                       context.read<TimerController>().setLoopBtn = 'set';
-                      showOverlayInfo(context,safeSize,"메시지");
+                      showOverlayInfo(context,"메시지");
                     },
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),

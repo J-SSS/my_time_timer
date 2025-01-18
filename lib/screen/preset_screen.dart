@@ -76,7 +76,7 @@ class PresetScreen extends StatelessWidget {
                     fontSize: 16.0,
                   );
                 } else {
-                  context.read<TimerViewModel>().addPreset(_textController.text, 'F');
+                  // context.read<TimerViewModel>().addPreset(_textController.text, 'F');
                   Navigator.pop(context);
                 }
               },

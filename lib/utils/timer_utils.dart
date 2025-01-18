@@ -17,13 +17,13 @@ String parseTimeString(int timeUnit, int setupTime){
 
     String mm = (setupTime ~/ 60).toString().padLeft(2,"0");
     String ss = (setupTime % 60).toString().padLeft(2,"0");
-    if(timeUnit <= 59){
-      // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
-      timeString = "$mm:$ss";
-    } else {
-      timeString = "$mm:$ss";
-      // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
-    }
+    timeString = "$mm:$ss";
+    // if(timeUnit <= 59){
+    //   // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
+    // } else {
+    //   timeString = "$mm:$ss";
+    //   // timeString = "${mm.toString().padLeft(2,"0")}:${ss.toString().padLeft(2,"0")}";
+    // }
   }
   return timeString;
 }

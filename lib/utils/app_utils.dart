@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/utils/size_util.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:provider/provider.dart';
@@ -81,10 +82,10 @@ void showOverlayText(BuildContext context, Size size, String msg) {
 
 
 /** 정보를 Overlay 위젯으로 표시 */
-void showOverlayInfo(BuildContext context, Size size, String msg) {
+void showOverlayInfo(BuildContext context, String msg) {
   TextPainter textPainter = getTextPainter(msg, overlayTextStyle);
   Size textBoxSize = textPainter.size;
-
+  Size size = SizeUtil.get.safeSize;
   /* 기존 overlayEntry 있으면 삭제 */
   if(_overlayEntryTime != null){
     _overlayEntryTime?.remove();

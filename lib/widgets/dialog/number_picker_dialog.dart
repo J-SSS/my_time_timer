@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/create_timer_controller.dart';
+import 'package:my_time_timer/utils/size_util.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
@@ -7,7 +8,8 @@ import '../../utils/common_values.dart';
 
 
 class NumberPickerDialog {
-    void show(BuildContext context, Size safeSize) {
+    void show(BuildContext context) {
+      Size safeSize = SizeUtil.get.safeSize;
     double dialogInnerPadding = safeSize.width * 0.8 * 0.05;
     double dialogSafeWidth = safeSize.width * 0.8 - safeSize.width * 0.8 * 0.1;
     double dialogSafeHeight = safeSize.height * 0.7 * 0.8 - safeSize.width * 0.8 * 0.1;
@@ -18,7 +20,7 @@ class NumberPickerDialog {
       builder: (BuildContext context) {
 
       int size  = context.select((CreateTimerController T) => T.timerColorListSize);
-      // List<int> items = context.read<AppConfigController>().timerColorList;
+
       // List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
 
       // int timeValue = 1;
@@ -69,9 +71,8 @@ class NumberPickerDialog {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context); // 다이얼로그 닫기
-                        // Navigator.of(context).pop(); // 다이얼로그 닫기
                       },
-                      child: const Text('닫기'),
+                      child: const Text('SAVE'),
                     ),
                   ),
                 )

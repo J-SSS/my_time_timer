@@ -12,6 +12,7 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
 import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
 
 
 // double 타입 소수점 n자리 까지
@@ -72,7 +73,7 @@ class _PizzaTypeBState extends State<PizzaTypeB> {
     // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');
     // print(setupTime);
-    Size safeSize = context.read<AppConfigController>().safeSize;
+    Size safeSize = SizeUtil.get.safeSize;
     // print(safeSize);
     return CustomPaint(
       size: safeSize,
@@ -240,7 +241,7 @@ class PizzaTypeBaseB extends StatefulWidget {
 class _PizzaTypeBStateBase extends State<PizzaTypeBaseB> {
   @override
   Widget build(BuildContext context) {
-    Size safeSize = context.read<AppConfigController>().safeSize;
+    Size safeSize = SizeUtil.get.safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: pizzaTypeBBasePainter(

@@ -108,7 +108,7 @@ class SampleThemeCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CreateTimerScreen(safeSize)),
+                MaterialPageRoute(builder: (context) => CreateTimerScreen()),
               );
             },
             child: Padding(

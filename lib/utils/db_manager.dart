@@ -14,7 +14,7 @@ class DbManager {
   DbManager._();
   static final DbManager instance = DbManager._();
 
-  static Database? _db;
+  Database? _db;
 
   // 데이터베이스 객체를 가져오는 Getter
   Future<Database> get database async {

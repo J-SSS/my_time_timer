@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
@@ -11,16 +12,15 @@ import '../utils/common_values.dart';
 import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
-  final Size safeSize;
-  CreateTimerScreen(this.safeSize, {super.key});
+  CreateTimerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Timer.a;
-    double verticalDividerIndent = safeSize.height * 0.1 * 0.5 * 0.3;
+
+    double verticalDividerIndent = SizeUtil.get.sh * 0.1 * 0.5 * 0.3;
     AppManager.log("타이머생성",type: "B");
-    // print("가로 : ${safeSize.width}, 세로 : ${safeSize.height}");
-    double mainLRPadding = (safeSize.width * 0.075).roundToDouble(); // 가로 411 기준 약 31
+    double mainLRPadding = SizeUtil.get.sw075.roundToDouble(); // 가로 411 기준 약 31
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -35,7 +35,7 @@ class CreateTimerScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                showOverlayInfo(context,safeSize,"타이틀 숨김");
+                showOverlayInfo(context,"타이틀 숨김");
               },
               icon: Icon(Icons.settings),
               color: Colors.grey,
@@ -48,13 +48,13 @@ class CreateTimerScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container( // 임시
-                  height: safeSize.height * 0.1,
-                  width: safeSize.width,
+                  height: SizeUtil.get.sh * 0.1,
+                  width: SizeUtil.get.sw,
                   color: Colors.green.withOpacity(0.15),
                   alignment: Alignment.center,
                   child: Container(
-                    height: safeSize.height * 0.1 * 0.5,
-                    width: safeSize.width * 0.50,
+                    height: SizeUtil.get.sh * 0.1 * 0.5,
+                    width: SizeUtil.get.sw * 0.50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(50.0),
@@ -94,7 +94,7 @@ class CreateTimerScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                    height: safeSize.height * 0.7,
+                    height: SizeUtil.get.sh * 0.7,
                     child:  Padding(
                       padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                       child: Center(
@@ -104,16 +104,16 @@ class CreateTimerScreen extends StatelessWidget {
                     )),
                 Container(
                     // color: Colors.blue.withOpacity(0.15),// 임시
-                    width: safeSize.width,
-                    height: safeSize.height * 0.2,
+                    width: SizeUtil.get.sw,
+                    height: SizeUtil.get.sh * 0.2,
                     child: Stack(
                       children: <Widget>[
                         Positioned( /** 하단 사각 영역 */
-                          top: safeSize.height * 0.2 * 0.25,
-                          left: safeSize.width * 0.225,
+                          top: SizeUtil.get.sh * 0.2 * 0.25,
+                          left: SizeUtil.get.sw * 0.225,
                           child: Container(
-                              width: safeSize.width * 0.55,
-                              height: safeSize.height * 0.2 * 0.45,
+                              width: SizeUtil.get.sw * 0.55,
+                              height: SizeUtil.get.sh * 0.2 * 0.45,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(50),
@@ -131,7 +131,7 @@ class CreateTimerScreen extends StatelessWidget {
                                 children: [
                                   TextButton( /** 좌버튼 */
                                     onPressed: () {
-                                      SelectColorDialog.show(context,safeSize);
+                                      SelectColorDialog.show(context);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -152,7 +152,7 @@ class CreateTimerScreen extends StatelessWidget {
                                   ),
                                   TextButton( /** 우버튼 */
                                     onPressed: () {
-                                      showOverlayInfo(context,safeSize,"초기화");
+                                      showOverlayInfo(context,"초기화");
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: const CircleBorder(),
@@ -168,10 +168,10 @@ class CreateTimerScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned( /** 재생버튼 */
-                            left : safeSize.width * 0.4,
+                            left : SizeUtil.get.sw * 0.4,
                             child: Container(
-                              width: safeSize.width * 0.2,
-                              height: safeSize.width * 0.2,
+                              width: SizeUtil.get.sw * 0.2,
+                              height: SizeUtil.get.sw * 0.2,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(50),
@@ -184,6 +184,7 @@ class CreateTimerScreen extends StatelessWidget {
                               ),
                               child: TextButton(
                                 onPressed: () {
+                                  Navigator.pop(context); // 닫기
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
@@ -233,7 +234,7 @@ class CreateTimerScreen extends StatelessWidget {
               context.read<CreateTimerController>().assignTimerUIData();
             }
             case "maxTime" : { // maxTime 최대 시간
-              NumberPickerDialog().show(context,safeSize);
+              NumberPickerDialog().show(context);
 // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
             }
             case "remainTimeStyle" : { // remainTime 남은 시간 표시 여부
@@ -241,18 +242,12 @@ class CreateTimerScreen extends StatelessWidget {
               context.read<CreateTimerController>().setRemainTimeStyle = idxForRemainTimeStyle;
               context.read<CreateTimerController>().assignTimerUIData();
             }
-            case "timerColor" : { // timerColor 색상(3단)
-
-            }
-            case "alarmType" : { // alarmType 무음/진동/알람
-
-            }
-            default : SelectColorDialog.show(context, safeSize);
+            case "alarmType" : {} // alarmType 무음/진동/알람}
           }
         },
         child: Container(
-          width: safeSize.width * 0.15, // 가로 크기 (15%)
-          height: safeSize.height * 0.1 * 0.5, // 세로 크기
+          width: SizeUtil.get.sw * 0.15, // 가로 크기 (15%)
+          height: SizeUtil.get.sh * 0.1 * 0.5, // 세로 크기
           alignment: Alignment.center, // 텍스트를 중앙에 배치
           child: _itemBtnIcon(context, type)
         ),
@@ -292,26 +287,15 @@ class CreateTimerScreen extends StatelessWidget {
           ),
         );
       }
-      case "timerColor" : { // timerColor 색상(3단)
-        return Icon(
-          Icons.color_lens,
-          color: Colors.grey.withOpacity(0.5),
-          size: safeSize.height * 0.125 * 0.5,
-        );
-      }
       case "alarmType" : { // alarmType 무음/진동/알람
         return Icon(
           Icons.alarm,
           color: Colors.grey.withOpacity(0.5),
-          size: safeSize.height * 0.125 * 0.5,
+          size: SizeUtil.get.sh * 0.125 * 0.5,
         );
       }
       default : {
-        return Icon(
-          Icons.add_circle_rounded,
-          color: Colors.grey.withOpacity(0.5),
-          size: safeSize.height * 0.125 * 0.5,
-        );
+        return SizedBox();
       }
     }
   }

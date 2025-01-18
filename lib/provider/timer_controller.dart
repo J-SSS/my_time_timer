@@ -7,6 +7,7 @@ import 'package:my_time_timer/main.dart';
 import 'dart:isolate';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 
+import '../models/timer_model.dart';
 import '../utils/app_manager.dart';
 
 
@@ -28,7 +29,7 @@ class TimerController extends ChangeNotifier {
   String playBtn = 'btn_play';
   String loopBtn = 'btn_roop_none';
 
-
+  late TimerModel currentTimer;
 
 
   // ~기타

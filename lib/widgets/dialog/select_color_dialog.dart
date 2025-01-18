@@ -3,13 +3,18 @@ import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
 import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
 
 
 class SelectColorDialog {
-  static void show(BuildContext context, Size safeSize) {
-    double dialogInnerPadding = safeSize.width * 0.8 * 0.05;
-    double dialogSafeWidth = safeSize.width * 0.8 - safeSize.width * 0.8 * 0.1;
-    double dialogSafeHeight = safeSize.height * 0.7 * 0.8 - safeSize.width * 0.8 * 0.1;
+  static void show(BuildContext context) {
+    Size safeSize = SizeUtil.get.safeSize;
+    double dialogWidth = safeSize.width * 0.8;
+    double dialogHeight = safeSize.height * 0.7 * 0.6;
+    double dialogInnerPadding = dialogWidth * 0.05;
+    double dialogSafeWidth = dialogWidth - safeSize.width * 0.8 * 0.1;
+    double dialogSafeHeight = dialogHeight - safeSize.width * 0.8 * 0.1;
+
 
     showDialog( // 여기서부터 리빌드됨
       context: context,
@@ -17,9 +22,8 @@ class SelectColorDialog {
       builder: (BuildContext context) {
 
       int size  = context.select((CreateTimerController T) => T.timerColorListSize);
-      // List<int> items = context.read<AppConfigController>().timerColorList;
       List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
-      // List<Map<String,String>> colorData = context.select((AppConfigController T) => T.timerColorListSize);
+
 
         return Dialog(
           insetPadding: const EdgeInsets.all(0), // 기본값 변경 가능
@@ -27,21 +31,25 @@ class SelectColorDialog {
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Container(
-            width: safeSize.width * 0.8,
-            height: safeSize.height * 0.7 * 0.8,
+            width: dialogWidth,
+            height: dialogHeight,
             padding: EdgeInsets.all(dialogInnerPadding),
             child: Column(
               children: [
-                Container(
-                  color: Colors.green.withOpacity(0.1),
+                SizedBox(
                   height: dialogSafeHeight * 0.1,
                   child: Row(
                     // 타이틀과 아이콘 영역
-                    children: const [
-                      Icon(Icons.colorize_outlined),
-                      SizedBox(width: 8.0),
-                      Text(
-                        "색상선택",
+                    children: [
+                      // Image.asset(
+                      //   'assets/icon/btn_color.png',
+                      //   // width: 30,
+                      //   // height: 30,
+                      // ),
+                      const Icon(Icons.palette_outlined),
+                      const SizedBox(width: 8.0),
+                      const Text(
+                        "타이머 색상",
                         style: TextStyle(
                           color: Colors.blueGrey, // 텍스트 색상
                           fontSize: 18, // 텍스트 크기
@@ -112,17 +120,25 @@ class SelectColorDialog {
                   ],
                 ),
                 Container(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.blueGrey.withOpacity(0.1),
                   height: dialogSafeHeight * 0.1,
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
                         context.read<CreateTimerController>().assignTimerUIData();
+                        // Navigator.of(context).popUntil((route) {
+                        //   return route is MaterialPageRoute && route.builder.runtimeType == HomeScreen;
+                        // });
+                        // Navigator.of(context).popUntil((route) => route.settings.name == '/home');
                         Navigator.pop(context); // 다이얼로그 닫기
-                        // Navigator.of(context).pop(); // 다이얼로그 닫기
                       },
-                      child: const Text('저장'),
+                      child: const Text('SAVE'),
+                      // child: Icon(
+                      //   Icons.save, // X 표시
+                      //   color: Colors.blueGrey, // 아이콘 색상
+                      //   size: 25,
+                      // ),
                     ),
                   ),
                 )
@@ -161,7 +177,6 @@ class SelectColorDialog {
         ),
         GestureDetector(
           onTap: () {
-            // int trgtIndex = data['index']!
             int trgtIndex = int.parse(data['index']!);
             print(data['index']! + "삭제"); // 클릭 이벤트
             context.read<CreateTimerController>().deleteTimerColorByIndex = trgtIndex;

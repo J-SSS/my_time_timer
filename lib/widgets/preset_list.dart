@@ -238,7 +238,7 @@ class _PresetListState extends State<PresetList> {
             actions: [
               ElevatedButton(
                 onPressed: () {
-                  context.read<TimerViewModel>().deletePreset(key, 'F');
+                  // context.read<TimerViewModel>().deletePreset(key, 'F');
                   Navigator.of(context).pop(); // 다이얼로그 닫기
                 },
                 child: Text('삭제'),

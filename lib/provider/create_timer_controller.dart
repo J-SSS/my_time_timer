@@ -20,7 +20,7 @@ class CreateTimerController with ChangeNotifier {
   int _timeUnit = 0;
 
   /// 최대 시간
-  int _maxTime = 60;
+  int _maxTime = 60; // OK
 
   /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
   int _remainTimeStyle = 1;

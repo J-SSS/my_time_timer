@@ -23,7 +23,7 @@ class _OnTimerScreenState extends State<OnTimerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size safeSize = context.read<AppConfigController>().safeSize; // 미디어 사이즈 초기화
+
     print('빌드');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // print('온타이머'); // jdi : 본 위젯에 대한 콜백함수임
