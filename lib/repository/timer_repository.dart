@@ -9,13 +9,11 @@ class TimerRepository {
   final DbManager dbManager = DbManager.instance;
   final PrefsManager prefsManager = PrefsManager.instance;
 
-
   TimerRepository();
 
   /// SharedPreferences에서 최근 사용 타이머 정보를 불러온다
-  Future<TimerModel> getRecentFromPrefs() async {
-    final recentTimer =  await prefsManager.getRecentTimer();
-
+  TimerModel getRecentFromPrefs()  {
+    Map<String, dynamic> recentTimer = prefsManager.getRecentTimer();
     return TimerModel.fromSharedPreferences(recentTimer);
   }
 

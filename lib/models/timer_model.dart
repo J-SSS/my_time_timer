@@ -1,27 +1,48 @@
 import 'dart:convert';
 
 class TimerModel {
-  String? id;
-  String? name;
 
-  // 'parentNodeId': '[#f1234]',
-  // 'nodeId': '[#t1234]',
-  // 'nodeName': '새 리스트',
-  // 'type': 'pizza',
-  // 'unit': 'min', // 설정 단위 min,sec,time
-  // 'setupTime': '45', // 설정 시간
-  // 'viewRemainTime': '', // 남은 시간 표시 여부
-  // 'viewDescript': 'false', // 설명 표시 여부
-  // 'descriptText': 'test', // 설명 텍스트
-  // 'isAlarmYn': 'N', // 알람 여부
-  // 'alarmType': '', // 알람 타입 무음/진동/소리
-  // 'dismissAlarm': '', // 한 번, 버튼 클릭
-  // 'dismissAlarm': '', // 한 번, 버튼 클릭
-  // 'isInterNotif': '', // 중간 알림
-  // 'notifUnit': '', // 중간 알림
-  // 'notifGap': '', // 알림 간격
-  // 'notifType': '', // 알림 타입 무음 / 진동 / 소리
-  // bool? startFull; // 100%부터 시작 여부
+  Map<String,dynamic> _timerUIData = {
+    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+    "maxTime" : 60, // 최대 시간
+    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
+    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
+    "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
+  };
+
+  /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+  int _timeUnit = 0;
+
+  /// 최대 시간
+  int _maxTime = 60; // OK
+
+  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
+  int _remainTimeStyle = 1;
+
+  /// 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
+  int _alarmType = 0;
+
+  /// 타이머 색상 리스트 (최대 5개)
+  List<int> _timerColorList = [0];
+
+  int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
+
+  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
+
+// 'setupTime': '45', // 설정 시간
+// 'viewRemainTime': '', // 남은 시간 표시 여부
+// 'viewDescript': 'false', // 설명 표시 여부
+// 'descriptText': 'test', // 설명 텍스트
+// 'isAlarmYn': 'N', // 알람 여부
+// 'alarmType': '', // 알람 타입 무음/진동/소리
+// 'dismissAlarm': '', // 한 번, 버튼 클릭
+// 'dismissAlarm': '', // 한 번, 버튼 클릭
+// 'isInterNotif': '', // 중간 알림
+// 'notifUnit': '', // 중간 알림
+// 'notifGap': '', // 알림 간격
+// 'notifType': '', // 알림 타입 무음 / 진동 / 소리
+// bool? startFull; // 100%부터 시작 여부
+
 // bool? omitAlarm; // 다음 타이머가 있을 때 알람 생략
 //
 // String? alarmType; // 알림 스타일 (소리 / 진동 / 무음)
@@ -36,9 +57,8 @@ class TimerModel {
   Map<String, dynamic> _recentTimer = {}; // 최근 타이머
   get recentTimer => _recentTimer;
 
-  TimerModel.fromSharedPreferences(recentTimer){ // SharedPreferences 사용하는 경우
-    recentTimer = recentTimer;
-    // _timerPreset = timerPreset ?? defaultTimerPreset();
+  TimerModel.fromSharedPreferences(Map<String, dynamic> recentTimer){ // SharedPreferences 사용하는 경우
+    _recentTimer = recentTimer;
   }
 
 

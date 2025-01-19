@@ -18,11 +18,11 @@ class DbManager {
 
   // 데이터베이스 객체를 가져오는 Getter
   Future<Database> get database async {
-    return _db ??= await _initDatabase();
+    return _db ??= await init();
   }
 
   /// 데이터베이스 초기화
-  Future<Database> _initDatabase() async {
+  Future<Database> init() async {
     AppManager.log("SQLite 초기화", type: "S");
     // /data/user/0/com.mtt.my_time_timer/databases
     final dbPath = await getDatabasesPath();

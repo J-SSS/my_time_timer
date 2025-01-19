@@ -3,18 +3,28 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_time_timer/utils/db_manager.dart';
 import 'package:my_time_timer/utils/prefs_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_time_timer/my_app.dart';
 
 Future<void> main() async {
+  // CustomBinding 사용법 찾아보기
+  CustomWidgetsBinding();
 
-  CustomWidgetsBinding();  // CustomBinding 사용 - 뭔지 모름
+  // Flutter 엔진과의 바인딩을 보장 > SharedPreferences, Firebase, MediaQuery 등의 의존성을 안전하게 사용할 수 있게 함
+  WidgetsFlutterBinding.ensureInitialized();
 
-  WidgetsFlutterBinding.ensureInitialized(); // jdi 찾아보기 : 비동기 환경에서 초기화를 보장한다? // SystemChrome 설정 전에 호출
+  // SharedPreferences 초기화
+  await PrefsManager.instance.init();
 
-  await PrefsManager.instance.init(); // SharedPreferences 초기화
 
+  await DbManager.instance.init();
+
+
+
+  // todo SQLite 초기화 코드 추가
+
+  // SystemChrome은 Flutter에서 디바이스의 시스템 UI(상태바, 내비게이션 바 등)를 제어하기 위해 제공되는 클래스
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp, // 세로로 고정
   // ]).then((_) {

@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/models/timer_model.dart';
 import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'dart:async';
 import 'dart:math' as math;
@@ -39,6 +40,7 @@ class _PizzaTypeState extends State<PizzaType> {
   _PizzaTypeState();
   Timer? _timer; // 타이머 객체
   int setupTime = 45;
+  late TimerModel timerModel;
 
   Map<String,dynamic> uiData = { // 기본 값
     "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
@@ -52,6 +54,8 @@ class _PizzaTypeState extends State<PizzaType> {
   Widget build(BuildContext context) {
     if(widget.screenType == TimerScreenType.main){ /// 메인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
+      timerModel = context.select((TimerController T) => T.currentTimer);
+      print(timerModel.recentTimer);
     } else if(widget.screenType == TimerScreenType.timer) { /// 타이머 작동 중
       setupTime = context.select((TimerController T) => T.remainTime);
     } else if(widget.screenType == TimerScreenType.theme) { /// 테마 선택 화면

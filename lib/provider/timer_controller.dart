@@ -29,9 +29,16 @@ class TimerController extends ChangeNotifier {
   String playBtn = 'btn_play';
   String loopBtn = 'btn_roop_none';
 
-  late TimerModel currentTimer;
 
 
+  late TimerModel _currentTimer;
+
+  get currentTimer => _currentTimer;
+
+  set setCurrentTimer(TimerModel timerModel){
+    _currentTimer = timerModel;
+    // notifyListeners();
+  }
   // ~기타
 
   bool isPause = false;

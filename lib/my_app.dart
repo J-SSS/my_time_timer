@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => TimerViewModel(), lazy: false,), // shared preference & sqlite // todo 얘는 프로바이더 안써도될거같음
         ChangeNotifierProvider(create: (context) => TimerController(), lazy: false), // isolate timer
-        ChangeNotifierProvider(create: (context) => AppConfigController(), lazy: false),
-        ChangeNotifierProvider(create: (context) => CreateTimerController(), lazy: false), // 타이머 생성 및 수정 화면
+        ChangeNotifierProvider(create: (context) => AppConfigController()),
+        ChangeNotifierProvider(create: (context) => CreateTimerController()), // 타이머 생성 및 수정 화면
       ],
       child: MaterialApp(
         title: 'My Time Timer',
@@ -75,13 +75,12 @@ class MyAppMain extends StatelessWidget {
     double mainLRPadding = (SizeUtil.get.sw * 0.075).roundToDouble(); // 가로 411 기준 약 31
 
     // print(MyAppBar(mainSize: safeSize).preferredSize.height); // AppBar 높이 확인
-    // AppManager.log('앱 사이즈 확인');
 
     context.read<TimerViewModel>().loadPresetDb();
     // AppManager.log("SQLite 프리셋 초기화",type: "S");
 
-    // context.read<TimerViewModel>().loadRecentFromPrefs();
-    // TimerViewModel().loadRecentFromPrefs();
+    // SharedPreferences에서 최근 사용 타이머 셋팅
+    context.read<TimerController>().setCurrentTimer = TimerViewModel().loadRecentFromPrefs();
 
     /**
      * 현재 프레임이 끝난 후, 위젯 트리가 완전히 렌더링된 뒤 실행

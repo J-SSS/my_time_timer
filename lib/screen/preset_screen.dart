@@ -14,11 +14,11 @@ class PresetScreen extends StatelessWidget {
 
   TextEditingController _textController = TextEditingController();
 
-  late Size mediaSize;
-
   @override
   Widget build(BuildContext context) {
-    mediaSize = MediaQuery.sizeOf(context);
+
+    // context.read<TimerViewModel>().loadPresetDb();
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(

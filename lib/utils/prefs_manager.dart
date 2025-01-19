@@ -12,23 +12,21 @@ class PrefsManager {
   late SharedPreferences _prefs;
 
   /// SharedPreferences 초기화
-  Future<SharedPreferences?> init() async {
+  Future<void> init() async {
     AppManager.log("SharedPreferences 초기화", type: "S");
     _prefs = await SharedPreferences.getInstance();
-    return _prefs;
+    var recent = _prefs.getString('recent');
+    if (recent == null) {
+      await saveDefaultAndLoad();
+    }
   }
 
   /// 최근 사용 타이머 정보를 반환한다
-  Future<Map<String, dynamic>> getRecentTimer() async {
+  Map<String, dynamic> getRecentTimer() {
     var jsonString = _prefs.getString('recent');
-    Map<String, dynamic> recent;
-    if (jsonString != null) {
-      recent = json.decode(jsonString);
-      return recent;
-    } else {
-      recent = await saveDefaultAndLoad();
-      return recent;
-    }
+    // print(jsonString);
+    Map<String, dynamic> recent = json.decode(jsonString!);
+    return recent;
   }
 
   /// 최근 사용 타이머가 없을 경우, 기본 값을 저장하고 반환한다.
@@ -41,6 +39,7 @@ class PrefsManager {
       "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
       "timerColorList" : [0,1,2,3,4], // 타이머 색상 리스트 (최대 5개)
     };
+
     String defaultTimerString = json.encode(defaultUiData);
 
     await _prefs.setString('recent', defaultTimerString);
