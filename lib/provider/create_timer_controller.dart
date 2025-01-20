@@ -2,137 +2,98 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/models/timer_model.dart';
 import 'package:provider/provider.dart';
 
 class CreateTimerController with ChangeNotifier {
 
   BuildContext? context;
 
-  Map<String,dynamic> _timerUIData = {
-    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-    "maxTime" : 60, // 최대 시간
-    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-    "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
-  };
+  TimerModel? _timerModel;
 
-  /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-  int _timeUnit = 0;
+  get timerModel  {
+    return _timerModel ??= TimerModel();
+  }
 
-  /// 최대 시간
-  int _maxTime = 60; // OK
-
-  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-  int _remainTimeStyle = 1;
-
-  /// 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-  int _alarmType = 0;
-
-  /// 타이머 색상 리스트 (최대 5개)
-  List<int> _timerColorList = [0];
+  void initTimerModel(){
+    _timerModel ??= TimerModel();
+  }
 
   int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
 
-  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
-
-
-  void assignTimerUIData(){
-    // print('asd');
-    _timerUIData = {
-      "timeUnit" : _timeUnit,
-      "maxTime" : _maxTime,
-      "remainTimeStyle" : _remainTimeStyle,
-      "alarmType" : _alarmType,
-      "timerColorList" : _timerColorList,
-    };
-    // print(_timerUIData);
-    // _timerUIData.addAll({
-    //   "timeUnit" : _timeUnit.toString(),
-    //   "maxTime" : _maxTime.toString(),
-    //   "remainTimeStyle" : _remainTimeStyle.toString(),
-    //   "alarmType" : _alarmType.toString(),
-    //   "timerColorList" : _timerColorList,
-    // });
-
-    notifyListeners();
+  void refreshTimerModel(){
+    _timerModel = TimerModel();
   }
-
-  get timerUIData => _timerUIData;
 
   List<List<String>> _timerColorTextList =
   [
-    // [],
-    // ["~100%"],
-    // ["~100%", "~50%"],
-    // [ "~100%", "~66%", "~33%"],
-    // [ "~100%", "~75%", "~50%", "~25%"],
-    // ["~100%", "~80%", "~60%", "~40%", "~20%"]
     [],
     ["~100%"],
-    ["~50%", "~100%"],
-    ["~33%", "~66%", "~100%"],
-    ["~25%","~50%","~75%", "~100%"],
-    ["~20%", "~40%", "~60%", "~80%", "~100%"],
+    ["~100%", "~50%"],
+    ["~100%", "~66%", "~33%"],
+    ["~100%", "~75%", "~50%", "~25%"],
+    ["~100%", "~80%", "~60%", "~40%", "~20%"]
+    // [],
+    // ["~100%"],
+    // ["~50%", "~100%"],
+    // ["~33%", "~66%", "~100%"],
+    // ["~25%","~50%","~75%", "~100%"],
+    // ["~20%", "~40%", "~60%", "~80%", "~100%"],
   ];
 
-  get timerColorList => _timerColorList;
   get timerColorListSize => _timerColorListSize;
-  get timerColorData => _timerColorData;
+  // get timerColorData => _timerColorData;
+  get timerColorData => _timerModel?.timerColorData;
 
   set setTimerColorListSize(int idx){
-    _timerColorList.add(idx);
-    _timerColorListSize = _timerColorList.length;
-    _timerColorData.clear();
+    _timerModel?.timerColorList.add(idx);
+    _timerModel?.timerColorListSize = _timerModel!.timerColorList.length;
+    _timerModel?.timerColorData.clear();
+    int size = _timerModel!.timerColorList.length;
 
-    // print(_timerColorList.length);
-    // print(_timerColorList);
-    print('추가 : $_timerColorList' );
-    for (var i = _timerColorList.length - 1; i >= 0; i--) {
-      _timerColorData.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorListSize][i]});
-
-      // print(_timerColorData[i]);
+    // print('추가 : ${_timerModel?.timerColorList}' );
+    for (var i = 0; i < _timerModel!.timerColorList.length; i++) {
+      _timerModel?.timerColorData.add({"index" : i.toString(), "colorIdx" : _timerModel?.timerColorList[i].toString(), "msg" : _timerColorTextList[size][i]});
     }
-
-    // print(this._timerColorListSize);
-    // this._timerColorList.add = val;
+    _timerColorListSize = size; // List의 요소 변경에는 provider가 반응하지 않음
 
     notifyListeners();
   }
 
   set deleteTimerColorByIndex(int idx){
-    _timerColorList.removeAt(idx);
-    _timerColorListSize = _timerColorList.length;
-    _timerColorData.clear();
+    _timerModel?.timerColorList.removeAt(idx);
+    _timerModel?.timerColorListSize = _timerModel!.timerColorList.length;
+    _timerModel?.timerColorData.clear();
+
+    int size = _timerModel!.timerColorList.length;
 
     // print('삭제 : $_timerColorList' );
-    for (var i = _timerColorList.length - 1; i >= 0; i--) {
-      _timerColorData.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorListSize][i]});
-      // print(_timerColorData[i]);
+      for (var i = 0; i < _timerModel!.timerColorList.length; i++) {
+        _timerModel?.timerColorData.add({"index" : i.toString(), "colorIdx" : _timerModel?.timerColorList[i].toString(), "msg" : _timerColorTextList[size][i]});
     }
-    // print(this._timerColorListSize);
-    // this._timerColorList.add = val;
+
+    _timerColorListSize = size; // List의 요소 변경에는 provider가 반응하지 않음
+
     notifyListeners();
   }
-
-
 
   /// 타이머 시간 단위
-  get timeUnit => _timeUnit;
+  get timeUnit => _timerModel?.timeUnit;
   set setTimeUnit(int val){
-    this._timeUnit = val;
+    _timerModel?.timeUnit = val;
     notifyListeners();
   }
 
-  get maxTime => _maxTime;
+  get maxTime => _timerModel?.maxTime;
   set setMaxTime(int val){
-    this._maxTime = val;
+    _timerModel?.maxTime = val;
     notifyListeners();
   }
 
   /// 남은 시간 표시 여부
-  get remainTimeStyle => _remainTimeStyle;
+  get remainTimeStyle => _timerModel?.remainTimeStyle;
   set setRemainTimeStyle(int val){
-    _remainTimeStyle = val;
+    _timerModel?.remainTimeStyle = val;
     notifyListeners();
   }
 

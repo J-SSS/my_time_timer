@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class TimerModel {
-
-  Map<String,dynamic> _timerUIData = {
-    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-    "maxTime" : 60, // 최대 시간
-    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-    "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
-  };
+  /// 타이머 고유아이디
+  late int timerId;
+  /// 폴더 고유아이디
+  late int folderId;
+  /// 타이머 이름
+  late String timerName;
+  /// 타이머 정렬 순서
+  int? sordOrder;
 
   /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
   int _timeUnit = 0;
@@ -27,7 +27,19 @@ class TimerModel {
 
   int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
 
-  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}]; /// 타이머 색상 리스트 (최대 5개)
+  List<Map<String,String?>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}];
+
+  /// 타이머 색상 리스트 (최대 5개)
+
+  TimerModel();
+
+  Map<String,dynamic> _timerUIData = {
+    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+    "maxTime" : 60, // 최대 시간
+    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
+    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
+    "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
+  };
 
 // 'setupTime': '45', // 설정 시간
 // 'viewRemainTime': '', // 남은 시간 표시 여부
@@ -57,12 +69,63 @@ class TimerModel {
   Map<String, dynamic> _recentTimer = {}; // 최근 타이머
   get recentTimer => _recentTimer;
 
+  factory TimerModel.fromDb(List<Map<String, dynamic>> timerData) {
+    return TimerModel();
+  }
+
   TimerModel.fromSharedPreferences(Map<String, dynamic> recentTimer){ // SharedPreferences 사용하는 경우
     _recentTimer = recentTimer;
   }
 
+  int get timeUnit => _timeUnit;
 
-  /**
+  set timeUnit(int value) {
+    _timeUnit = value;
+  }
+
+  int get maxTime => _maxTime;
+
+  set maxTime(int value) {
+    _maxTime = value;
+  }
+
+  int get remainTimeStyle => _remainTimeStyle;
+
+  set remainTimeStyle(int value) {
+    _remainTimeStyle = value;
+  }
+
+  int get alarmType => _alarmType;
+
+  set alarmType(int value) {
+    _alarmType = value;
+  }
+
+  List<int> get timerColorList => _timerColorList;
+
+  set timerColorList(List<int> value) {
+    _timerColorList = value;
+  }
+
+  int get timerColorListSize => _timerColorListSize;
+
+  set timerColorListSize(int value) {
+    _timerColorListSize = value;
+  }
+
+  List<Map<String, String?>> get timerColorData => _timerColorData;
+
+  set timerColorData(List<Map<String, String?>> value) {
+    _timerColorData = value;
+  }
+
+  Map<String, dynamic> get timerUIData => _timerUIData;
+
+  set timerUIData(Map<String, dynamic> value) {
+    _timerUIData = value;
+  }
+
+/**
    * Java에서 Lombok 등을 사용해 Getter/Setter, equals, hashCode를 자동화하는 것처럼, Dart에도 아래와 같은 라이브러리를 사용할 수 있습니다:
 
       freezed : 불변 모델, copyWith, JSON 변환 등을 자동 생성

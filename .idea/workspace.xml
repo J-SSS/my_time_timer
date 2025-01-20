@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/folder_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/folder_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/preset_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/preset_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/timer_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/timer_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/db_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/db_manager.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/preset_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/preset_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/timer/pizza_type_b.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/timer/pizza_type_b.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitRewordedCommitMessages">
+    <option name="commitMessagesMapping">
+      <RewordedCommitMessageMapping>
+        <option name="originalMessage" value="[개발] #UI, Pretendard 폰트 추가" />
+        <option name="rewordedMessage" value="[개발] #UI, Pretendard 폰트 추가" />
+      </RewordedCommitMessageMapping>
+    </option>
+    <option name="currentCommit" value="1" />
+    <option name="onto" value="c32dc87b8ae5ed1d6cbbc1a536a5e1a79f5003cc" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectId" id="2dengkcSyQWKrNWo5vdgvb7gwF8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/my_time_timer/lib/widgets/timer&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.37356323&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\my_time_timer\lib\widgets\timer" />
+      <recent name="D:\Projects\my_time_timer\lib\screen" />
+      <recent name="D:\Projects\my_time_timer\lib\provider" />
+      <recent name="D:\Projects\my_time_timer\lib\widgets" />
+      <recent name="D:\Projects\my_time_timer\assets\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\my_time_timer\lib\widgets\timer" />
+      <recent name="D:\Projects\my_time_timer\lib\widgets" />
+      <recent name="D:\Projects\my_time_timer\lib\widgets\dialog" />
+      <recent name="D:\Projects\my_time_timer\assets\icon" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="4784aef7-4a17-4598-8246-c2a105d9af8b" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="D:/Projects/my_time_timer/android/app/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/android/app/build.gradle" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.D:/Projects/my_time_timer/android/app/build.gradle" />
+        <item itemvalue="Gradle.D:/Projects/my_time_timer/android/app/build.gradle" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="" />
+      <created>1710377529221</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710377529221</updated>
+      <workItem from="1710377530280" duration="3772000" />
+      <workItem from="1710743089680" duration="1043000" />
+      <workItem from="1712299697538" duration="736000" />
+      <workItem from="1715318391539" duration="2587000" />
+      <workItem from="1715562912766" duration="2871000" />
+      <workItem from="1715567132771" duration="2132000" />
+      <workItem from="1715820045974" duration="1533000" />
+      <workItem from="1716792811720" duration="1327000" />
+      <workItem from="1733300427867" duration="6769000" />
+      <workItem from="1733377171007" duration="3373000" />
+      <workItem from="1735008746575" duration="6587000" />
+      <workItem from="1735015499693" duration="707000" />
+      <workItem from="1735016242103" duration="11349000" />
+      <workItem from="1735029477363" duration="292000" />
+      <workItem from="1735516703847" duration="17494000" />
+      <workItem from="1735603753813" duration="1173000" />
+      <workItem from="1735604966800" duration="117000" />
+      <workItem from="1735605102217" duration="18883000" />
+      <workItem from="1735775405324" duration="9295000" />
+      <workItem from="1735794425712" duration="3994000" />
+      <workItem from="1735805976385" duration="105000" />
+      <workItem from="1735861843660" duration="1972000" />
+      <workItem from="1735873513918" duration="174000" />
+      <workItem from="1735873878003" duration="1342000" />
+      <workItem from="1735879647079" duration="9247000" />
+      <workItem from="1736145678575" duration="133000" />
+      <workItem from="1736228427196" duration="258000" />
+      <workItem from="1736228691169" duration="1208000" />
+      <workItem from="1736230297362" duration="606000" />
+      <workItem from="1736231006865" duration="5658000" />
+      <workItem from="1736295062501" duration="3501000" />
+      <workItem from="1736320196766" duration="605000" />
+      <workItem from="1736323442072" duration="213000" />
+      <workItem from="1736324363438" duration="19000" />
+      <workItem from="1736380973321" duration="1940000" />
+      <workItem from="1736389126090" duration="4655000" />
+      <workItem from="1736411289223" duration="79000" />
+      <workItem from="1736473552074" duration="20619000" />
+      <workItem from="1736726668286" duration="12046000" />
+      <workItem from="1736741643413" duration="4015000" />
+      <workItem from="1736753849561" duration="2895000" />
+      <workItem from="1736812586904" duration="29446000" />
+      <workItem from="1736898694591" duration="3463000" />
+      <workItem from="1736930985517" duration="1153000" />
+      <workItem from="1736999954339" duration="1035000" />
+      <workItem from="1737014857555" duration="90000" />
+      <workItem from="1737334779874" duration="97000" />
+      <workItem from="1737334994629" duration="9537000" />
+      <workItem from="1737355149089" duration="4199000" />
+      <workItem from="1737361059093" duration="631000" />
+    </task>
+    <task id="LOCAL-00001" summary="[개발] #001 새 프로젝트 생성">
+      <created>1710377781114</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710377781114</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[개발] #002 새 프로젝트 생성-2">
+      <created>1710378936908</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710378936908</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[개발] #003 My Time Timer 기존 개발 부분 이관">
+      <created>1710379016609</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710379016609</updated>
+    </task>
+    <task id="LOCAL-00004" summary="[패치] #empty gradle-wrapper 및 의존성 업데이트">
+      <created>1733360330710</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733360330710</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[개발] #004 AppBar 위젯 분리">
+      <created>1733387413017</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733387413017</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[개발] #공통 carousel_slider 의존성 추가">
+      <created>1735015786238</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1735015786238</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[개발] #메인, MediaQueryData Provider에 저장">
+      <created>1735020518821</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735020518821</updated>
+    </task>
+    <task id="LOCAL-00008" summary="[개발] #테마선택, carousel_slider 적용 등&#10;&#10;- carousel_slider 적용&#10;- 사이즈 Provider를 통해 사용">
+      <created>1735020575632</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1735020575632</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[개발] #공통, app_config_controller 이름 변경">
+      <created>1735022280559</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1735022280559</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[개발] #공통, safeSize 계산 추가">
+      <created>1735022430904</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1735022430904</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[개발] #타이머생성, 임시저장">
+      <created>1735029581930</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1735029581930</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[개발] 임시저장">
+      <created>1735545173982</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735545173983</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[개발] #공통, 1:7:2 레이아웃 설정">
+      <created>1735604475980</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735604475980</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[개발] #타이머, 1:7:2 레이아웃 대응">
+      <created>1735610517017</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1735610517017</updated>
+    </task>
+    <task id="LOCAL-00015" summary="[개발] #타이머생성화면, 버튼 배치 수정">
+      <created>1735628650192</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1735628650193</updated>
+    </task>
+    <task id="LOCAL-00016" summary="[개발] #공통, 세로 화면으로 고정">
+      <created>1735630424267</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1735630424267</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[개발] #타이머색상선택Dialog, 레이아웃 수정">
+      <created>1735806066110</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1735806066111</updated>
+    </task>
+    <task id="LOCAL-00018" summary="[개발] #UI, 저장 버튼 추가">
+      <created>1735861972872</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1735861972872</updated>
+    </task>
+    <task id="LOCAL-00019" summary="[개발] #리팩토링, ListDrawer 위젯 경로 수정">
+      <created>1735862233991</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1735862233991</updated>
+    </task>
+    <task id="LOCAL-00020" summary="[개발] #UI, Pretendard 폰트 추가">
+      <created>1735863749961</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1735863749961</updated>
+    </task>
+    <task id="LOCAL-00021" summary="[개발] #UI, Pretendard 폰트 추가">
+      <created>1735863766124</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1735863766124</updated>
+    </task>
+    <task id="LOCAL-00022" summary="[개발] #타이머생성, NumberPicker Dialog 추가 등">
+      <created>1735883105835</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1735883105835</updated>
+    </task>
+    <task id="LOCAL-00023" summary="[개발] #타이머, 매개변수에 사이즈 추가">
+      <created>1735884724651</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1735884724651</updated>
+    </task>
+    <task id="LOCAL-00024" summary="[개발] #온타이머, 레이아웃 수정">
+      <created>1735893232535</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1735893232535</updated>
+    </task>
+    <task id="LOCAL-00025" summary="[개발] #타이머생성, 컨트롤러 분리 등">
+      <created>1736238020113</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1736238020113</updated>
+    </task>
+    <task id="LOCAL-00026" summary="[개발] #타이머생성, numberpicker 수정">
+      <created>1736323600241</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1736323600241</updated>
+    </task>
+    <task id="LOCAL-00027" summary="[개발] #공통값, 공통값 사용 추가">
+      <created>1736411358489</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1736411358489</updated>
+    </task>
+    <task id="LOCAL-00028" summary="[개발] #테마선탁, 레이아웃 수정">
+      <created>1736497862227</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1736497862228</updated>
+    </task>
+    <task id="LOCAL-00029" summary="[개발] #기타, device_view 위젯 의존성 추가">
+      <created>1736497910276</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1736497910276</updated>
+    </task>
+    <task id="LOCAL-00030" summary="[개발] #타이머생성, UI 데이타 적용 로직 추가">
+      <created>1736497945635</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1736497945635</updated>
+    </task>
+    <task id="LOCAL-00031" summary="[개발] #레이아웃, UI 수정 등">
+      <created>1736758078505</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1736758078505</updated>
+    </task>
+    <task id="LOCAL-00032" summary="[개발] #IO, SQLite 적용 및 MVVC 패턴에 마이그레이션">
+      <created>1736842108303</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1736842108303</updated>
+    </task>
+    <task id="LOCAL-00033" summary="[개발] #IO, SQLite 적용 및 MVVC 패턴에 마이그레이션">
+      <created>1736843442622</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1736843442622</updated>
+    </task>
+    <task id="LOCAL-00034" summary="[개발] #기타, 폴더 구조 수정 등">
+      <created>1737000717560</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1737000717560</updated>
+    </task>
+    <task id="LOCAL-00035" summary="[개발] #기타, .gitignore 수정&#10;&#10;- workspace.xml 공유">
+      <created>1737335249030</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1737335249030</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[개발] #공통, app_config_controller 이름 변경" />
+    <MESSAGE value="[개발] #공통, safeSize 계산 추가" />
+    <MESSAGE value="[개발] #타이머생성, 임시저장" />
+    <MESSAGE value="[개발] 임시저장" />
+    <MESSAGE value="[개발] #공통, 1:7:2 레이아웃 설정" />
+    <MESSAGE value="[개발] #타이머, 1:7:2 레이아웃 대응" />
+    <MESSAGE value="[개발] #타이머생성화면, 버튼 배치 수정" />
+    <MESSAGE value="[개발] #공통, 세로 화면으로 고정" />
+    <MESSAGE value="[개발] #타이머색상선택Dialog, 레이아웃 수정" />
+    <MESSAGE value="[개발] #UI, 저장 버튼 추가" />
+    <MESSAGE value="[개발] #리팩토링, ListDrawer 위젯 경로 수정" />
+    <MESSAGE value="[개발] #UI, Pretendard 폰트 추가" />
+    <MESSAGE value="[개발] #타이머생성, NumberPicker Dialog 추가 등" />
+    <MESSAGE value="[개발] #타이머, 매개변수에 사이즈 추가" />
+    <MESSAGE value="[개발] #온타이머, 레이아웃 수정" />
+    <MESSAGE value="[개발] #타이머생성, 컨트롤러 분리 등" />
+    <MESSAGE value="[개발] #타이머생성, numberpicker 수정" />
+    <MESSAGE value="[개발] #공통값, 공통값 사용 추가" />
+    <MESSAGE value="[개발] #테마선탁, 레이아웃 수정" />
+    <MESSAGE value="[개발] #기타, device_view 위젯 의존성 추가" />
+    <MESSAGE value="[개발] #타이머생성, UI 데이타 적용 로직 추가" />
+    <MESSAGE value="[개발] #레이아웃, UI 수정 등" />
+    <MESSAGE value="[개발] #IO, SQLite 적용 및 MVVC 패턴에 마이그레이션" />
+    <MESSAGE value="[개발] #기타, 폴더 구조 수정 등" />
+    <MESSAGE value="[개발] #기타, .gitignore 수정&#10;&#10;- workspace.xml 공유" />
+    <option name="LAST_COMMIT_MESSAGE" value="[개발] #기타, .gitignore 수정&#10;&#10;- workspace.xml 공유" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="dart-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+        <watch expression="startAngle" />
+      </inline-watch>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+        <watch expression="startAngle" />
+      </inline-watch>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+        <watch expression="startAngle" />
+      </inline-watch>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+        <watch expression="startAngle" />
+      </inline-watch>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

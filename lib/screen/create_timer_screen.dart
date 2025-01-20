@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/utils/app_manager.dart';
 import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
@@ -216,6 +215,9 @@ class CreateTimerScreen extends StatelessWidget {
     // alarmType 무음/진동/알람
 
     String type = btnType;
+
+    context.read<CreateTimerController>().initTimerModel();
+
     int idxForTimeUnit = context.select((CreateTimerController a) => a.timeUnit);
     int idxForRemainTimeStyle = context.select((CreateTimerController a) => a.remainTimeStyle);
 
@@ -231,7 +233,7 @@ class CreateTimerScreen extends StatelessWidget {
             case "timeUnit" : { // timeUnit 시간 단위
               idxForTimeUnit = (idxForTimeUnit + 1) % 3;
               context.read<CreateTimerController>().setTimeUnit = idxForTimeUnit;
-              context.read<CreateTimerController>().assignTimerUIData();
+              // context.read<CreateTimerController>().assignTimerUIData();
             }
             case "maxTime" : { // maxTime 최대 시간
               NumberPickerDialog().show(context);
@@ -240,7 +242,7 @@ class CreateTimerScreen extends StatelessWidget {
             case "remainTimeStyle" : { // remainTime 남은 시간 표시 여부
               idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
               context.read<CreateTimerController>().setRemainTimeStyle = idxForRemainTimeStyle;
-              context.read<CreateTimerController>().assignTimerUIData();
+              // context.read<CreateTimerController>().assignTimerUIData();
             }
             case "alarmType" : {} // alarmType 무음/진동/알람}
           }

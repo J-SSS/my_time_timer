@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/models/timer_model.dart';
 import 'package:my_time_timer/provider/create_timer_controller.dart';
 import 'package:provider/provider.dart';
 import '../../provider/app_config_controller.dart';
@@ -22,7 +23,13 @@ class SelectColorDialog {
       builder: (BuildContext context) {
 
       int size  = context.select((CreateTimerController T) => T.timerColorListSize);
-      List<Map<String,String>> colorData = context.read<CreateTimerController>().timerColorData;
+
+      List<Map<String,String?>> colorData = context.read<CreateTimerController>().timerColorData; // List의 요소 변경에는 Provider가 반응하지 않음
+      // TimerModel timerModel = context.read<CreateTimerController>().timerModel;
+      // List<Map<String,String?>> colorData = timerModel.timerColorData; // List의 요소 변경에는 Provider가 반응하지 않음
+
+
+        // List<Map<String,String?>> colorData = context.select((CreateTimerController T) => T.timerColorData);
 
 
         return Dialog(
@@ -126,11 +133,7 @@ class SelectColorDialog {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
-                        context.read<CreateTimerController>().assignTimerUIData();
-                        // Navigator.of(context).popUntil((route) {
-                        //   return route is MaterialPageRoute && route.builder.runtimeType == HomeScreen;
-                        // });
-                        // Navigator.of(context).popUntil((route) => route.settings.name == '/home');
+                        // context.read<CreateTimerController>().refreshTimerModel();
                         Navigator.pop(context); // 다이얼로그 닫기
                       },
                       child: const Text('SAVE'),
@@ -151,7 +154,7 @@ class SelectColorDialog {
     );
   }
 
-  static Widget _colorBtn(BuildContext context, Map<String,String> data) {
+  static Widget _colorBtn(BuildContext context, Map<String,String?> data) {
     // print(data);
     // print(data['colorIdx']);
     // print(int.parse(data['colorIdx']!));

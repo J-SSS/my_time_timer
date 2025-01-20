@@ -68,7 +68,7 @@ class _PizzaTypeBState extends State<PizzaTypeB> {
       // });
     } else if(widget.screenType == TimerScreenType.create) { // 타이머 디자인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
-      uiData = context.select((CreateTimerController T) => T.timerUIData);
+
     }
     // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');

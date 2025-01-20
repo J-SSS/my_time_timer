@@ -34,8 +34,8 @@ class _PresetListState extends State<PresetList> {
   @override
   Widget build(BuildContext context) {
     // todo FutureBuilder로 변경하기
-    _folderPresetDb = context.watch<TimerViewModel>().preset!.folderPresetDb;
-    _timerPresetDb = context.watch<TimerViewModel>().preset!.timerPresetDb;
+    // _folderPresetDb = context.watch<TimerViewModel>().preset!.folderPresetDb;
+    // _timerPresetDb = context.watch<TimerViewModel>().preset!.timerPresetDb;
     // print('폴더DB : ${_folderPresetDb}');
     // print('타이머Db : ${_timerPresetDb}');
 

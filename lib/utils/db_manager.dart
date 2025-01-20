@@ -62,6 +62,7 @@ class DbManager {
       CREATE TABLE $_tableFolder(
         folder_id INTEGER PRIMARY KEY AUTOINCREMENT,
         folder_name TEXT,
+        sort_order INTEGER,
         insert_date TEXT,
         update_date TEXT
       )

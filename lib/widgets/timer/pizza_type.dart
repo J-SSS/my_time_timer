@@ -40,7 +40,7 @@ class _PizzaTypeState extends State<PizzaType> {
   _PizzaTypeState();
   Timer? _timer; // 타이머 객체
   int setupTime = 45;
-  late TimerModel timerModel;
+  late TimerModel _timerModel;
 
   Map<String,dynamic> uiData = { // 기본 값
     "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
@@ -54,11 +54,13 @@ class _PizzaTypeState extends State<PizzaType> {
   Widget build(BuildContext context) {
     if(widget.screenType == TimerScreenType.main){ /// 메인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
-      timerModel = context.select((TimerController T) => T.currentTimer);
-      print(timerModel.recentTimer);
+      _timerModel = context.select((TimerController T) => T.currentTimer);
+      // print(_timerModel.recentTimer);
     } else if(widget.screenType == TimerScreenType.timer) { /// 타이머 작동 중
       setupTime = context.select((TimerController T) => T.remainTime);
+      _timerModel = TimerModel(); // 임시
     } else if(widget.screenType == TimerScreenType.theme) { /// 테마 선택 화면
+      _timerModel = TimerModel(); // 임시
       uiData = { // 기본값
         "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
         "maxTime" : 60, // 최대 시간
@@ -73,14 +75,10 @@ class _PizzaTypeState extends State<PizzaType> {
       // });
     } else if(widget.screenType == TimerScreenType.create) { // 타이머 디자인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
-      uiData = context.select((CreateTimerController T) => T.timerUIData);
-      print(uiData);
-    }
 
-    late List<Map<String, dynamic>> _folderPresetDb;
-    late List<Map<String, dynamic>> _timerPresetDb;
-    // _folderPresetDb = context.watch<TimerViewModel>().preset!.folderPresetDb;
-    // _timerPresetDb = context.watch<TimerViewModel>().preset!.timerPresetDb;
+      _timerModel = context.select((CreateTimerController T) => T.timerModel);
+
+    }
 
     // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');
@@ -111,7 +109,7 @@ class _PizzaTypeState extends State<PizzaType> {
       // size: Size(double.infinity,double.infinity), // 원하는 크기로 지정
       painter: PizzaTypePainter(
         setupTime: setupTime,
-        uiData : uiData,
+        timerModel : _timerModel,
       ),
     );
   }
@@ -119,27 +117,16 @@ class _PizzaTypeState extends State<PizzaType> {
 
 class PizzaTypePainter extends CustomPainter {
   int setupTime;
-  Map<String,dynamic> uiData;
-
-  int _timeUnit ;  /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-  int _maxTime ; /// 최대 시간
-  int _remainTimeStyle;  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-  int _alarmType; /// 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-  List<int> _timerColorList; /// 타이머 색상 리스트 (최대 5개)
+  TimerModel timerModel;
 
   PizzaTypePainter({
     required this.setupTime,
-    required this.uiData,
-  }):
-        _timeUnit = uiData['timeUnit'] ?? 0,
-        _maxTime = uiData['maxTime'] ?? 60,
-        _remainTimeStyle = uiData['remainTimeStyle'] ?? 0,
-        _alarmType = uiData['alarmType'] ?? 0,
-        _timerColorList = uiData['timerColorList'] ?? [0];
+    required this.timerModel,
+  });
 
   /// 진행도에 따른 색상 인덱스 값을 찾는다
   int assignColorIndex (int ratio){
-    List<int> colorRange = colorAssignList[_timerColorList.length-1];
+    List<int> colorRange = colorAssignList[timerModel.timerColorList.length-1];
     int colorIdx = 0;
 
     for (var i = 0; i < colorRange.length; ++i) {
@@ -157,10 +144,11 @@ class PizzaTypePainter extends CustomPainter {
     Paint paint = Paint()
       ..style = PaintingStyle.fill; // 채우기로 변경
 
-    int ratio = (setupTime / _maxTime * 100).round();
+    int ratio = (setupTime / timerModel.maxTime * 100).round();
+
 
     // 색상 지정
-    int colorIdx = _timerColorList[assignColorIndex(ratio)];
+    int colorIdx = timerModel.timerColorList[assignColorIndex(ratio)];
     paint.color = colorList[colorIdx];
     // print("페인터 내부 사이즈 : " + size.toString());
 
@@ -255,11 +243,11 @@ class PizzaTypePainter extends CustomPainter {
 
 
     /// 남은 시간 표시
-    if(_remainTimeStyle == 1){  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
+    if(timerModel.remainTimeStyle == 1){  /// 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
       // TextPainter 설정
       final textPainter = TextPainter(
         text: TextSpan(
-          text: utils.parseTimeString(_timeUnit, setupTime),
+          text: utils.parseTimeString(timerModel.timeUnit, setupTime),
           style: TextStyle(
             color: Colors.white,
             fontSize: size.width / 10,
