@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+/// mft_timer 테이블을 맵핑하기 위한 Model
 class TimerModel {
   /// 타이머 고유아이디
   late int timerId;
   /// 폴더 고유아이디
-  late int folderId;
+  late int groupId;
   /// 타이머 이름
   late String timerName;
   /// 타이머 정렬 순서
-  int? sordOrder;
+  int? sortOrder;
 
   /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
   int _timeUnit = 0;
@@ -26,12 +27,30 @@ class TimerModel {
   List<int> _timerColorList = [0];
 
   int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
-
+  /// 타이머 색상 리스트 (최대 5개)
   List<Map<String,String?>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}];
 
-  /// 타이머 색상 리스트 (최대 5개)
+  TimerModel(
+      this.timerId,
+      this.groupId,
+      this.timerName,
+      this.sortOrder,
+      // this._timeUnit,
+      // this._maxTime,
+      // this._remainTimeStyle,
+      // this._timerColorList
+      );
 
-  TimerModel();
+  TimerModel.dflt();
+
+  factory TimerModel.fromDb(Map<String, dynamic> timerData) {
+    return TimerModel(
+      timerData['timer_id'],
+      timerData['group_id'],
+      timerData['timer_name'],
+      timerData['sort_order']
+    );
+  }
 
   Map<String,dynamic> _timerUIData = {
     "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
@@ -69,9 +88,7 @@ class TimerModel {
   Map<String, dynamic> _recentTimer = {}; // 최근 타이머
   get recentTimer => _recentTimer;
 
-  factory TimerModel.fromDb(List<Map<String, dynamic>> timerData) {
-    return TimerModel();
-  }
+
 
   TimerModel.fromSharedPreferences(Map<String, dynamic> recentTimer){ // SharedPreferences 사용하는 경우
     _recentTimer = recentTimer;

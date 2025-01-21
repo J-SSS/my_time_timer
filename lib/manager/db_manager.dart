@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -7,7 +7,7 @@ class DbManager {
   // DB 이름, 버전, 테이블 이름 등 정의
   static const _dbName = 'myDatabase.db';
   static const _dbVersion = 1;
-  static const _tableFolder = 'mft_folder';
+  static const _tableGroup = 'mft_group';
   static const _tableTimer = 'mft_timer';
   static const _tableConfig = 'mft_config';
 
@@ -57,11 +57,11 @@ class DbManager {
       )
     ''');
 
-    // mft_folder 테이블
+    // mft_group 테이블
     await db.execute('''
-      CREATE TABLE $_tableFolder(
-        folder_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        folder_name TEXT,
+      CREATE TABLE $_tableGroup(
+        group_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        group_name TEXT,
         sort_order INTEGER,
         insert_date TEXT,
         update_date TEXT
@@ -72,12 +72,10 @@ class DbManager {
     await db.execute('''
       CREATE TABLE $_tableTimer(
         timer_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        folder_id INTEGER NOT NULL,
+        group_id INTEGER NOT NULL,
         timer_name TEXT,
         sort_order INTEGER,
-        insert_date TEXT,
-        update_date TEXT,
-        FOREIGN KEY (folder_id) REFERENCES $_tableFolder (folder_id) 
+        FOREIGN KEY (group_id) REFERENCES $_tableGroup (group_id) 
         ON DELETE CASCADE
         ON UPDATE CASCADE
       )
@@ -112,13 +110,13 @@ class DbManager {
   Future<void> insertDefaultData(Database db) async {
     // Database db = await instance.database;
     // db.insert(_tableConfig, {}); // mft_config
-    await db.insert(_tableFolder, {
-      "folder_id" : 0,
-      "folder_name" : "Timer Group",
-    }); // mft_folder
+    await db.insert(_tableGroup, {
+      "group_id" : 0,
+      "group_name" : "Timer Group",
+    }); // mft_group
     await db.insert(_tableTimer, {
       "timer_id" : 0,
-      "folder_id" : 0,
+      "group_id" : 0,
       "timer_name" : "Basic Timer",
     }); // mft_timer
   }
@@ -133,9 +131,9 @@ class DbManager {
   }
 
   /// Read
-  Future<List<Map<String, dynamic>>> getFolderData() async {
+  Future<List<Map<String, dynamic>>> getGroupData() async {
     Database db = await instance.database;
-    return await db.query(_tableFolder);
+    return await db.query(_tableGroup);
   }
   /// Read
   Future<List<Map<String, dynamic>>> getTimerData() async {
@@ -175,7 +173,7 @@ class DbManager {
   Future<void> resetData() async {
     Database db = await instance.database;
     await db.execute('''DROP TABLE IF EXISTS $_tableConfig;'''); // mft_config drop
-    await db.execute('''DROP TABLE IF EXISTS $_tableFolder;'''); // mft_folder drop
+    await db.execute('''DROP TABLE IF EXISTS $_tableGroup;'''); // mft_group drop
     await db.execute('''DROP TABLE IF EXISTS $_tableTimer;'''); // mft_timer drop
 
     return await _onCreate(db, _dbVersion); // 테이블 재생성 및 값 초기화 todo 앱 재실행까지 가능한지 확인해보기

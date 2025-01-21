@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_time_timer/utils/db_manager.dart';
-import 'package:my_time_timer/utils/prefs_manager.dart';
+import 'package:my_time_timer/manager/db_manager.dart';
+import 'package:my_time_timer/manager/prefs_manager.dart';
 import 'package:my_time_timer/my_app.dart';
 
 Future<void> main() async {

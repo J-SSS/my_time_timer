@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/preset_model.dart';

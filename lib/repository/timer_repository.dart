@@ -1,9 +1,9 @@
-import 'package:my_time_timer/utils/prefs_manager.dart';
+import 'package:my_time_timer/manager/prefs_manager.dart';
 import 'package:my_time_timer/models/preset_model.dart';
 import 'dart:convert';
 
 import '../models/timer_model.dart';
-import '../utils/db_manager.dart';
+import '../manager/db_manager.dart';
 
 class TimerRepository {
   final DbManager dbManager = DbManager.instance;
@@ -17,10 +17,10 @@ class TimerRepository {
     return TimerModel.fromSharedPreferences(recentTimer);
   }
 
-  /// mft_folder 및 mft_timer 테이블의 모든 데이터를 조회한다.
-  Future<PresetModel?> getPresetDb() async {
-    final folderDate =  await dbManager.getFolderData();
+  /// mft_group 및 mft_timer 테이블의 모든 데이터를 PresetModel로 반환한다
+  Future<PresetModel?> getPresetFromDb() async {
+    final groupDate =  await dbManager.getGroupData();
     final timerData =  await dbManager.getTimerData();
-    return PresetModel.fromDb(folderDate,timerData);
+    return PresetModel.fromDb(groupDate,timerData);
   }
 }

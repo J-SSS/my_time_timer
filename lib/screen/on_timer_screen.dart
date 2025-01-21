@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:my_time_timer/my_app.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/widgets/timer_loader.dart';

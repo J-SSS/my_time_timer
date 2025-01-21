@@ -12,17 +12,17 @@ class CreateTimerController with ChangeNotifier {
   TimerModel? _timerModel;
 
   get timerModel  {
-    return _timerModel ??= TimerModel();
+    return _timerModel ??= TimerModel.dflt();
   }
 
   void initTimerModel(){
-    _timerModel ??= TimerModel();
+    _timerModel ??= TimerModel.dflt();
   }
 
   int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
 
   void refreshTimerModel(){
-    _timerModel = TimerModel();
+    _timerModel = TimerModel.dflt();
   }
 
   List<List<String>> _timerColorTextList =

@@ -11,98 +11,24 @@ import '../models/timer_model.dart';
 import '../manager/app_manager.dart';
 
 
-class TimerController extends ChangeNotifier {
-  // isolate 변수
+class IsolateManager extends ChangeNotifier {
+  static final IsolateManager instance = IsolateManager._();
+
+  IsolateManager._() {
+    AppManager.log('Isolate Timer 초기화',type: "S");
+    init(); // isolate 생성
+  }
+
   late SendPort _sendPort;
   late ReceivePort _receivePort;
   late Isolate _isolate;
 
-  // ~isolate 변수
+  int setupTime = 1;
+  int _remainTime = 1;
 
-  // timer 변수
-  int _setupTime = 34;
-  int _remainTime = 34;
-  String loopType = ''; // N : 반복 안함, O : 하나 반복, L : 목록 반복
-  // ~timer 변수
-
-  // 기타
-  String playBtn = 'btn_play';
-  String loopBtn = 'btn_roop_none';
-
-
-
-  late TimerModel _currentTimer;
-
-  get currentTimer => _currentTimer;
-
-  set setCurrentTimer(TimerModel timerModel){
-    _currentTimer = timerModel;
-    // notifyListeners();
-  }
-  // ~기타
-
-  bool isPause = false;
-  String timeType = 'M'; // min : 분, sec : 초
-
-  bool _isPlyaing = true; // 현재 작동중인지 여부
-
-  bool get isPlaying => _isPlyaing;
-
-  set setIsPlaying(bool value) => _isPlyaing = value;
-
-  set setPlayBtn(var btn) {
-    this.playBtn = btn;
-    notifyListeners();
-  }
-
-  get setupTime => _setupTime;
-
-  get remainTime => _remainTime;
-
-  set setSetupTime(int setupTime) {
-    if(this._setupTime != setupTime || this._remainTime != setupTime) {
-      this._setupTime = setupTime;
-      this._remainTime = setupTime;
-      notifyListeners();
-    }
-  }
-
-  // 안쓰는 것으로 추정
-  bool ableEdit = false;
-  Offset clickPoint = Offset(0, 0);
-
-  set setClickPoint(Offset clickPoint) {
-    this.clickPoint = clickPoint;
-    notifyListeners();
-  }
-
-  // 안쓰는 것으로 추정
-
-  /** 반복 버튼 아이콘 변경 */
-  set setLoopBtn(var btn) {
-    String currentSet = this.loopBtn.split('_')[2];
-    if (currentSet == 'none') {
-      this.loopBtn = 'btn_roop_one';
-      this.loopType = 'O';
-    } else if (currentSet == 'one') {
-      this.loopBtn = 'btn_roop_list';
-      this.loopType = 'L';
-    } else {
-      this.loopBtn = 'btn_roop_none';
-      this.loopType = 'N';
-    }
-    notifyListeners();
-  }
-
-  TimerController() {
-    AppManager.log('Isolate Timer Init');
-    isolateTimerInit(); // isolate 생성
-  }
-
-  // String msg = '기본값';
 
   /// Isolate 타이머 실행
-  void runTimer() {
+  void run() {
     _sendPort.send({
       'cmd': 'run',
       'setupTime': setupTime,
@@ -111,7 +37,7 @@ class TimerController extends ChangeNotifier {
   }
 
   /// Isolate 타이머 정지
-  void cancelTimer() {
+  void cancel() {
     _sendPort.send({
       'cmd': 'cancel',
       'callback': '',
@@ -119,7 +45,7 @@ class TimerController extends ChangeNotifier {
   }
 
   /// Isolate 타이머 일시정지
-  void pauseTimer() {
+  void pause() {
     _sendPort.send({
       'cmd': 'pause',
       'setupTime': setupTime,
@@ -128,7 +54,7 @@ class TimerController extends ChangeNotifier {
   }
 
   /// Isolate 타이머 시간 수정
-  void updateTimer() {
+  void update() {
     _sendPort.send({
       'cmd': 'update',
       'setupTime': setupTime,
@@ -137,7 +63,7 @@ class TimerController extends ChangeNotifier {
   }
 
   /** isolate 생성 & 메시지 수신시 처리 */
-  isolateTimerInit() async {
+  void init() async {
     final ReceivePort receivePort = ReceivePort();
     final isolate = await Isolate.spawn(_isolateTimer, receivePort.sendPort); // Isolate를 생성하고 receivePort 전달
     receivePort.listen((msg) {

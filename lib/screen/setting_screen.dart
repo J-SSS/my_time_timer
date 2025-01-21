@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 
-import '../utils/db_manager.dart';
+import '../manager/db_manager.dart';
 
 class SettingScreen extends StatefulWidget {
   @override

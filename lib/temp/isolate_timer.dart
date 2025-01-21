@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/main.dart';
 
-import 'app_manager.dart';
+import '../manager/app_manager.dart';
 
 class IsolateTimerRunner extends ChangeNotifier {
   late SendPort _sendPort;

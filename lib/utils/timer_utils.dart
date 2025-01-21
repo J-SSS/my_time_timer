@@ -8,6 +8,17 @@ import 'dart:developer';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 
+
+int getUnixTimeInSeconds() {
+  print('현재 유닉스 시간 (초 단위): ${getUnixTimeInSeconds()}'); // 예: 1672531200
+  return DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000;
+}
+
+int getUnixTimeInMilliseconds() {
+  print('현재 유닉스 시간 (밀리초 단위): ${getUnixTimeInMilliseconds()}'); // 예: 1672531200000
+  return DateTime.now().toUtc().millisecondsSinceEpoch;
+}
+
 /// 시간을 mm:ss 포멧 문자열로 변환
 String parseTimeString(int timeUnit, int setupTime){
   String timeString = "";

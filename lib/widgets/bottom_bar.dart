@@ -12,7 +12,7 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import '../utils/app_utils.dart';
 import '../utils/size_util.dart';
 import '../utils/timer_utils.dart';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 
 class BottomBarWidget extends StatefulWidget{
   final Size safeSize;

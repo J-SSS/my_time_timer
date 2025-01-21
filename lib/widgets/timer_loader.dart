@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_time_timer/widgets/timer/pizza_type.dart';
 import 'package:my_time_timer/widgets/timer/pizza_type_b.dart';

@@ -7,11 +7,11 @@ import 'dart:developer';
 import 'package:my_time_timer/provider/timer_controller.dart';
 import 'package:my_time_timer/provider/app_config_controller.dart';
 
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/common_values.dart';
-import 'package:my_time_timer/utils/db_manager.dart';
+import 'package:my_time_timer/manager/db_manager.dart';
 
-import 'package:my_time_timer/utils/isolate_timer.dart';
+import 'package:my_time_timer/temp/isolate_timer.dart';
 import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/repository/timer_repository.dart';
@@ -76,7 +76,7 @@ class MyAppMain extends StatelessWidget {
 
     // print(MyAppBar(mainSize: safeSize).preferredSize.height); // AppBar 높이 확인
 
-    context.read<TimerViewModel>().loadPresetDb();
+    context.read<TimerViewModel>().loadPresetFromDb();
     // AppManager.log("SQLite 프리셋 초기화",type: "S");
 
     // SharedPreferences에서 최근 사용 타이머 셋팅

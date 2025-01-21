@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+import 'package:my_time_timer/models/group_model.dart';
+import 'package:my_time_timer/models/timer_model.dart';
 
 import 'package:my_time_timer/utils/size_util.dart';
 import 'package:provider/provider.dart';
 
+import '../models/preset_model.dart';
 import '../screen/select_theme_screen.dart';
 import '../viewModels/timer_view_model.dart';
 
@@ -17,14 +20,11 @@ class PresetList extends StatefulWidget {
 class _PresetListState extends State<PresetList> {
   List<int> expandedKey = [];
   bool isExpanded = false; // ExpansionTile의 초기 상태
-  List<String> items = ['- 피자타입', '- 배터리타입'];
+  // List<String> items = ['- 피자타입', '- 배터리타입'];
 
+  late PresetModel _presetModel;
   // int _expandedTileIndex = -1; // 현재 열려 있는 타일의 인덱스를 저장
-
   TextEditingController _textController = TextEditingController();
-
-  late List<Map<String, dynamic>> _folderPresetDb;
-  late List<Map<String, dynamic>> _timerPresetDb;
 
   @override
   void initState() {
@@ -33,33 +33,26 @@ class _PresetListState extends State<PresetList> {
 
   @override
   Widget build(BuildContext context) {
-    // todo FutureBuilder로 변경하기
-    // _folderPresetDb = context.watch<TimerViewModel>().preset!.folderPresetDb;
-    // _timerPresetDb = context.watch<TimerViewModel>().preset!.timerPresetDb;
-    // print('폴더DB : ${_folderPresetDb}');
-    // print('타이머Db : ${_timerPresetDb}');
-
-    // _folderPresetDb.forEach((item) {
-    //   print('ID: ${item['folder_id']}, Name: ${item['folder_name']}');
-    // });
-
-    // FutureBuilder( todo 적용해보기
+    // FutureBuilder( todo FutureBuilder로 변경하기
     //     future: viewModel.loadUsers(),
     //     builder: (context, snapshot) {
     //       if (snapshot.connectionState == ConnectionState.waiting) {
     //         return CircularProgressIndicator();
     //       }
     //       return
+    _presetModel = context.read<TimerViewModel>().presetModel!;
 
     return ListView(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         // contentPadding :  EdgeInsets.all(0),
-        children: _folderPresetDb.map((item) {
+        // children: _folderPresetDb.map((item) {
+        children: _presetModel.groupMap.entries.map((ele) {
 
-          int folderId = item['folder_id'];
-          String folderName = item['folder_name'];
+          GroupModel groupModel = ele.value;
+          int folderId = groupModel.groupId;
+          String folderName = groupModel.groupName;
+          List<TimerModel> timerModelList = groupModel.timerList;
 
-          // print('$folderName');
           return ExpansionTile( // todo 사이즈 수정하기
             initiallyExpanded: false, // todo 초기값 수정
             key: Key('$folderId'),
@@ -80,8 +73,8 @@ class _PresetListState extends State<PresetList> {
                       child: IconButton(
                           padding: EdgeInsets.all(10.0),
                           onPressed: () {
-                            _showModifyFolderPopup(
-                                context, "F", folderId.toString());
+                            // _showModifyFolderPopup(context, "F", folderId.toString());
+                            _showModifyFolderPopup(context, groupModel);
                           },
                           icon: Icon(
                             FontAwesome.pencil_square_o,
@@ -132,9 +125,7 @@ class _PresetListState extends State<PresetList> {
             },
             children: <Widget>[ // 목록의 하위 요소들
                 Container( // 추가 버튼
-                    height: _timerPresetDb.where((item) {
-                          return item['folder_id'] == folderId;
-                        }).length.toDouble() * SizeUtil.get.sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
+                    height: timerModelList.length.toDouble() * SizeUtil.get.sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
                     width: SizeUtil.get.sw90,
                     decoration: BoxDecoration(
                       borderRadius:
@@ -153,21 +144,17 @@ class _PresetListState extends State<PresetList> {
                     // physics: NeverScrollableScrollPhysics(), // 스크롤 제약 조건 설정
                     padding: EdgeInsets.only(left: 16.0),
                     onReorder: (oldIndex, newIndex) {
-                      // print('??');
                       setState(() {
                         if (newIndex > oldIndex) {
                           newIndex -= 1;
                         }
-                        final item = items.removeAt(oldIndex);
-                        items.insert(newIndex, item);
                       });
                     },
-                    children: _timerPresetDb.map((item){
+                    children: timerModelList.map((ele){ // TimerModel 부분
 
-                      // print(folderId);
-                      // int folderId = item['timer_id'];
-                      int timerId = item['timer_id'];
-                      String timerName = item['timer_name'];
+                      TimerModel timer = ele;
+                      int timerId = timer.timerId;
+                      String timerName = timer.timerName;
 
                       return InkWell(
                         key: Key(timerId.toString()),
@@ -182,9 +169,12 @@ class _PresetListState extends State<PresetList> {
                         )
                       );
 
-                    }).toList()
+                    }).toList() // TimerModel
                 ),
               ),
+              SizedBox(
+                height: SizeUtil.get.sh05 / 3,
+              ), // 추가 버튼 상단 여백
               Container( // 추가 버튼
                   height: SizeUtil.get.sh05,
                   width: SizeUtil.get.sw90,
@@ -202,6 +192,7 @@ class _PresetListState extends State<PresetList> {
                   ),
                   child: IconButton(
                     onPressed: () {
+                      // todo folderId 추가
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SelectThemeScreen(safeSize : SizeUtil.get.safeSize)));
@@ -213,15 +204,13 @@ class _PresetListState extends State<PresetList> {
                       // size: 23,
                       size: SizeUtil.get.sw05,
                     ),
-                  )),
+                  )), // 추가 버튼
               SizedBox(
                 height: SizeUtil.get.sh05 / 3,
-              )
+              ) // 추가 버튼 하단 여백
             ],
-          )
-          ;
-
-        }).toList()
+          );
+        }).toList() // GroupModel
     );
   }
 
@@ -254,18 +243,19 @@ class _PresetListState extends State<PresetList> {
         });
   }
 
-  void _showModifyFolderPopup(BuildContext context, String type, String key) {
-    bool isFolder = type == "F" ? true : false;
-    // _textController.text = _folderPreset[key]?['nodeName'];
+  // void _showModifyFolderPopup(BuildContext context, String type, String key, [String msg = "!@3"]) {
+  void _showModifyFolderPopup(BuildContext context, GroupModel groupModel) {
+    // bool isFolder = type == "F" ? true : false;
+    _textController.text = "123";
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('폴더 수정'),
+          title: Text('그룹 수정'),
           content: TextField(
             controller: _textController,
             decoration: InputDecoration(
-              hintText: '폴더 이름을 입력하세요.',
+              hintText: '그룹 이름을 입력하세요.',
             ),
           ),
           actions: [
@@ -274,13 +264,13 @@ class _PresetListState extends State<PresetList> {
                 Navigator.pop(context);
                 // context.read<TimerViewModel>().addPreset(_textController.text, 'F');
               },
-              child: Text('생성'),
+              child: Text('수정'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: Text('취소'),
+              child: Text('닫기'),
             ),
           ],
         );

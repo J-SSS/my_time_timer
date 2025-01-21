@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_manager.dart';
+import '../manager/app_manager.dart';
 
 /// SizeUtil class
 ///  - 중복된 MediaQuery 인스턴스 생성 방지

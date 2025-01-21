@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_time_timer/utils/app_manager.dart';
+import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
 import 'package:provider/provider.dart';

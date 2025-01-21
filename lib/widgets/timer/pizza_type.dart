@@ -58,9 +58,9 @@ class _PizzaTypeState extends State<PizzaType> {
       // print(_timerModel.recentTimer);
     } else if(widget.screenType == TimerScreenType.timer) { /// 타이머 작동 중
       setupTime = context.select((TimerController T) => T.remainTime);
-      _timerModel = TimerModel(); // 임시
+      _timerModel = TimerModel.dflt(); // 임시
     } else if(widget.screenType == TimerScreenType.theme) { /// 테마 선택 화면
-      _timerModel = TimerModel(); // 임시
+      _timerModel = TimerModel.dflt(); // 임시
       uiData = { // 기본값
         "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
         "maxTime" : 60, // 최대 시간
