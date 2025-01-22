@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // todo 프로바이더는 리빌드 안됨 > 초기화 메서드들 옮기기
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TimerViewModel(), lazy: false,), // shared preference & sqlite // todo 얘는 프로바이더 안써도될거같음
@@ -45,7 +47,6 @@ class MyApp extends StatelessWidget {
         title: 'My Time Timer',
           theme: ThemeData(
               fontFamily: 'Pretendard'
-            // fontFamily: 'NanumSquareNeo'
             // expansionTileTheme: ExpansionTileThemeData(
             //   // tilePadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
             //   // childrenPadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
@@ -70,14 +71,13 @@ class MyAppMain extends StatelessWidget {
 
     context.read<AppConfigController>().setMediaQuery = MediaQuery.of(context); // 미디어 쿼리 자주 호출하면 안됨
 
-
     Size safeSize = SizeUtil.get.safeSize;
     double mainLRPadding = (SizeUtil.get.sw * 0.075).roundToDouble(); // 가로 411 기준 약 31
 
     // print(MyAppBar(mainSize: safeSize).preferredSize.height); // AppBar 높이 확인
 
-    context.read<TimerViewModel>().loadPresetFromDb();
     // AppManager.log("SQLite 프리셋 초기화",type: "S");
+    context.read<TimerViewModel>().loadPresetFromDb();
 
     // SharedPreferences에서 최근 사용 타이머 셋팅
     context.read<TimerController>().setCurrentTimer = TimerViewModel().loadRecentFromPrefs();

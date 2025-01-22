@@ -15,10 +15,12 @@ class CreateTimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Timer.a;
+    AppManager.log("타이머생성",type: "B");
+
+    int groupId = context.read<CreateTimerController>().groupId;
+    print('현재그룹아이디 : $groupId');
 
     double verticalDividerIndent = SizeUtil.get.sh * 0.1 * 0.5 * 0.3;
-    AppManager.log("타이머생성",type: "B");
     double mainLRPadding = SizeUtil.get.sw075.roundToDouble(); // 가로 411 기준 약 31
     return Scaffold(
         resizeToAvoidBottomInset: false,

@@ -9,13 +9,18 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 import 'package:my_time_timer/provider/timer_controller.dart';
 
 
+int getUtc() {
+  // print('현재 유닉스 시간 (초 단위): ${getUnixTimeInSeconds()}'); // 예: 1672531200
+  return DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000;
+}
+
 int getUnixTimeInSeconds() {
-  print('현재 유닉스 시간 (초 단위): ${getUnixTimeInSeconds()}'); // 예: 1672531200
+  // print('현재 유닉스 시간 (초 단위): ${getUnixTimeInSeconds()}'); // 예: 1672531200
   return DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000;
 }
 
 int getUnixTimeInMilliseconds() {
-  print('현재 유닉스 시간 (밀리초 단위): ${getUnixTimeInMilliseconds()}'); // 예: 1672531200000
+  // print('현재 유닉스 시간 (밀리초 단위): ${getUnixTimeInMilliseconds()}'); // 예: 1672531200000
   return DateTime.now().toUtc().millisecondsSinceEpoch;
 }
 

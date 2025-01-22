@@ -7,7 +7,7 @@ class GroupModel {
   /// 그룹 이름
   late String groupName;
   /// 그룹 정렬 순서
-  int? sortOrder;
+  late int sortOrder;
   /// 타이머 목록
   List<TimerModel> timerList = [];
 
@@ -18,13 +18,24 @@ class GroupModel {
       // this.timerList
       );
 
+  /// 객체를 Map으로 변환
+  Map<String, dynamic> toMap() {
+    return {
+      'groupId': groupId,
+      'groupName': groupName,
+      'sortOrder': sortOrder,
+    };
+  }
 
-  factory GroupModel.fromDb(Map<String, dynamic> groupData) {
+
+  factory GroupModel.fromMap(Map<String, dynamic> groupData) {
     return GroupModel(
-      groupData['group_id'],
-      groupData['group_name'],
-      groupData['sort_order'],
+      groupData['groupId'],
+      groupData['groupName'],
+      groupData['sortOrder'],
       // folderData['timer_List'],
     );
   }
+
+
 }

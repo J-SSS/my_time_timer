@@ -9,6 +9,8 @@ class CreateTimerController with ChangeNotifier {
 
   BuildContext? context;
 
+  int groupId = 0;
+
   TimerModel? _timerModel;
 
   get timerModel  {

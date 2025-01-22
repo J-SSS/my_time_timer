@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 
 import '../provider/app_config_controller.dart';
+import '../utils/timer_utils.dart';
 import '../widgets/preset_list.dart';
 
 class PresetScreen extends StatefulWidget {
@@ -20,23 +21,28 @@ class PresetScreen extends StatefulWidget {
 
 class _PresetScreenState extends State<PresetScreen> {
 
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+  // textFormField(
+  // controller: _controller,
+  // validator: (value) {
+  // if (value == null || value.isEmpty) {
+  // return 'Please enter some text';
+  // }
+  // return null;
+  // },
+
 
   @override
   @override
   Widget build(BuildContext context) {
-    PresetModel presetModel = context.read<TimerViewModel>().presetModel!;
-
-    int? newSortOrder = 0;
-    presetModel.groupMap.entries.map((e){
-      if(newSortOrder! < newSortOrder!)
-        newSortOrder = e.value.sortOrder;
-    });
-    newSortOrder = newSortOrder! + 1;
-
-    GroupModel groupModel = GroupModel(1, "새 그룹", newSortOrder);
-
-    // print(presetModel);
+    // PresetModel presetModel = context.read<TimerViewModel>().presetModel!;
+    PresetModel presetModel = context.select((TimerViewModel T) => T.presetModel!); // select는 여기서만 해주면 될듯?
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -45,7 +51,7 @@ class _PresetScreenState extends State<PresetScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _showCreateGroupPopup(context,groupModel);
+            _showCreateGroupPopup(context);
             print('Custom FAB clicked!');
           },
           tooltip: 'Add Item',
@@ -71,9 +77,8 @@ class _PresetScreenState extends State<PresetScreen> {
     );
   }
 
-
-
-  void _showCreateGroupPopup(BuildContext context, GroupModel model) {
+  void _showCreateGroupPopup(BuildContext context) {
+    _textController.text = '';
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -99,9 +104,7 @@ class _PresetScreenState extends State<PresetScreen> {
                     fontSize: 16.0,
                   );
                 } else {
-                  int unixTimeInSeconds = DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000;
-                  print(unixTimeInSeconds); // 예: 1672531200
-                  model.groupName = _textController.text;
+                  GroupModel model = GroupModel(getUtc(), _textController.text, 0);
                   context.read<TimerViewModel>().createGroup(model);
                   Navigator.pop(context);
                 }
@@ -112,7 +115,7 @@ class _PresetScreenState extends State<PresetScreen> {
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
-              child: Text('취소'),
+              child: Text('닫기'),
             ),
           ],
         );

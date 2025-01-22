@@ -20,11 +20,25 @@ class TimerViewModel extends ChangeNotifier {
     TimerModel loadedPreset = _timerRepository.getRecentFromPrefs();
     _recent = loadedPreset;
     return _recent;
-    // notifyListeners();
   }
 
-  void createGroup (GroupModel model){
+  /// mft_group에 새 그룹을 생성한다
+  Future<void> createGroup (GroupModel model) async {
+    List<Map<String, dynamic>> sortOrder = await _timerRepository.getSortOrderGroup();
+    model.sortOrder = sortOrder[0]['sortOrder'];
+    await _timerRepository.insertGroup(model.toMap());
+    final loadedPreset = await _timerRepository.getPresetFromDb();
+    _presetModel = loadedPreset;
+    notifyListeners();
+  }
 
+  /// mft_group에서 그룹을 삭제한다
+  Future<void> deleteGroup (int groupId) async {
+    await _timerRepository.deleteGroup(groupId); // 그룹 삭제
+    await _timerRepository.deleteTimerByGroupId(groupId); // 타이머 삭제
+    final loadedPreset = await _timerRepository.getPresetFromDb();
+    _presetModel = loadedPreset;
+    notifyListeners();
   }
 
   /// mft_group 및 mft_timer 테이블의 모든 데이터를 PresetModel로 반환한다

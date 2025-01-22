@@ -9,7 +9,13 @@ class TimerModel {
   /// 타이머 이름
   late String timerName;
   /// 타이머 정렬 순서
-  int? sortOrder;
+  late int sortOrder;
+
+  /// 설정시간
+  int setupTime = 45;
+
+  /// 타이머 타입 (0 : 타이머형, 1 : 알람형)
+  int _timeType = 0;
 
   /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
   int _timeUnit = 0;
@@ -43,12 +49,12 @@ class TimerModel {
 
   TimerModel.dflt();
 
-  factory TimerModel.fromDb(Map<String, dynamic> timerData) {
+  factory TimerModel.fromMap(Map<String, dynamic> timerData) {
     return TimerModel(
-      timerData['timer_id'],
-      timerData['group_id'],
-      timerData['timer_name'],
-      timerData['sort_order']
+      timerData['timerId'],
+      timerData['groupId'],
+      timerData['timerName'],
+      timerData['sortOrder']
     );
   }
 
@@ -59,7 +65,7 @@ class TimerModel {
     "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
     "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
   };
-
+// timeType : 0 // 타이머 타입 (0 : 타이머, 1 : 알람)
 // 'setupTime': '45', // 설정 시간
 // 'viewRemainTime': '', // 남은 시간 표시 여부
 // 'viewDescript': 'false', // 설명 표시 여부
