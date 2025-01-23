@@ -14,33 +14,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/manager/isolate_manager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/folder_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/group_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/preset_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/preset_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/manager/prefs_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/prefs_manager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/timer_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/timer_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/my_app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/my_app.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/provider/timer_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/timer_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/repository/timer_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repository/timer_repository.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/on_timer_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/on_timer_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/preset_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/preset_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/select_theme_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/select_theme_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screen/setting_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/setting_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/app_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/app_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/db_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/db_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/isolate_timer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/temp/isolate_timer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/prefs_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/prefs_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/shared_preferences.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/size_util.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/size_util.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/timer_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/timer_utils.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/viewModels/timer_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/viewModels/timer_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/bottom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/bottom_bar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/preset_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/preset_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/number_picker_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_type_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/timer_loader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/timer_loader.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +87,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.37356323&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -250,7 +234,9 @@
       <workItem from="1737355149089" duration="4199000" />
       <workItem from="1737361059093" duration="753000" />
       <workItem from="1737417715917" duration="11095000" />
-      <workItem from="1737445797752" duration="364000" />
+      <workItem from="1737445797752" duration="500000" />
+      <workItem from="1737504721254" duration="20916000" />
+      <workItem from="1737594854674" duration="17775000" />
     </task>
     <task id="LOCAL-00001" summary="[개발] #001 새 프로젝트 생성">
       <created>1710377781114</created>
@@ -504,7 +490,21 @@
       <option name="project" value="LOCAL" />
       <updated>1737361795079</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="[개발] #기타, MVVM 패턴 적용 작업">
+      <created>1737446177136</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1737446177136</updated>
+    </task>
+    <task id="LOCAL-00038" summary="[개발] #기타, MVVM 패턴 적용 작업">
+      <created>1737533424236</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1737533424236</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,16 +568,16 @@
       </default-breakpoints>
     </breakpoint-manager>
     <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="144">
         <watch expression="startAngle" />
       </inline-watch>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="144">
         <watch expression="startAngle" />
       </inline-watch>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="144">
         <watch expression="startAngle" />
       </inline-watch>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="160">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" line="144">
         <watch expression="startAngle" />
       </inline-watch>
     </watches-manager>

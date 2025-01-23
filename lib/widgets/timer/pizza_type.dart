@@ -42,45 +42,29 @@ class _PizzaTypeState extends State<PizzaType> {
   int setupTime = 45;
   late TimerModel _timerModel;
 
-  Map<String,dynamic> uiData = { // 기본 값
-    "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-    "maxTime" : 60, // 최대 시간
-    "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-    "alarmType" : 1, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-    "timerColorList" : [0,1,2,3,4], // 타이머 색상 리스트 (최대 5개)
-  };
-
   @override
   Widget build(BuildContext context) {
     if(widget.screenType == TimerScreenType.main){ /// 메인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
-      _timerModel = context.select((TimerController T) => T.currentTimer);
-      // print(_timerModel.recentTimer);
+      _timerModel = TimerModel(); // 임시
+      // _timerModel = context.select((TimerController T) => T.currentTimer);
+
     } else if(widget.screenType == TimerScreenType.timer) { /// 타이머 작동 중
       setupTime = context.select((TimerController T) => T.remainTime);
-      _timerModel = TimerModel.dflt(); // 임시
+      _timerModel = TimerModel(); // 임시
     } else if(widget.screenType == TimerScreenType.theme) { /// 테마 선택 화면
-      _timerModel = TimerModel.dflt(); // 임시
-      uiData = { // 기본값
-        "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
-        "maxTime" : 60, // 최대 시간
-        "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
-        "alarmType" : 0, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
-        "timerColorList" : [0], // 타이머 색상 리스트 (최대 5개)
-      };
+      _timerModel = TimerModel(); // 임시
       // Future.delayed(Duration(seconds: 1), () {
       //   setState(() {
       //     setupTime--; // 값 증가
       //   });
       // });
-    } else if(widget.screenType == TimerScreenType.create) { // 타이머 디자인 화면
+    } else if(widget.screenType == TimerScreenType.create) { /// 타이머 디자인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
-
       _timerModel = context.select((CreateTimerController T) => T.timerModel);
 
     }
 
-    // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');
     Size safeSize = SizeUtil.get.safeSize;
 

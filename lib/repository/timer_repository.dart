@@ -16,7 +16,8 @@ class TimerRepository {
   /// SharedPreferences에서 최근 사용 타이머 정보를 불러온다
   TimerModel getRecentFromPrefs()  {
     Map<String, dynamic> recentTimer = prefsManager.getRecentTimer();
-    return TimerModel.fromSharedPreferences(recentTimer);
+    print(recentTimer);
+    return TimerModel.fromMap(recentTimer);
   }
 
   /// mft_group 및 mft_timer 테이블의 모든 데이터를 PresetModel로 반환한다

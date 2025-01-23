@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_time_timer/manager/prefs_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 
@@ -12,6 +13,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   List<bool> switchValues = List.generate(10, (index) => false);
   final dbManager = DbManager.instance;
+  final prefsManager = PrefsManager.instance; // todo 수정필요
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
                 Expanded(
@@ -66,7 +68,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
                 Expanded(
@@ -85,12 +87,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             TextButton(onPressed: () async {
-              // print(await dbManager.resetData());
+
                 await dbManager.resetData();
+                await prefsManager.resetData();
+
               print('DB 삭제 완료');
-                // context.read<TimerViewModel>().clearPreset();
+
             }, child: Text('설정 초기화'))
           ]
         ),

@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/size_util.dart';
-import 'package:my_time_timer/widgets/dialog/number_picker_dialog.dart';
+import 'package:my_time_timer/widgets/dialog/select_type_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
+import '../models/timer_model.dart';
 import '../provider/create_timer_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
@@ -19,6 +22,8 @@ class CreateTimerScreen extends StatelessWidget {
 
     int groupId = context.read<CreateTimerController>().groupId;
     print('현재그룹아이디 : $groupId');
+
+    TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel);
 
     double verticalDividerIndent = SizeUtil.get.sh * 0.1 * 0.5 * 0.3;
     double mainLRPadding = SizeUtil.get.sw075.roundToDouble(); // 가로 411 기준 약 31
@@ -73,7 +78,7 @@ class CreateTimerScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _ItemBtn(context,"maxTime"), // 최대 시간
+                        _ItemBtn(context,"maxTime",timerModel), // 최대 시간
                         VerticalDivider(
                           color: Colors.blueGrey.withOpacity(0.3), // 선 색상
                           thickness: 1.5, // 선 두께
@@ -81,7 +86,7 @@ class CreateTimerScreen extends StatelessWidget {
                           indent: verticalDividerIndent, // 시작 부분 여백
                           endIndent: verticalDividerIndent, // 끝 부분 여백
                         ),
-                        _ItemBtn(context,"timeUnit"), // 시간 단위
+                        _ItemBtn(context,"timeUnit",timerModel), // 시간 단위
                         VerticalDivider(
                           color: Colors.blueGrey.withOpacity(0.3), // 선 색상
                           thickness: 1.5, // 선 두께
@@ -89,7 +94,7 @@ class CreateTimerScreen extends StatelessWidget {
                           indent: verticalDividerIndent, // 시작 부분 여백
                           endIndent: verticalDividerIndent, // 끝 부분 여백
                         ),
-                        _ItemBtn(context,"remainTimeStyle"), // 시간 표시 여부
+                        _ItemBtn(context,"remainTimeStyle",timerModel), // 시간 표시 여부
                       ],
                     ),
                   ),
@@ -209,19 +214,13 @@ class CreateTimerScreen extends StatelessWidget {
             )));
   }
 
-  Widget _ItemBtn(BuildContext context, String btnType) {
-    // timeUnit 시간 단위
-    // maxTime 최대 시간
-    // remainTime 남은 시간 표시
-    // timerColor 색상(3단)
+  Widget _ItemBtn(BuildContext context, String btnType,TimerModel timerModel) {
     // alarmType 무음/진동/알람
 
     String type = btnType;
 
-    context.read<CreateTimerController>().initTimerModel();
-
-    int idxForTimeUnit = context.select((CreateTimerController a) => a.timeUnit);
-    int idxForRemainTimeStyle = context.select((CreateTimerController a) => a.remainTimeStyle);
+    int idxForTimeUnit = timerModel.timeUnit;
+    int idxForRemainTimeStyle = timerModel.remainTimeStyle;
 
     return Material(
       color: Colors.transparent,
@@ -234,17 +233,15 @@ class CreateTimerScreen extends StatelessWidget {
           switch (type){
             case "timeUnit" : { // timeUnit 시간 단위
               idxForTimeUnit = (idxForTimeUnit + 1) % 3;
-              context.read<CreateTimerController>().setTimeUnit = idxForTimeUnit;
-              // context.read<CreateTimerController>().assignTimerUIData();
+              context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(timeUnit: idxForTimeUnit));
             }
             case "maxTime" : { // maxTime 최대 시간
-              NumberPickerDialog().show(context);
+              SelectTypeDialog().show(context);
 // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
             }
             case "remainTimeStyle" : { // remainTime 남은 시간 표시 여부
               idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
-              context.read<CreateTimerController>().setRemainTimeStyle = idxForRemainTimeStyle;
-              // context.read<CreateTimerController>().assignTimerUIData();
+              context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(remainTimeStyle: idxForRemainTimeStyle));
             }
             case "alarmType" : {} // alarmType 무음/진동/알람}
           }
@@ -253,17 +250,17 @@ class CreateTimerScreen extends StatelessWidget {
           width: SizeUtil.get.sw * 0.15, // 가로 크기 (15%)
           height: SizeUtil.get.sh * 0.1 * 0.5, // 세로 크기
           alignment: Alignment.center, // 텍스트를 중앙에 배치
-          child: _itemBtnIcon(context, type)
+          child: _itemBtnIcon(context, type, timerModel)
         ),
       ),
     );
   }
 
-  Widget _itemBtnIcon(BuildContext context, String btnType) {
+  Widget _itemBtnIcon(BuildContext context, String btnType, TimerModel timerModel) {
     switch (btnType){
       case "timeUnit" : {
         return Text(
-          TimeUnit.values[context.select((CreateTimerController a) => a.timeUnit)].name,
+          TimeUnit.values[timerModel.timeUnit].name,
           style: TextStyle(
             color: Colors.blueGrey, // 텍스트 색상
             fontSize: 18, // 텍스트 크기
@@ -283,7 +280,7 @@ class CreateTimerScreen extends StatelessWidget {
       }
       case "remainTimeStyle" : { // remainTime 남은 시간 표시
         return  Text(
-          RemainTimeStyle.values[context.select((CreateTimerController a) => a.remainTimeStyle)].name,
+          RemainTimeStyle.values[timerModel.remainTimeStyle].name,
           style: TextStyle(
             color: Colors.blueGrey, // 텍스트 색상
             fontSize: 14, // 텍스트 크기

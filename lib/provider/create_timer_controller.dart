@@ -6,28 +6,14 @@ import 'package:my_time_timer/models/timer_model.dart';
 import 'package:provider/provider.dart';
 
 class CreateTimerController with ChangeNotifier {
-
   BuildContext? context;
 
   int groupId = 0;
 
   TimerModel? _timerModel;
 
-  get timerModel  {
-    return _timerModel ??= TimerModel.dflt();
-  }
 
-  void initTimerModel(){
-    _timerModel ??= TimerModel.dflt();
-  }
-
-  int _timerColorListSize = 0; /// 타이머 색상 리스트 사이즈 (최대 5개)
-
-  void refreshTimerModel(){
-    _timerModel = TimerModel.dflt();
-  }
-
-  List<List<String>> _timerColorTextList =
+  final List<List<String>> _timerColorTextList =
   [
     [],
     ["~100%"],
@@ -43,61 +29,60 @@ class CreateTimerController with ChangeNotifier {
     // ["~20%", "~40%", "~60%", "~80%", "~100%"],
   ];
 
-  get timerColorListSize => _timerColorListSize;
-  // get timerColorData => _timerColorData;
-  get timerColorData => _timerModel?.timerColorData;
 
-  set setTimerColorListSize(int idx){
-    _timerModel?.timerColorList.add(idx);
-    _timerModel?.timerColorListSize = _timerModel!.timerColorList.length;
-    _timerModel?.timerColorData.clear();
-    int size = _timerModel!.timerColorList.length;
+  List<int> _timerColorList = [0];
+  List<Map<String,String>> _timerColorData = [{"colorIdx": "0", "msg": "~100%"}];
 
-    // print('추가 : ${_timerModel?.timerColorList}' );
-    for (var i = 0; i < _timerModel!.timerColorList.length; i++) {
-      _timerModel?.timerColorData.add({"index" : i.toString(), "colorIdx" : _timerModel?.timerColorList[i].toString(), "msg" : _timerColorTextList[size][i]});
-    }
-    _timerColorListSize = size; // List의 요소 변경에는 provider가 반응하지 않음
+  get timerModel {
+    _timerModel ??= TimerModel();
+    return _timerModel;
+  }
 
+  set setTimerModel(TimerModel model) {
+    _timerModel = model;
+    // todo 컬러데이터 초기화 로직 추가
+  }
+
+
+  /// TimerModel 갱신(timerColorList 만)
+  void refreshTimerModelWithColor(){
+    _timerModel = _timerModel?.copyWith(timerColorList: _timerColorList);
     notifyListeners();
   }
 
+  /// TimerModel 갱신
+  void refreshTimerModel(TimerModel model){
+    _timerModel = model;
+    notifyListeners();
+  }
+
+  get timerColorData => _timerColorData;
+
+  get timerColorList => _timerColorList;
+
+  /// timerColorList에 값을 추가한다
+  set setTimerColorList(int idx){
+    List<Map<String,String>> newList = [];
+    _timerColorList.add(idx);
+
+    for (var i = 0; i < _timerColorList.length; i++) {
+      newList.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorList.length][i]});
+    }
+    _timerColorData = newList;
+    notifyListeners();
+  }
+
+  /// timerColorList에서 값을 삭제한다
   set deleteTimerColorByIndex(int idx){
-    _timerModel?.timerColorList.removeAt(idx);
-    _timerModel?.timerColorListSize = _timerModel!.timerColorList.length;
-    _timerModel?.timerColorData.clear();
+    List<Map<String,String>> newList = [];
+    _timerColorList.removeAt(idx);
 
-    int size = _timerModel!.timerColorList.length;
-
-    // print('삭제 : $_timerColorList' );
-      for (var i = 0; i < _timerModel!.timerColorList.length; i++) {
-        _timerModel?.timerColorData.add({"index" : i.toString(), "colorIdx" : _timerModel?.timerColorList[i].toString(), "msg" : _timerColorTextList[size][i]});
+    for (var i = 0; i < _timerColorList.length; i++) {
+      newList.add({"index" : i.toString(), "colorIdx" : _timerColorList[i].toString(), "msg" : _timerColorTextList[_timerColorList.length][i]});
     }
-
-    _timerColorListSize = size; // List의 요소 변경에는 provider가 반응하지 않음
+    _timerColorData = newList;
+    notifyListeners();
 
     notifyListeners();
   }
-
-  /// 타이머 시간 단위
-  get timeUnit => _timerModel?.timeUnit;
-  set setTimeUnit(int val){
-    _timerModel?.timeUnit = val;
-    notifyListeners();
-  }
-
-  get maxTime => _timerModel?.maxTime;
-  set setMaxTime(int val){
-    _timerModel?.maxTime = val;
-    notifyListeners();
-  }
-
-  /// 남은 시간 표시 여부
-  get remainTimeStyle => _timerModel?.remainTimeStyle;
-  set setRemainTimeStyle(int val){
-    _timerModel?.remainTimeStyle = val;
-    notifyListeners();
-  }
-
-
 }

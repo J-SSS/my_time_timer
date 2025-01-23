@@ -24,7 +24,6 @@ class PrefsManager {
   /// 최근 사용 타이머 정보를 반환한다
   Map<String, dynamic> getRecentTimer() {
     var jsonString = _prefs.getString('recent');
-    // print(jsonString);
     Map<String, dynamic> recent = json.decode(jsonString!);
     return recent;
   }
@@ -32,7 +31,10 @@ class PrefsManager {
   /// 최근 사용 타이머가 없을 경우, 기본 값을 저장하고 반환한다.
   Future<Map<String, dynamic>> saveDefaultAndLoad() async {
     const Map<String,dynamic> defaultUiData = {
-      "type" : "pizza",
+      "timerId" : 0,
+      "groupId" : 0,
+      "timerName" : "Basic Timer",
+      "sortOrder" : 0,
       "timeUnit" : 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
       "maxTime" : 60, // 최대 시간
       "remainTimeStyle" : 1, // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
@@ -46,8 +48,9 @@ class PrefsManager {
     return defaultUiData;
   }
 
-  /// deprecated
-  Future<void> clearPrefs() async {
+  /// SharedPreferences의 데이터를 삭제하고 다시 초기화 한다
+  Future<void> resetData() async {
     await _prefs.remove('recent');
+    await instance.init();
   }
 }

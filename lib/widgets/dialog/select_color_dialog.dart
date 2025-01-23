@@ -22,15 +22,8 @@ class SelectColorDialog {
       barrierDismissible: false, // 배경 터치로 닫기 여부
       builder: (BuildContext context) {
 
-      int size  = context.select((CreateTimerController T) => T.timerColorListSize);
-
-      List<Map<String,String?>> colorData = context.read<CreateTimerController>().timerColorData; // List의 요소 변경에는 Provider가 반응하지 않음
-      // TimerModel timerModel = context.read<CreateTimerController>().timerModel;
-      // List<Map<String,String?>> colorData = timerModel.timerColorData; // List의 요소 변경에는 Provider가 반응하지 않음
-
-
-        // List<Map<String,String?>> colorData = context.select((CreateTimerController T) => T.timerColorData);
-
+      List<Map<String,String>> colorData = context.select((CreateTimerController T) => T.timerColorData);
+      int size  = colorData.length;
 
         return Dialog(
           insetPadding: const EdgeInsets.all(0), // 기본값 변경 가능
@@ -89,7 +82,7 @@ class SelectColorDialog {
                             ),
                             onPressed: () {
                               if(size < 5){
-                                context.read<CreateTimerController>().setTimerColorListSize = index;
+                                context.read<CreateTimerController>().setTimerColorList = index;
                               } else {
 
                               }
@@ -109,17 +102,6 @@ class SelectColorDialog {
                           children: [
                             for (var data in colorData)
                                 _colorBtn(context, data),
-                            // if(size < 5){
-                            //
-                            // } else {
-                            //
-                            // }
-                            // _colorBtn(context),
-                            // for (var data in colorData)
-                            //     _colorBtn(context, data),
-                            //   Text(data['colorIdx'].toString() + data['msg'].toString()), // 리스트의 각 요소를 Text로 변환
-
-
                           ],
                         ),
                       ),
@@ -133,15 +115,10 @@ class SelectColorDialog {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
-                        // context.read<CreateTimerController>().refreshTimerModel();
+                        context.read<CreateTimerController>().refreshTimerModelWithColor();
                         Navigator.pop(context); // 다이얼로그 닫기
                       },
                       child: const Text('SAVE'),
-                      // child: Icon(
-                      //   Icons.save, // X 표시
-                      //   color: Colors.blueGrey, // 아이콘 색상
-                      //   size: 25,
-                      // ),
                     ),
                   ),
                 )
@@ -155,10 +132,6 @@ class SelectColorDialog {
   }
 
   static Widget _colorBtn(BuildContext context, Map<String,String?> data) {
-    // print(data);
-    // print(data['colorIdx']);
-    // print(int.parse(data['colorIdx']!));
-    // I/flutter ( 3972): {index: 3, colorIdx: 7, msg: ~100%}
     return Row(
       mainAxisSize: MainAxisSize.min, // Row의 크기를 내용에 맞게 조정
       children: [

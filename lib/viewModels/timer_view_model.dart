@@ -17,9 +17,8 @@ class TimerViewModel extends ChangeNotifier {
 
   /// SharedPreferences에서 최근 사용 타이머 정보를 불러온다
   TimerModel loadRecentFromPrefs() {
-    TimerModel loadedPreset = _timerRepository.getRecentFromPrefs();
-    _recent = loadedPreset;
-    return _recent;
+    TimerModel recentTimer = _timerRepository.getRecentFromPrefs();
+    return recentTimer;
   }
 
   /// mft_group에 새 그룹을 생성한다
