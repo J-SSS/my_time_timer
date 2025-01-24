@@ -13,18 +13,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="">
+    <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="[개발] #기타, MVVM 패턴 적용 작업">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/manager/prefs_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/prefs_manager.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/manager/db_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/manager/db_manager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/models/timer_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/timer_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/provider/create_timer_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repository/timer_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repository/timer_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/setting_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/setting_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/viewModels/timer_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/viewModels/timer_view_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/number_picker_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_type_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_color_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/timer/pizza_type.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/dialog/select_type_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/dialog/select_type_dialog.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,34 +62,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/my_time_timer/lib/manager&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.37356323&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "D:/Projects/my_time_timer/lib/manager",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.37356323",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\my_time_timer\lib\manager" />
@@ -236,7 +229,8 @@
       <workItem from="1737417715917" duration="11095000" />
       <workItem from="1737445797752" duration="500000" />
       <workItem from="1737504721254" duration="20916000" />
-      <workItem from="1737594854674" duration="17775000" />
+      <workItem from="1737594854674" duration="17845000" />
+      <workItem from="1737681082084" duration="20000000" />
     </task>
     <task id="LOCAL-00001" summary="[개발] #001 새 프로젝트 생성">
       <created>1710377781114</created>
@@ -504,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1737533424236</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="[개발] #기타, MVVM 패턴 적용 작업">
+      <created>1737620893856</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1737620893856</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

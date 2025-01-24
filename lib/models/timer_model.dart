@@ -13,9 +13,9 @@ class TimerModel {
   final int sortOrder;
   /// 설정시간
   int setupTime = 45;
-  /// 타이머 타입 (0 : 타이머형, 1 : 알람형)
-  final int timeType = 0;
-  /// 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
+  /// 타이머 모드 (0 : 타이머형, 1 : 알람형)
+  final int timerMode = 0;
+  /// 시간 단위 (0 : 초, 1 : 분)
   final int timeUnit;
   /// 최대 시간
   final int maxTime; // OK
@@ -99,7 +99,7 @@ class TimerModel {
 // 'sortOrder': "", // 타이머 정렬 순서
 // 'setupTime': 45, // 설정 시간
 // 'uiType': 'pizza', // 디자인 타입
-// 'timeType': 0, // 타이머 타입 (0 : 타이머형, 1 : 알람형)
+// 'timerMode': 0, // 타이머 타입 (0 : 타이머형, 1 : 알람형) // todo timerMode로 바꾸기
 // 'maxTime': 60, // 최대 시간
 // 'timeUnit': 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
 // 'remainTimeStyle': 'false', // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
@@ -135,14 +135,14 @@ class TimerModel {
  *
  * ### 기본 타이머
  * - 초
- * 최소 단위 : 5초
- * 최소 값 : 5초
- * 최대 값 : 360초 = 6분
+ * 최소 단위 : 60초
+ * 최소 값 : 60초
+ * 최대 값 : 720초 = 12분
  *
  * - 분
- * 최소 단위 : 1분
- * 최소 값 : 1분
- * 최대 값 : 360분 = 6시간
+ * 최소 단위 : 60분
+ * 최소 값 : 60분
+ * 최대 값 : 720분 = 12시간
  *
  * ### 스케쥴 타이머
  * 오전/오후
