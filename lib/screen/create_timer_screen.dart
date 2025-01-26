@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/size_util.dart';
-import 'package:my_time_timer/widgets/dialog/select_type_dialog.dart';
+
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/widgets/dialog/select_color_dialog.dart';
 import '../models/timer_model.dart';
@@ -11,6 +12,7 @@ import '../provider/create_timer_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
 import '../utils/common_values.dart';
+import '../widgets/create_timer_toolbar.dart';
 import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
@@ -24,6 +26,8 @@ class CreateTimerScreen extends StatelessWidget {
     print('현재그룹아이디 : $groupId');
 
     TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel);
+
+    // print(SizeUtil.get.sw * 0.2);
 
     double verticalDividerIndent = SizeUtil.get.sh * 0.1 * 0.5 * 0.3;
     double mainLRPadding = SizeUtil.get.sw075.roundToDouble(); // 가로 411 기준 약 31
@@ -56,49 +60,11 @@ class CreateTimerScreen extends StatelessWidget {
                 Container( // 임시
                   height: SizeUtil.get.sh * 0.1,
                   width: SizeUtil.get.sw,
-                  color: Colors.green.withOpacity(0.15),
+                  // color: Colors.green.withOpacity(0.2),
                   alignment: Alignment.center,
-                  child: Container(
-                    height: SizeUtil.get.sh * 0.1 * 0.5,
-                    width: SizeUtil.get.sw * 0.50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50.0),
-                      border: Border.all(
-                          color: Colors.grey.withOpacity(0.9), width: 0.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26.withOpacity(0.05),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _ItemBtn(context,"maxTime",timerModel), // 최대 시간
-                        VerticalDivider(
-                          color: Colors.blueGrey.withOpacity(0.3), // 선 색상
-                          thickness: 1.5, // 선 두께
-                          width: 1, // Divider 전체 영역의 너비
-                          indent: verticalDividerIndent, // 시작 부분 여백
-                          endIndent: verticalDividerIndent, // 끝 부분 여백
-                        ),
-                        _ItemBtn(context,"timeUnit",timerModel), // 시간 단위
-                        VerticalDivider(
-                          color: Colors.blueGrey.withOpacity(0.3), // 선 색상
-                          thickness: 1.5, // 선 두께
-                          width: 1, // Divider 전체 영역의 너비
-                          indent: verticalDividerIndent, // 시작 부분 여백
-                          endIndent: verticalDividerIndent, // 끝 부분 여백
-                        ),
-                        _ItemBtn(context,"remainTimeStyle",timerModel), // 시간 표시 여부
-                      ],
-                    ),
-                  ),
+                  child: CreateTimerToolbar()
                 ),
+
                 SizedBox(
                     height: SizeUtil.get.sh * 0.7,
                     child:  Padding(
@@ -213,93 +179,5 @@ class CreateTimerScreen extends StatelessWidget {
               ],
             )));
   }
-
-  Widget _ItemBtn(BuildContext context, String btnType,TimerModel timerModel) {
-    // alarmType 무음/진동/알람
-
-    String type = btnType;
-
-    int idxForTimeUnit = timerModel.timeUnit;
-    int idxForRemainTimeStyle = timerModel.remainTimeStyle;
-
-    return Material(
-      color: Colors.transparent,
-      // shape: CircleBorder(), // 동그랗게 그림자를 만듭니다.
-      child: InkWell(
-        // splashColor: Colors.grey, // 스플래시 효과 제거
-        // highlightColor: Colors.purple, // 하이라이트 효과 제거
-        borderRadius: BorderRadius.circular(20),
-        onTap: () {
-          switch (type){
-            case "timeUnit" : { // timeUnit 시간 단위
-              idxForTimeUnit = (idxForTimeUnit + 1) % 3;
-              context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(timeUnit: idxForTimeUnit));
-            }
-            case "maxTime" : { // maxTime 최대 시간
-              SelectTypeDialog().show(context);
-// "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
-            }
-            case "remainTimeStyle" : { // remainTime 남은 시간 표시 여부
-              idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
-              context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(remainTimeStyle: idxForRemainTimeStyle));
-            }
-            case "alarmType" : {} // alarmType 무음/진동/알람}
-          }
-        },
-        child: Container(
-          width: SizeUtil.get.sw * 0.15, // 가로 크기 (15%)
-          height: SizeUtil.get.sh * 0.1 * 0.5, // 세로 크기
-          alignment: Alignment.center, // 텍스트를 중앙에 배치
-          child: _itemBtnIcon(context, type, timerModel)
-        ),
-      ),
-    );
-  }
-
-  Widget _itemBtnIcon(BuildContext context, String btnType, TimerModel timerModel) {
-    switch (btnType){
-      case "timeUnit" : {
-        return Text(
-          TimeUnit.values[timerModel.timeUnit].name,
-          style: TextStyle(
-            color: Colors.blueGrey, // 텍스트 색상
-            fontSize: 18, // 텍스트 크기
-            fontWeight: FontWeight.w700, // 텍스트 두께
-          ),
-        );
-      }
-      case "maxTime" : { // maxTime 최대 시간
-        return Text(
-          "60",
-          style: TextStyle(
-            color: Colors.blueGrey, // 텍스트 색상
-            fontSize: 18, // 텍스트 크기
-            fontWeight: FontWeight.w700, // 텍스트 두께
-          ),
-        );
-      }
-      case "remainTimeStyle" : { // remainTime 남은 시간 표시
-        return  Text(
-          RemainTimeStyle.values[timerModel.remainTimeStyle].name,
-          style: TextStyle(
-            color: Colors.blueGrey, // 텍스트 색상
-            fontSize: 14, // 텍스트 크기
-            fontWeight: FontWeight.w700, // 텍스트 두께
-          ),
-        );
-      }
-      case "alarmType" : { // alarmType 무음/진동/알람
-        return Icon(
-          Icons.alarm,
-          color: Colors.grey.withOpacity(0.5),
-          size: SizeUtil.get.sh * 0.125 * 0.5,
-        );
-      }
-      default : {
-        return SizedBox();
-      }
-    }
-  }
-
 }
 

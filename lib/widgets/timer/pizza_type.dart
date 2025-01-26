@@ -166,50 +166,9 @@ class PizzaTypePainter extends CustomPainter {
         )
         ..close(); // 닫힌 도형으로 만듦
       canvas.drawPath(path, paint);
-
-
-      /// 링 타입
-      // var rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
-      // Path path = Path();
-      //
-      // for (var i = 0; i < setupTime; i++) {
-      //   path.moveTo(centerX, centerY); // 중심으로 이동
-      //   var startAngle2 = startAngle + sweepAngleOne * i + 0.02;
-      //   var sweepAngleOn2 = sweepAngleOne - 0.02;
-      //   path.arcTo(rect, startAngle2, sweepAngleOn2, false);
-      // }
-      // path.close(); // 닫힌 도형으로 만듦
-      // canvas.drawPath(path, paint);
-      //
-      //
-      // Paint innerPaint = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      // ..color = Colors.white.withOpacity(0.8);
-      //
-      // Paint innerPaint2 = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      //   ..color = Colors.white.withOpacity(0.8);
-      //
-      // Path path2 = Path()
-      //   ..moveTo(centerX, centerY) // 중심으로 이동
-      //   ..arcTo(
-      //     Rect.fromCircle(center: Offset(centerX, centerY), radius: radius / 10 * 8),
-      //     startAngle,
-      //     sweepAngle,
-      //     false,
-      //   )
-      //   ..close(); // 닫힌 도형으로 만듦
-      // canvas.drawPath(path2, paint);
-      // canvas.drawPath(path2, innerPaint);
-
-      // Paint innerPaint = Paint()
-      //   ..style = PaintingStyle.fill // 채우기로 변경
-      // ..color = Colors.white.withOpacity(0.7);
-      // canvas.drawCircle(Offset(centerX, centerY), radius / 10 * 7, innerPaint);
-      // canvas.drawCircle(Offset(centerX, centerY), radius / 2, innerPaint);
     }
 
-    // 중심점
+    // // 중심점
     Paint innerPaint = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
@@ -218,9 +177,9 @@ class PizzaTypePainter extends CustomPainter {
       ..color = Colors.black26
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
-
+    //
     double innerRadius = radius / 15;
-
+    //
     Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(center, innerRadius, innerPaint);
     canvas.drawCircle(center, innerRadius, outerPaint);

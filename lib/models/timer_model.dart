@@ -14,7 +14,7 @@ class TimerModel {
   /// 설정시간
   int setupTime = 45;
   /// 타이머 모드 (0 : 타이머형, 1 : 알람형)
-  final int timerMode = 0;
+  final int timerMode;
   /// 시간 단위 (0 : 초, 1 : 분)
   final int timeUnit;
   /// 최대 시간
@@ -49,6 +49,7 @@ class TimerModel {
     this.groupId = 0,
     this.timerName = "새 타이머",
     this.sortOrder = 0,
+    this.timerMode = 0,
     this.timeUnit = 0,
     this.maxTime = 60,
     this.remainTimeStyle = 0,
@@ -65,6 +66,7 @@ class TimerModel {
     int? groupId,
     String? timerName,
     int? sortOrder,
+    int? timerMode,
     int? timeUnit,
     int? maxTime,
     int? remainTimeStyle,
@@ -76,6 +78,7 @@ class TimerModel {
       groupId : groupId ?? this.groupId,
       timerName : timerName ?? this.timerName,
       sortOrder : sortOrder ?? this.sortOrder,
+      timerMode : timerMode ?? this.timerMode,
       timeUnit : timeUnit ?? this.timeUnit,
       maxTime : maxTime ?? this.maxTime,
       remainTimeStyle : remainTimeStyle ?? this.remainTimeStyle,
@@ -99,12 +102,13 @@ class TimerModel {
 // 'sortOrder': "", // 타이머 정렬 순서
 // 'setupTime': 45, // 설정 시간
 // 'uiType': 'pizza', // 디자인 타입
-// 'timerMode': 0, // 타이머 타입 (0 : 타이머형, 1 : 알람형) // todo timerMode로 바꾸기
+// 'timerMode': 0, // 타이머 타입 (0 : 타이머형, 1 : 알람형)
 // 'maxTime': 60, // 최대 시간
 // 'timeUnit': 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)
 // 'remainTimeStyle': 'false', // 남은 시간 표시 여부 (0 : 표시안함, 1 : hh:mm:ss, 2 : 00%)
 // 'alarmType': 0, // 무음/진동/알람 (0 : 무음, 1 : 진동, 2 : 소리)
 // 'timerColorList': [0], // 타이머 색상 리스트 (최대 5개)
+// 타이머 설명 표시 여부 todo
 
 
 // 'dismissAlarm': '', // 한 번, 버튼 클릭
