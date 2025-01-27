@@ -21,6 +21,22 @@ class TimerViewModel extends ChangeNotifier {
     return recentTimer;
   }
 
+  /// mft_timer에 새 타이머를 생성한다
+  Future<void> insertTimer (TimerModel model) async {
+    await _timerRepository.insertTimer(model.toMap());
+    // todo insert 후
+    // print(model.toMap());
+    final loadedPreset = await _timerRepository.getPresetFromDb();
+    _presetModel = loadedPreset;
+  }
+
+  /// mft_timer의 타이머를 업데이트 한다
+  Future<void> updateTimer (TimerModel model) async {
+    await _timerRepository.updateTimer(model.toMap());
+    // final loadedPreset = await _timerRepository.getPresetFromDb();
+    // _presetModel = loadedPreset;
+  }
+
   /// mft_group에 새 그룹을 생성한다
   Future<void> createGroup (GroupModel model) async {
     List<Map<String, dynamic>> sortOrder = await _timerRepository.getSortOrderGroup();
@@ -50,6 +66,7 @@ class TimerViewModel extends ChangeNotifier {
   // FutureBuilder 테스트용, 3초 지연 코드
   static Future<String> loadPresetDb2() async {
     await Future.delayed(const Duration(seconds: 3));
+    print('??');
     return 'Hello from the Future!';
   }
 }

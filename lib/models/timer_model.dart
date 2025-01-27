@@ -43,11 +43,26 @@ class TimerModel {
   //   _timerColorList = value;
   // }
 
+
+  /// 객체를 Map으로 변환
+  Map<String, dynamic> toMap() {
+    return {
+      'timerId': timerId,
+      'groupId': groupId,
+      'sortOrder': sortOrder,
+      'timerMode': timerMode,
+      'timerName': timerName,
+      'timeUnit': timeUnit,
+      'remainTimeStyle': remainTimeStyle,
+      'timerColorList': timerColorList.toString(),
+    };
+  }
+
   TimerModel(
     {
-    this.timerId = 0,
+    this.timerId = -1,
     this.groupId = 0,
-    this.timerName = "새 타이머",
+    this.timerName = "New Timer",
     this.sortOrder = 0,
     this.timerMode = 0,
     this.timeUnit = 0,
@@ -72,7 +87,6 @@ class TimerModel {
     int? remainTimeStyle,
     List<int>? timerColorList,
   }) {
-    print('타이머카피');
     return TimerModel(
       timerId : timerId ?? this.timerId,
       groupId : groupId ?? this.groupId,
@@ -91,7 +105,7 @@ class TimerModel {
     return TimerModel(
         timerId : timerData['timerId'],
         groupId : timerData['groupId'],
-        timerName: timerData['timerName'],
+        timerName: timerData['timerName'] ?? 'Basic Timer',
         sortOrder: timerData['sortOrder']
     );
   }

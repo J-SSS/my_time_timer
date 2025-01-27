@@ -32,6 +32,16 @@ class TimerRepository {
     await dbManager.insertGroup(data);
   }
 
+  /// mft_timer에 새 타이머를 생성한다
+  Future<void> insertTimer(Map<String, dynamic> data) async {
+    await dbManager.insertTimer(data);
+  }
+
+  /// mft_timer의 타이머를 업데이트한다 todo 수정해야함
+  Future<void> updateTimer(Map<String, dynamic> data) async {
+    await dbManager.insertGroup(data);
+  }
+
   /// mft_group에 새 그룹을 생성하기 위한 sortOrder 값을 반환한다
   Future<List<Map<String, dynamic>>> getSortOrderGroup() async {
     return await dbManager.getSortOrderGroup();

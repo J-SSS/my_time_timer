@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_time_timer/manager/app_manager.dart';
 import 'package:my_time_timer/utils/size_util.dart';
 
@@ -12,20 +13,26 @@ import '../provider/create_timer_controller.dart';
 import '../provider/timer_controller.dart';
 import '../utils/app_utils.dart';
 import '../utils/common_values.dart';
+import '../utils/timer_utils.dart';
+import '../viewModels/timer_view_model.dart';
 import '../widgets/create_timer_toolbar.dart';
 import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
   CreateTimerScreen({super.key});
 
+  final TextEditingController _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     AppManager.log("타이머생성",type: "B");
+    TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel); // 여기서만 select 해주면 될 듯?
+
+    print("타이머 아이디 : ${timerModel.timerId}");
+    _textController.text = timerModel.timerName; // TextEditingController에 timerName 초기화
 
     int groupId = context.read<CreateTimerController>().groupId;
-    print('현재그룹아이디 : $groupId');
-
-    TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel);
+    print('그룹 아이디 : $groupId');
 
     // print(SizeUtil.get.sw * 0.2);
 
@@ -34,20 +41,20 @@ class CreateTimerScreen extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: TextField(
-            decoration: InputDecoration(
-              // labelText: '타이머 이름',
-              border:  InputBorder.none // 외곽선 스타일
-            ),textAlign: TextAlign.left,
+          title: FittedBox( // todo AutoSizeText로 바꾸기
+              fit: BoxFit.contain, // 텍스트 크기를 박스 크기에 맞게 조정
+              child: Text(timerModel.timerName,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold))
           ),
+
           // toolbarHeight: 56,
-          // centerTitle: false,
+          centerTitle: true,
+
           actions: [
             IconButton(
               onPressed: () {
-                showOverlayInfo(context,"타이틀 숨김");
+                _showModifyTimerNamePopup(context,timerModel);
               },
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.mode_edit),
               color: Colors.grey,
             ),
           ],
@@ -62,7 +69,7 @@ class CreateTimerScreen extends StatelessWidget {
                   width: SizeUtil.get.sw,
                   // color: Colors.green.withOpacity(0.2),
                   alignment: Alignment.center,
-                  child: CreateTimerToolbar()
+                  child: const CreateTimerToolbar()
                 ),
 
                 SizedBox(
@@ -75,7 +82,7 @@ class CreateTimerScreen extends StatelessWidget {
                       ),
                     )),
                 Container(
-                    // color: Colors.blue.withOpacity(0.15),// 임시
+                    color: Colors.blue.withOpacity(0.15),// 임시
                     width: SizeUtil.get.sw,
                     height: SizeUtil.get.sh * 0.2,
                     child: Stack(
@@ -155,8 +162,15 @@ class CreateTimerScreen extends StatelessWidget {
                                 ],
                               ),
                               child: TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context); // 닫기
+                                onPressed: () async {
+                                  if(timerModel.timerId == -1){ // 신규 생성인 경우
+                                    timerModel = timerModel.copyWith(timerId: getUtc()); // 타이머아이디
+                                    await context.read<TimerViewModel>().insertTimer(timerModel);
+                                    // await asyncTest();
+                                  } else { // 업데이트 하는 경우
+                                    context.read<TimerViewModel>().updateTimer(timerModel);
+                                  }
+                                  Navigator.pop(context); // 닫기 todo 메인으로 돌아가게 해야함
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
@@ -179,5 +193,53 @@ class CreateTimerScreen extends StatelessWidget {
               ],
             )));
   }
+
+  void _showModifyTimerNamePopup(BuildContext context, TimerModel model) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('타이머 이름'),
+          content: TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+              hintText: '타이머 이름을 입력하세요.',
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                if (!(_textController.text ?? '').isNotEmpty) {
+                  Fluttertoast.showToast(
+                    msg: "타이머 이름을 입력하세요",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                } else {
+                  print(_textController.text);
+                  // _textController.text
+                  // GroupModel model = GroupModel(getUtc(), _textController.text, 0);
+                  context.read<CreateTimerController>().refreshTimerModel(model.copyWith(timerName: _textController.text));
+                  Navigator.pop(context);
+                }
+              },
+              child: Text('수정'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // 다이얼로그 닫기
+              },
+              child: Text('닫기'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
 

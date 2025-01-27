@@ -174,6 +174,7 @@ class _PresetListState extends State<PresetList> {
                             },
                             child: Container(
                             key: Key(timerId.toString()),
+                            margin:  const EdgeInsets.only(bottom: 8), // 마진 줄 수 있음
                             height: SizeUtil.get.sh075,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25), // 원하는 곡선의 반지름 값 설정

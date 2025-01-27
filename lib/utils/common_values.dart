@@ -23,6 +23,14 @@ const colorAssignList = [
   [80, 60, 40, 20, 0] // ["~100%", "~80%", "~60%", "~40%", "~20%"]
 ];
 
+// todo 사용 코드 추가하기
+const remainTimeIconist = [
+  Icon(Icons.mode_edit),
+  Icon(Icons.mode_edit),
+  Icon(Icons.mode_edit)
+];
+
+
 enum TimerStyle {a,b,c}
 enum TimerScreenType {main, timer, theme, create } /// 타이머 타입 (메인, 온타이머, 테마선택, 타이머 생성)
 enum TimeUnit { sec, min, hour } /// 시간 단위

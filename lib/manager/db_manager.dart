@@ -68,7 +68,6 @@ class DbManager {
         updateDate TEXT
       )
     ''');
-
     // mft_timer 테이블
     await db.execute('''
       CREATE TABLE $_tableTimer(
@@ -81,6 +80,7 @@ class DbManager {
         timeUnit INTEGER,
         maxTime INTEGER,
         remainTimeStyle INTEGER,
+        timerColorList TEXT,
         sortOrder INTEGER,
         FOREIGN KEY (groupId) REFERENCES $_tableGroup (groupId) 
         ON DELETE CASCADE
@@ -108,6 +108,7 @@ class DbManager {
       "timeUnit" : 1,
       "maxTime" : 60,
       "remainTimeStyle" : 1,
+      "timerColorList" : "[0]",
       "sortOrder" : 0,
     }); // mft_timer
   }
@@ -116,6 +117,12 @@ class DbManager {
   Future<int> insertGroup(Map<String, dynamic> data) async {
     Database db = await instance.database;
     return await db.insert(_tableGroup, data);
+  }
+
+  /// mft_timer에 새 타이머를 생성한다 // todo 수정해야함
+  Future<int> insertTimer(Map<String, dynamic> data) async {
+    Database db = await instance.database;
+    return await db.insert(_tableTimer, data);
   }
 
   /// mft_group에 새 그룹을 생성하기 위한 sortOrder 값을 반환한다

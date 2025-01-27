@@ -115,6 +115,7 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
             ],
           ),
           child: InkWell(
+            borderRadius: BorderRadius.circular(50),
             onTap: (){
               if(idxForTimerMode == 0){ // 기본형
                 SelectTimeConfigDialog().show(context);

@@ -264,6 +264,25 @@ class pizzaTypeBasePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double radius = size.width / 2;
 
+    // 원의 중심과 반지름 설정
+    final Offset center = Offset(size.width / 2, size.height / 2);
+    // final double radius = 50.0;
+
+    // Path에 원(oval) 추가
+    final Rect circleRect = Rect.fromCircle(center: center, radius: radius);
+    final Path circlePath = Path()..addOval(circleRect);
+
+    // 1) 그림자 먼저 그리기
+    //    매개변수: (Path path, Color color, double elevation, bool transparentOccluder)
+    //    - elevation이 클수록 그림자가 강하게(멀리) 나타납니다.
+    canvas.drawShadow(circlePath, Colors.blueGrey.withOpacity(0.1), 10.0, true);
+
+    // 2) 실제 원 그리기
+    final Paint circlePaint = Paint()..color = Colors.white70;
+    // canvas.drawPath(circlePath, circlePaint);
+
+
+
     for (int angle = 0; angle < 360; angle += 6) {
       int subRadius = 0;
       final Paint paint = Paint()..color = Colors.grey;
@@ -293,6 +312,8 @@ class pizzaTypeBasePainter extends CustomPainter {
         paint,
       );
     }
+
+
   }
 
   @override
