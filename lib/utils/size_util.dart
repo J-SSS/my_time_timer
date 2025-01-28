@@ -45,8 +45,10 @@ class SizeUtil {
   late double sh05;
   late double sh075;
   late double sh10;
+  late double sh15;
   late double sh20;
   late double sh70;
+  late double sh75;
   late double sh80;
   late double sh90;
 
@@ -94,8 +96,10 @@ class SizeUtil {
     sh05 = sh * 0.05;
     sh075 = sh * 0.075;
     sh10 = sh * 0.1;
+    sh15 = sh * 0.15;
     sh20 = sh * 0.2;
     sh70 = sh * 0.7;
+    sh75 = sh * 0.75;
     sh80 = sh * 0.8;
     sh90 = sh * 0.9;
 

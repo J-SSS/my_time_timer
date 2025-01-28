@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ import '../provider/create_timer_controller.dart';
 import '../utils/app_utils.dart';
 import '../utils/common_values.dart';
 import '../utils/size_util.dart';
+import 'dialog/select_color_dialog.dart';
 import 'dialog/select_time_config_dialog.dart';
 
 
@@ -71,81 +73,133 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
       _selectedTimeText = "Until ${DateFormat('hh:mm a').format(newDateTime)}"; // HH : 24시간타입
     }
 
-    return Row(children: [
-      Container(
-        // color: Colors.red.withOpacity(0.1),
-        width: SizeUtil.get.sw * 0.2,
-        child: IconButton(
-          onPressed: () {
-            idxForTimerMode = (idxForTimerMode + 1) % 2;
-
-            context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(timerMode: idxForTimerMode));
-            showOverlayInfo(context,"타이머 모드 변경");
-
-            if(idxForTimerMode == 0){
-
-            } else {
-
-            }
-
-            // idxForTimeUnit = (idxForTimeUnit + 1) % 3;
-            // context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(timeUnit: idxForTimeUnit));
-          },
-          icon: Icon(Icons.cached_rounded,size: 41,),
-          color: Colors.grey,
-        ),
-      ),
-      SizedBox(
-        width: SizeUtil.get.sw * 0.6,
-        child: Container(
-          height: SizeUtil.get.sh * 0.1 * 0.7,
-          width: SizeUtil.get.sw * 0.6,
+    return  Container(
+      // color: Colors.blue.withOpacity(0.15),// 임시
+      width: SizeUtil.get.sw,
+      height: SizeUtil.get.sh * 0.1,
+      alignment: Alignment.topCenter,
+      child: Container(
+          width: SizeUtil.get.sw * 0.9,
+          height: SizeUtil.get.sh * 0.1 * 0.75,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(50.0),
-            border: Border.all(
-                color: Colors.blueGrey.withOpacity(0.9), width: 0.5),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
             boxShadow: [
               BoxShadow(
-                color: Colors.black26.withOpacity(0.05),
+                color: Colors.blueGrey.withOpacity(0.2),
+                // color: Colors.grey.withOpacity(0.4),
+                // color: Colors.purple.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 5,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(50),
-            onTap: (){
-              if(idxForTimerMode == 0){ // 기본형
-                SelectTimeConfigDialog().show(context);
-              } else { // 시각형
-                _showTimePicker();
-              }
+          child : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton( /** 타이머 모드 변경 */
+                  onPressed: () {
+                    idxForTimerMode = (idxForTimerMode + 1) % 2;
 
-              // // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
-            },
-            // child: Align(child: Text("120 min Timer",style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black54), textAlign: TextAlign.center),),
-            child: Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black54), textAlign: TextAlign.center),),
-          ),
-        ),
+                    context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(timerMode: idxForTimerMode));
+                    showOverlayInfo(context,"타이머 모드 변경");
+
+                    if(idxForTimerMode == 0){
+
+                    } else {
+
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    // padding: EdgeInsets.all(10.0),
+                    // fixedSize: Size(55.0, 55.0),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(MaterialCommunityIcons.cached,size: 20,),//format_paint
+                      Text("Mode",style: TextStyle(color: Colors.deepPurple,fontSize: 10),)
+                    ]
+                    ,)
+              ),
+
+              TextButton( /** 알람 버튼 */
+                  onPressed: () {
+                    if(idxForTimerMode == 0){ // 기본형
+                      SelectTimeConfigDialog().show(context);
+                    } else { // 시각형
+                      _showTimePicker();
+                    }
+
+                    // // "가득 찬 상태로 타이머 시작" 옵션이 활성화 되어있는 경우, 최대 설정 시간과 관계 없이 가득 찬 상태로 타이머가 시작됩니다.
+                  },
+                  style: ElevatedButton.styleFrom(
+                    // shape: const CircleBorder(),
+                    // padding: EdgeInsets.all(10.0),
+                    // fixedSize: Size(55.0, 55.0),
+                      shadowColor: Colors.grey.withOpacity(0.1),
+                      backgroundColor: Colors.white,
+                      side: BorderSide(
+                          color: Colors.blueGrey.withOpacity(0.1), // 테두리 색상
+                          width: 1, // 테두리 두께
+                        ),
+                    elevation: 1,
+                    fixedSize : Size.fromHeight(1)
+                  ),
+                  child: Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
+              ),
+              // Container(
+              //   height: SizeUtil.get.sh * 0.1 * 0.7 * 0.7,
+              //   width: SizeUtil.get.sw * 0.5,
+              //   decoration: BoxDecoration(
+              //     // color: Colors.grey,
+              //     borderRadius: BorderRadius.circular(20.0),
+              //     border: Border.all(
+              //         color: Colors.blueGrey.withOpacity(0.3), width: 1),
+              //     // boxShadow: [
+              //       // BoxShadow(
+              //       //   color: Colors.black26.withOpacity(0.05),
+              //       //   spreadRadius: 1,
+              //       //   blurRadius: 5,
+              //       //   offset: Offset(0, 3),
+              //       // ),
+              //     // ],
+              //   ),
+              //   child:
+              // ),
+
+
+              TextButton( /** 남은 시간 표시 여부 */
+                  onPressed: () {
+                    idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
+                    context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(remainTimeStyle: idxForRemainTimeStyle));
+
+                    showOverlayInfo(context,"남은 시간 표시");
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    // padding: EdgeInsets.all(10.0),
+                    // fixedSize: Size(55.0, 55.0),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(MaterialCommunityIcons.eye_off,size: 20,),
+                      Text("None",style: TextStyle(color: Colors.deepPurple,fontSize: 10),)
+                    ]
+                    ,)
+              ),
+
+
+
+
+
+            ],
+          )
       ),
-      Container(
-        // color: Colors.blue.withOpacity(0.1),
-        width: SizeUtil.get.sw * 0.2,
-        child: IconButton(
-          onPressed: () {
-            idxForRemainTimeStyle = (idxForRemainTimeStyle + 1) % 3;
-            context.read<CreateTimerController>().refreshTimerModel(timerModel.copyWith(remainTimeStyle: idxForRemainTimeStyle));
 
-            showOverlayInfo(context,"남은 시간 표시");
-          },
-          icon: Icon(Icons.visibility_off_outlined,size: 41,),
-          // icon: Icon(MaterialCommunityIcons.eye_off, size: 41,),
-          color: Colors.grey,
-        ),
-      ),
-
-    ],);
+    );
   }
 }

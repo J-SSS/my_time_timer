@@ -245,7 +245,7 @@ class _PresetListState extends State<PresetList> {
                   child: IconButton(
                     onPressed: () {
                       context.read<CreateTimerController>().groupId = groupId;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectThemeScreen(safeSize : SizeUtil.get.safeSize)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectThemeScreen()));
                     },
                     icon: Icon(
                       Icons.add,

@@ -40,7 +40,7 @@ dependencies:
   intl: ^0.19.0 # 국제화
 
   flutter_screenutil: ^5.9.0 # 해상도 대응
-
+  flutter_vector_icons: ^2.0.0 # Material Design Icons
   path: ^1.8.3 # 파일 및 디렉토리 경로 처리
   sqflite: ^2.0.0 # SQLite
 
