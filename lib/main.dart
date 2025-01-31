@@ -20,7 +20,15 @@ Future<void> main() async {
 
   await DbManager.instance.init();
 
-
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      // 상태바를 완전 투명하게
+      statusBarColor: Colors.transparent,
+      // 아이콘 색상 (Light 면 흰색 아이콘, Dark 면 검정 아이콘)
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark, // iOS 상태바 텍스트 색
+    ),
+  );
 
   // todo SQLite 초기화 코드 추가
 

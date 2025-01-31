@@ -18,6 +18,7 @@ import 'package:my_time_timer/utils/size_util.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 import 'package:my_time_timer/repository/timer_repository.dart';
 import 'package:my_time_timer/widgets/create_timer_toolbar.dart';
+import 'package:my_time_timer/widgets/main_toolbar.dart';
 import 'package:my_time_timer/widgets/my_app_bar.dart';
 import 'package:my_time_timer/widgets/timer_loader.dart';
 
@@ -93,72 +94,101 @@ class MyAppMain extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       // appBar: MyAppBar(safeSize: safeSize),
-      appBar: AppBar(
-        leading: const SizedBox(),
-        title: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 200), // 최대 너비 제한
-          child: FittedBox( // todo AutoSizeText로 바꾸기
-              fit: BoxFit.contain, // 텍스트 크기를 박스 크기에 맞게 조정
-              child: Text("New Timer",
-                  maxLines: 1, // 최대 한 줄로 제한
-                  overflow: TextOverflow.ellipsis, // 넘치는 텍스트를 생략(...)
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(0, 3), // 그림자의 x, y 위치
-                        blurRadius: 1.0, // 그림자 흐림 정도
-                        color: Colors.grey.withOpacity(0.2), // 그림자 색상
-                      ),
-                    ],))),
-        ),
+      // appBar: AppBar(
+      //   leading: const SizedBox(),
+      //   title: ConstrainedBox(
+      //     constraints: BoxConstraints(maxWidth: 200), // 최대 너비 제한
+      //     child: FittedBox( // todo AutoSizeText로 바꾸기
+      //         fit: BoxFit.contain, // 텍스트 크기를 박스 크기에 맞게 조정
+      //         child: Text("New Timer",
+      //             maxLines: 1, // 최대 한 줄로 제한
+      //             overflow: TextOverflow.ellipsis, // 넘치는 텍스트를 생략(...)
+      //             style: TextStyle(
+      //               fontSize: 25,
+      //               fontWeight: FontWeight.bold,
+      //               color: Colors.black54,
+      //               shadows: [
+      //                 Shadow(
+      //                   offset: Offset(0, 3), // 그림자의 x, y 위치
+      //                   blurRadius: 1.0, // 그림자 흐림 정도
+      //                   color: Colors.grey.withOpacity(0.2), // 그림자 색상
+      //                 ),
+      //               ],))),
+      //   ),
+      //
+      //   // toolbarHeight: 56,
+      //   centerTitle: true,
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => SettingScreen()), // 설정 화면
+      //         );
+      //       },
+      //       // icon: Icon(Icons.settings),
+      //       icon: Icon(MaterialCommunityIcons.settings,size: 19,),
+      //       color: Colors.grey,
+      //     ),
+      //   ],
+      // ),
+      body: SafeArea(
+          child: Column(
 
-        // toolbarHeight: 56,
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingScreen()), // 설정 화면
-              );
-            },
-            // icon: Icon(Icons.settings),
-            icon: Icon(MaterialCommunityIcons.settings,size: 19,),
-            color: Colors.grey,
+            children: [
+              Container( // 임시
+                  height: SizeUtil.get.sh075,
+                  // color: Colors.green.withOpacity(0.15),
+                  alignment: Alignment.topCenter,
+                  child: const MainToolbar()
+              ),
+              Container( // 임시
+                  height: SizeUtil.get.sh075,
+                  width: SizeUtil.get.sw,
+                  // color: Colors.blue.withOpacity(0.1),
+                  // alignment: Alignment.bottomCenter,
+                  alignment: Alignment.center,
+                  child:  Text("WorkOut 60 min!" * 1, // todo AutoSizeText로 바꾸기
+                      maxLines: 1, // 최대 한 줄로 제한
+                      overflow: TextOverflow.ellipsis, // 넘치는 텍스트를 생략(...)
+                      style: TextStyle(
+                        fontSize: SizeUtil.get.sh075 / 2,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(0, 3), // 그림자의 x, y 위치
+                            blurRadius: 1.0, // 그림자 흐림 정도
+                            color: Colors.grey.withOpacity(0.2), // 그림자 색상
+                          ),
+                        ],
+                      )
+                  )
+              ),
+
+              Container(
+                // color: Colors.blue.withOpacity(0.05),
+                  height: SizeUtil.get.sh70,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
+                    child: Center(
+                        child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
+                      // child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
+                      // child: TimerLoader().timerLoader(context, "pizzaB",TimerScreenType.main)
+                    ),
+                  )),
+              SizedBox(
+                height: SizeUtil.get.sh15,
+                child: BottomBarWidget(safeSize: safeSize),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container( // 임시
-                height: SizeUtil.get.sh10,
-                // color: Colors.green.withOpacity(0.15),
-                child: const CreateTimerToolbar()
-            ),
-            Container(
-              // color: Colors.blue.withOpacity(0.05),
-                height: SizeUtil.get.sh75,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
-                  child: Center(
-                    child: TimerLoader().timerLoader(context, "pizza",TimerScreenType.main)
-                    // child: TimerLoader().timerLoader(context, "battery",TimerScreenType.main)
-                    // child: TimerLoader().timerLoader(context, "pizzaB",TimerScreenType.main)
-                  ),
-                )),
-            SizedBox(
-              height: SizeUtil.get.sh15,
-              child: BottomBarWidget(safeSize: safeSize),
-            ),
-          ],
-        ),
-      ),
+      )
+
+
+
     );
   }
 }

@@ -13,17 +13,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="[개발] #기타, MVVM 패턴 적용 작업">
+    <list default="true" id="db6b7ee8-2ebc-4ff4-abcf-a2897739964c" name="변경" comment="[개발] #기타, 10:75:15 레이아웃으로 변경">
+      <change afterPath="$PROJECT_DIR$/lib/widgets/layout_default.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/main_toolbar.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/my_app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/my_app.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/create_timer_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen/select_theme_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen/select_theme_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/size_util.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/size_util.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/bottom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/bottom_bar.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/create_timer_toolbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/create_timer_toolbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/preset_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/preset_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,45 +81,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Flutter.main.dart.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/my_time_timer/lib/manager&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.37356323&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.main.dart.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/projects/my_time_timer/lib/widgets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.37356323",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\my_time_timer\lib\widgets" />
       <recent name="D:\Projects\my_time_timer\lib\manager" />
       <recent name="D:\Projects\my_time_timer\lib\widgets\timer" />
       <recent name="D:\Projects\my_time_timer\lib\screen" />
       <recent name="D:\Projects\my_time_timer\lib\provider" />
-      <recent name="D:\Projects\my_time_timer\lib\widgets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\my_time_timer\lib\manager" />
@@ -267,7 +265,8 @@
       <workItem from="1737978236819" duration="264000" />
       <workItem from="1737978509632" duration="18000" />
       <workItem from="1737978534412" duration="289000" />
-      <workItem from="1737978834429" duration="18946000" />
+      <workItem from="1737978834429" duration="26924000" />
+      <workItem from="1738296255564" duration="14595000" />
     </task>
     <task id="LOCAL-00001" summary="[개발] #001 새 프로젝트 생성">
       <created>1710377781114</created>
@@ -542,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737620893856</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="[개발] #기타, 10:75:15 레이아웃으로 변경">
+      <option name="closed" value="true" />
+      <created>1738050197029</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1738050197029</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,7 +579,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[개발] #공통, safeSize 계산 추가" />
     <MESSAGE value="[개발] #타이머생성, 임시저장" />
     <MESSAGE value="[개발] 임시저장" />
     <MESSAGE value="[개발] #공통, 1:7:2 레이아웃 설정" />
@@ -597,7 +603,8 @@
     <MESSAGE value="[개발] #기타, 폴더 구조 수정 등" />
     <MESSAGE value="[개발] #기타, .gitignore 수정&#10;&#10;- workspace.xml 공유" />
     <MESSAGE value="[개발] #기타, MVVM 패턴 적용 작업" />
-    <option name="LAST_COMMIT_MESSAGE" value="[개발] #기타, MVVM 패턴 적용 작업" />
+    <MESSAGE value="[개발] #기타, 10:75:15 레이아웃으로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="[개발] #기타, 10:75:15 레이아웃으로 변경" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

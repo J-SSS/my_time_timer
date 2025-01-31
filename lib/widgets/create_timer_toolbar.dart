@@ -80,17 +80,15 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
       alignment: Alignment.topCenter,
       child: Container(
           width: SizeUtil.get.sw * 0.9,
-          height: SizeUtil.get.sh * 0.1 * 0.75,
+          height: SizeUtil().sh075 * 0.8, // todo 060 새로 만들기
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
               BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.2),
-                // color: Colors.grey.withOpacity(0.4),
-                // color: Colors.purple.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 5,
+                color: Colors.blueGrey.withOpacity(0.3),
+                spreadRadius: 3,
+                blurRadius: 1,
                 offset: const Offset(0, 3),
               ),
             ],
@@ -113,7 +111,7 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    // padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(0.0),
                     // fixedSize: Size(55.0, 55.0),
                   ),
                   child: Column(
@@ -142,7 +140,7 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                       shadowColor: Colors.grey.withOpacity(0.1),
                       backgroundColor: Colors.white,
                       side: BorderSide(
-                          color: Colors.blueGrey.withOpacity(0.1), // 테두리 색상
+                          color: Colors.blueGrey.withOpacity(0.2), // 테두리 색상
                           width: 1, // 테두리 두께
                         ),
                     elevation: 1,
@@ -150,26 +148,7 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                   ),
                   child: Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
               ),
-              // Container(
-              //   height: SizeUtil.get.sh * 0.1 * 0.7 * 0.7,
-              //   width: SizeUtil.get.sw * 0.5,
-              //   decoration: BoxDecoration(
-              //     // color: Colors.grey,
-              //     borderRadius: BorderRadius.circular(20.0),
-              //     border: Border.all(
-              //         color: Colors.blueGrey.withOpacity(0.3), width: 1),
-              //     // boxShadow: [
-              //       // BoxShadow(
-              //       //   color: Colors.black26.withOpacity(0.05),
-              //       //   spreadRadius: 1,
-              //       //   blurRadius: 5,
-              //       //   offset: Offset(0, 3),
-              //       // ),
-              //     // ],
-              //   ),
-              //   child:
-              // ),
-
+              // ElevatedButton(onPressed: (){}, child: SizedBox()),
 
               TextButton( /** 남은 시간 표시 여부 */
                   onPressed: () {
@@ -180,8 +159,7 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    // padding: EdgeInsets.all(10.0),
-                    // fixedSize: Size(55.0, 55.0),
+                    padding: const EdgeInsets.all(0.0),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

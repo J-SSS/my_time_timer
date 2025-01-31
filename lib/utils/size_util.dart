@@ -89,7 +89,8 @@ class SizeUtil {
     dh = mQ.size.height;
 
     // 안전영역 계산
-    sh = mQ.size.height - mQ.padding.top - mQ.padding.bottom - 56; // 56은 AppBar 기본 높이 todo 맞는지 확인필요
+    sh = mQ.size.height - mQ.padding.top - mQ.padding.bottom; // 56은 AppBar 기본 높이 todo 맞는지 확인필요
+    // sh = mQ.size.height; // 56은 AppBar 기본 높이 todo 맞는지 확인필요
     sw = mQ.size.width - mQ.padding.left - mQ.padding.right;
     safeSize = Size(sw, sh);
 
