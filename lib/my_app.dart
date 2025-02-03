@@ -50,7 +50,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'My Time Timer',
           theme: ThemeData(
-              fontFamily: 'Pretendard'
+            fontFamily: 'Pretendard',
+            dividerColor: Colors.transparent,
             // expansionTileTheme: ExpansionTileThemeData(
             //   // tilePadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
             //   // childrenPadding : EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
@@ -94,7 +95,7 @@ class MyAppMain extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       // appBar: MyAppBar(safeSize: safeSize),
       // appBar: AppBar(
       //   leading: const SizedBox(),
@@ -141,7 +142,7 @@ class MyAppMain extends StatelessWidget {
               Container( // 임시
                   height: SizeUtil.get.sh075,
                   // color: Colors.green.withOpacity(0.15),
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.center,
                   child: const MainToolbar()
               ),
               Container( // 임시

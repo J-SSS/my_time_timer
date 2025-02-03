@@ -5,6 +5,7 @@ import 'package:my_time_timer/models/group_model.dart';
 import 'package:my_time_timer/models/preset_model.dart';
 import 'package:my_time_timer/screen/select_theme_screen.dart';
 import 'package:my_time_timer/utils/size_util.dart';
+import 'package:my_time_timer/widgets/preset_toolbar.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 
@@ -46,34 +47,64 @@ class _PresetScreenState extends State<PresetScreen> {
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text('List'),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _showCreateGroupPopup(context);
-            print('Custom FAB clicked!');
-          },
-          tooltip: 'Add Item',
-          child: Icon(Icons.add),
-          backgroundColor: Colors.blueGrey,
-          // 배경색
-          foregroundColor: Colors.white,
-          // 아이콘 색
-          elevation: 5.0, // 그림자 높이
-        ),
-        body: Column(
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        body: SafeArea(child: Column(
           children: [
-            SizedBox(
-                height: SizeUtil.get.sh90,
-                child: PresetList()
-            ),
             Container(
-              color: Colors.green.withOpacity(0.1),
-              height: SizeUtil.get.sh10,
+              // color: Colors.green.withOpacity(0.5),
+              height: SizeUtil.get.sh075,
+              child: PresetToolbar(),
+            ),
+            SizedBox(
+                height: SizeUtil.get.sh85,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: SizeUtil().sh01, horizontal: 0),
+                  child: PresetList(),
+                ),
+                // child: PresetList()
+            ),
+            SizedBox(
+              // color: Colors.green.withOpacity(0.05),
+              height: SizeUtil.get.sh075,
+              width: SizeUtil().sw,
+
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                height: SizeUtil.get.sh075/2,
+                alignment: Alignment.bottomCenter,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blueGrey.withOpacity(0.3),
+                      spreadRadius: 3,
+                      blurRadius: 1,
+                      offset: const Offset(0, -3),
+                    ),
+                  ],
+                ),
+              ),
+              )
+
+
+
             )
           ],
-        )
+        )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showCreateGroupPopup(context);
+          print('Custom FAB clicked!');
+        },
+        tooltip: 'Add Group',
+        shape: CircleBorder(),
+        child: Icon(MaterialCommunityIcons.folder_plus,size: SizeUtil().sh075/2,color: Colors.white,),
+        backgroundColor: Colors.blueGrey, // 배경색
+        foregroundColor: Colors.white, // 아이콘 색
+        elevation: 5.0,
+      ),
+
     );
   }
 
