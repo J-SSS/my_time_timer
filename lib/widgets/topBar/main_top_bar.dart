@@ -4,13 +4,13 @@ import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../models/timer_model.dart';
-import '../provider/create_timer_controller.dart';
-import '../utils/app_utils.dart';
-import '../utils/common_values.dart';
-import '../utils/size_util.dart';
-import 'dialog/select_color_dialog.dart';
-import 'dialog/select_time_config_dialog.dart';
+import '../../models/timer_model.dart';
+import '../../provider/create_timer_controller.dart';
+import '../../utils/app_utils.dart';
+import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
+import '../dialog/select_color_dialog.dart';
+import '../dialog/select_time_config_dialog.dart';
 
 
 class MainToolbar extends StatefulWidget {
@@ -72,8 +72,9 @@ class _MainToolbarState extends State<MainToolbar> {
     }
 
     return Container(
-          width: SizeUtil.get.sw * 0.9,
-          height: SizeUtil.get.sh075 * 0.8,
+          width: SizeUtil().sw,
+          height: SizeUtil().sh10 * 0.9,
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
           // alignment: Alignment.topCenter,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -103,7 +104,7 @@ class _MainToolbarState extends State<MainToolbar> {
                 child: Icon(MaterialCommunityIcons.chevron_left,size: 35,),
               ),
 
-              Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
+              Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: SizeUtil().sh10/2.5, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
 
               TextButton( /** 우 버튼 */
                   onPressed: () {

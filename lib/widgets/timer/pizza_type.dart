@@ -26,9 +26,8 @@ extension DoubleExtension on double {
 }
 
 class PizzaType extends StatefulWidget {
-  Size safeSize;
   TimerScreenType screenType;
-  PizzaType({required this.safeSize, super.key, this.screenType = TimerScreenType.main});
+  PizzaType({super.key, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
@@ -66,7 +65,7 @@ class _PizzaTypeState extends State<PizzaType> {
     }
 
     print('피자 리빌드');
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
 
     // return FutureBuilder(
     //     future: TimerViewModel().loadPresetDb3(),
@@ -89,8 +88,7 @@ class _PizzaTypeState extends State<PizzaType> {
 
 
     return CustomPaint(
-      size: safeSize,
-      // size: Size(double.infinity,double.infinity), // 원하는 크기로 지정
+      size: Size(double.infinity,double.infinity), // 원하는 크기로 지정
       painter: PizzaTypePainter(
         setupTime: setupTime,
         timerModel : _timerModel,
@@ -193,7 +191,8 @@ class PizzaTypePainter extends CustomPainter {
           text: utils.parseTimeString(timerModel.timeUnit, setupTime),
           style: TextStyle(
             color: Colors.white,
-            fontSize: size.width / 10,
+            fontSize: size.width / 7,
+            fontWeight: FontWeight.bold
           ),
         ),
         textDirection: TextDirection.ltr, // 텍스트 방향
@@ -212,7 +211,7 @@ class PizzaTypePainter extends CustomPainter {
       );
 
       RRect textrRect = RRect.fromRectAndRadius(textRect, Radius.circular(15));
-      final textRectPaint = Paint()..color = Colors.blueGrey.withOpacity(0.5);
+      final textRectPaint = Paint()..color = Colors.blueGrey.withOpacity(0.8);
       canvas.drawRRect(textrRect, textRectPaint);
 
       final offset = Offset( // 텍스트 그릴 위치 계산
@@ -233,8 +232,8 @@ class PizzaTypePainter extends CustomPainter {
 }
 
 class PizzaTypeBase extends StatefulWidget {
-  Size safeSize;
-  PizzaTypeBase({required this.safeSize,super.key});
+
+  const PizzaTypeBase({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -245,7 +244,7 @@ class PizzaTypeBase extends StatefulWidget {
 class _PizzaTypeStateBase extends State<PizzaTypeBase> {
   @override
   Widget build(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: pizzaTypeBasePainter(

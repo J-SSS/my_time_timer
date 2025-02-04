@@ -24,7 +24,7 @@ class _BatteryTypeState extends State<BatteryType> {
 
   @override
   Widget build(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     int setupTime = 0;
     if(widget.screenType == TimerScreenType.main){ // 메인 화면
       setupTime = context.select((TimerController T) => T.setupTime);
@@ -146,7 +146,7 @@ class BatteryTypeBase extends StatelessWidget{
   Widget build(BuildContext context) {
     // Size inf = Size(double.infinity, double.maxFinite);
     // Size safeSize = inf;
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: BatteryTypeBasePainter(

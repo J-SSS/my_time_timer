@@ -12,6 +12,7 @@ import 'package:my_time_timer/provider/app_config_controller.dart';
 
 import '../screen/create_timer_screen.dart';
 import '../screen/preset_screen.dart';
+import '../screen/setting_screen.dart';
 import '../utils/app_utils.dart';
 import '../utils/size_util.dart';
 import '../utils/timer_utils.dart';
@@ -35,12 +36,12 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
     Widget build(BuildContext context){
       return Container(
         // color: Colors.red.withOpacity(0.55),// 임시
-        width: SizeUtil.get.sw,
-        height: SizeUtil.get.sh * 0.15,
+        width: SizeUtil().sw,
+        height: SizeUtil().sh * 0.15,
         alignment: Alignment.center,
         child: Container(
-            width: SizeUtil.get.sw * 0.9,
-            height: SizeUtil.get.sh * 0.15 * 0.65,
+            width: SizeUtil().sw * 0.9,
+            height: SizeUtil().sh * 0.15 * 0.65,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(50),
@@ -59,7 +60,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                 Expanded(
                   child:
                   SizedBox(
-                    // width: SizeUtil.get.sw * 0.8 * 0.7,
+                    // width: SizeUtil().sw * 0.8 * 0.7,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -140,14 +141,34 @@ class _BottomBarWidgetState extends State<BottomBarWidget>{
                               ]
                               ,)
                         ),
+                        TextButton( /** 셋팅 화면 */
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SettingScreen()), // 설정 화면
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: EdgeInsets.all(0.0),
+                              fixedSize: Size(65.0, 65.0),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(MaterialCommunityIcons.settings,size: 30,),//format_paint
+                                Text("Settings")
+                              ]
+                              ,)
+                        ),
                       ],
                     ),
                   ),
                 ),
                 Container( // 재생버튼 부분
                   // color: Colors.redAccent.withOpacity(0.1),
-                  // width: SizeUtil.get.sw * 0.8 * 0.3,
-                  width: SizeUtil.get.sh * 0.2 * 0.5,
+                  // width: SizeUtil().sw * 0.8 * 0.3,
+                  width: SizeUtil().sh * 0.2 * 0.5,
                   child: TextButton(
                     onPressed: () async {
                       Navigator.push(

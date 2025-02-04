@@ -18,10 +18,85 @@ import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 class TimerLoader {
 
   /// 타이머 생성 및 수정 화면에서 사용
-  Widget timerLoader(BuildContext context, String type, TimerScreenType screenType){
-    Size safeSize = SizeUtil.get.safeSize; // 미디어 사이즈 초기화
+  Widget timerLoaderWithGesture(BuildContext context, String theme, TimerScreenType screenType){
+    Size safeSize = SizeUtil().safeSize; // 미디어 사이즈 초기화
     int? beforeTime;
-    if(type == "pizza"){
+
+    // child:  Padding(
+    //   padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
+    //   child: Center(
+    //       child: TimerLoader().timerLoaderWithGesture(context, timerModel.theme, TimerScreenType.create)
+    //   ),
+    if(theme == "pizza"){
+      return GestureDetector(
+        onPanUpdate: (point) {
+          Offset clickPoint = point.localPosition;
+          int clickToTime = utils.clickToTimePizza(clickPoint, safeSize, 60);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToTime)){
+            showOverlayText(context,safeSize,clickToTime.toString());
+            context.read<TimerController>().setSetupTime = clickToTime;
+            beforeTime = clickToTime;
+          }
+        },
+        child: Stack(children: [
+          PizzaTypeBase(),
+          PizzaType(screenType: screenType,),
+        ]),
+      );
+    } else if(theme == "pizzaB"){
+      return GestureDetector(
+        onPanUpdate: (point) {
+          Offset clickPoint = point.localPosition;
+          int clickToTime = utils.clickToTimePizza(clickPoint, safeSize, 60);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToTime)){
+            // showOverlayText(context,safeSize,clickToTime.toString());
+            context.read<TimerController>().setSetupTime = clickToTime;
+            beforeTime = clickToTime;
+          }
+        },
+        child: Stack(children: [
+          PizzaTypeBaseB(),
+          PizzaTypeB(screenType: screenType,),
+        ]),
+      );
+    } else if(theme == "battery"){
+      return GestureDetector(
+        onPanUpdate: (point) {
+          Offset clickPoint = point.localPosition;
+          int clickToTime = utils.clickToTimeBattery(clickPoint, safeSize, 60);
+          if(beforeTime == null || (beforeTime != null && beforeTime != clickToTime)){
+            showOverlayText(context,safeSize,clickToTime.toString());
+            context.read<TimerController>().setSetupTime = clickToTime;
+            beforeTime = clickToTime;
+          }
+        },
+        child: Stack(children: [
+          BatteryTypeBase(safeSize: safeSize),
+          BatteryType(safeSize: safeSize,)
+        ]),
+      );
+    } else {
+      return GestureDetector(
+        onPanUpdate: (point) {
+          Offset clickPoint = point.localPosition;
+          int clickToTime = utils.clickToTimePizza(clickPoint, safeSize, 60);
+          showOverlayText(context,safeSize,clickToTime.toString());
+          context.read<TimerController>().setSetupTime = clickToTime;
+        },
+        child: Stack(children: [
+          PizzaTypeBase(),
+          PizzaType(screenType: screenType,),
+        ]),
+      );
+    }
+  }
+
+
+  /// 타이머 생성 및 수정 화면에서 사용
+  Widget timerLoader(BuildContext context, String theme, TimerScreenType screenType){
+    Size safeSize = SizeUtil().safeSize; // 미디어 사이즈 초기화
+    int? beforeTime;
+    if(theme == "pizza"){
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
@@ -48,11 +123,11 @@ class TimerLoader {
         //         }
         //       }),
         child: Stack(children: [
-          PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, screenType: screenType,),
+          PizzaTypeBase(),
+          PizzaType(screenType: screenType,),
         ]),
       );
-    } else if(type == "pizzaB"){
+    } else if(theme == "pizzaB"){
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
@@ -64,11 +139,11 @@ class TimerLoader {
           }
         },
         child: Stack(children: [
-          PizzaTypeBaseB(safeSize: safeSize),
-          PizzaTypeB(safeSize: safeSize, screenType: screenType,),
+          PizzaTypeBaseB(),
+          PizzaTypeB(screenType: screenType,),
         ]),
       );
-    } else if(type == "battery"){
+    } else if(theme == "battery"){
       return GestureDetector(
         onPanUpdate: (point) {
           Offset clickPoint = point.localPosition;
@@ -93,25 +168,25 @@ class TimerLoader {
           context.read<TimerController>().setSetupTime = clickToTime;
         },
         child: Stack(children: [
-          PizzaTypeBase(safeSize: safeSize),
-          PizzaType(safeSize: safeSize, screenType: screenType),
+          PizzaTypeBase(),
+          PizzaType(screenType: screenType,),
         ]),
       );
     }
   }
 
   /// 타이머 실행 중 사용
-  Widget onTimer(BuildContext context, String type){
-    Size safeSize = SizeUtil.get.safeSize; // 미디어 사이즈 초기화
+  Widget onTimer(BuildContext context, String theme){
+    Size safeSize = SizeUtil().safeSize; // 미디어 사이즈 초기화
     // Size safeSize = MediaQuery.of(context).size; // 미디어 사이즈
     // Size inf = Size(double.infinity, double.infinity);
     // print(inf);
-    if(type == "pizza"){
+    if(theme == "pizza"){
       return Stack(children: [
-        PizzaTypeBase(safeSize: safeSize),
-        PizzaType(safeSize: safeSize),
+        PizzaTypeBase(),
+        PizzaType(screenType: TimerScreenType.timer),
       ]);
-    } else if(type == "battery"){
+    } else if(theme == "battery"){
       return Stack(children: [
         BatteryTypeBase(safeSize: safeSize),
         BatteryType(safeSize: safeSize)
@@ -120,28 +195,33 @@ class TimerLoader {
       ]);
     } else {
       return Stack(children: [
-        PizzaTypeBase(safeSize: safeSize),
-        PizzaType(safeSize: safeSize),
+        PizzaTypeBase(),
+        PizzaType(screenType: TimerScreenType.timer),
       ]);
     }
   }
 
   /// 테마 선택 화면용
-  Widget sampleTimerLoader(BuildContext context, String type, Size cardSize){
-    if(type == "pizza"){
+  Widget sampleTimerLoader(BuildContext context, String theme, Size cardSize){
+    if(theme == "pizza"){
       return Stack(children: [
-        PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, screenType:TimerScreenType.theme),
+        PizzaTypeBase(),
+        PizzaType(screenType: TimerScreenType.theme),
       ]);
-    } else if(type == "battery"){
+    } else if(theme == "battery"){
       return Stack(children: [
         BatteryTypeBase(safeSize: cardSize),
         BatteryType(safeSize: cardSize, screenType:TimerScreenType.theme)
       ]);
+    } else if(theme == "pizzaB"){
+      return Stack(children: [
+        PizzaTypeBaseB(),
+        PizzaTypeB(screenType: TimerScreenType.theme,),
+      ]);
     } else {
       return Stack(children: [
-        PizzaTypeBase(safeSize: cardSize),
-        PizzaType(safeSize: cardSize, screenType:TimerScreenType.theme),
+        PizzaTypeBase(),
+        PizzaType(screenType:TimerScreenType.theme),
       ]);
     }
   }

@@ -24,9 +24,8 @@ extension DoubleExtension on double {
 }
 
 class PizzaTypeB extends StatefulWidget {
-  Size safeSize;
   TimerScreenType screenType;
-  PizzaTypeB({required this.safeSize, super.key, this.screenType = TimerScreenType.main});
+  PizzaTypeB({super.key, this.screenType = TimerScreenType.main});
 
   @override
   State<StatefulWidget> createState() {
@@ -73,7 +72,7 @@ class _PizzaTypeBState extends State<PizzaTypeB> {
     // widget.isOnTimer ? context.select((TimerController T) => T.remainTime) : context.select((TimerController T) => T.setupTime),
     print('피자 리빌드');
     // print(setupTime);
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     // print(safeSize);
     return CustomPaint(
       size: safeSize,
@@ -192,7 +191,8 @@ class PizzaTypePainter extends CustomPainter {
           text: utils.parseTimeString(_timeUnit, setupTime),
           style: TextStyle(
             color: Colors.white,
-            fontSize: size.width / 10,
+            fontSize: size.width / 7,
+            fontWeight: FontWeight.bold
           ),
         ),
         textDirection: TextDirection.ltr, // 텍스트 방향
@@ -210,7 +210,7 @@ class PizzaTypePainter extends CustomPainter {
       );
 
       RRect textrRect = RRect.fromRectAndRadius(textRect, Radius.circular(15));
-      final textRectPaint = Paint()..color = Colors.blueGrey.withOpacity(0.5);
+      final textRectPaint = Paint()..color = Colors.blueGrey.withOpacity(0.8);
       canvas.drawRRect(textrRect, textRectPaint);
 
       final offset = Offset( // 텍스트 그릴 위치 계산
@@ -229,8 +229,7 @@ class PizzaTypePainter extends CustomPainter {
 }
 
 class PizzaTypeBaseB extends StatefulWidget {
-  Size safeSize;
-  PizzaTypeBaseB({required this.safeSize,super.key});
+  PizzaTypeBaseB({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -241,7 +240,7 @@ class PizzaTypeBaseB extends StatefulWidget {
 class _PizzaTypeBStateBase extends State<PizzaTypeBaseB> {
   @override
   Widget build(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     return CustomPaint(
       size: safeSize, // 원하는 크기로 지정
       painter: pizzaTypeBBasePainter(

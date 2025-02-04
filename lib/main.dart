@@ -23,7 +23,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       // 상태바를 완전 투명하게
-      statusBarColor: Colors.transparent,
+      statusBarColor: Colors.white,
       // 아이콘 색상 (Light 면 흰색 아이콘, Dark 면 검정 아이콘)
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark, // iOS 상태바 텍스트 색

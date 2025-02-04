@@ -4,13 +4,13 @@ import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../models/timer_model.dart';
-import '../provider/create_timer_controller.dart';
-import '../utils/app_utils.dart';
-import '../utils/common_values.dart';
-import '../utils/size_util.dart';
-import 'dialog/select_color_dialog.dart';
-import 'dialog/select_time_config_dialog.dart';
+import '../../models/timer_model.dart';
+import '../../provider/create_timer_controller.dart';
+import '../../utils/app_utils.dart';
+import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
+import '../dialog/select_color_dialog.dart';
+import '../dialog/select_time_config_dialog.dart';
 
 
 class CreateTimerToolbar extends StatefulWidget {
@@ -75,12 +75,13 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
 
     return  Container(
       // color: Colors.blue.withOpacity(0.15),// 임시
-      width: SizeUtil.get.sw,
-      height: SizeUtil.get.sh * 0.1,
-      alignment: Alignment.topCenter,
+      width: SizeUtil().sw,
+      height: SizeUtil().sh * 0.1,
+      alignment: Alignment.center,
       child: Container(
-          width: SizeUtil.get.sw * 0.9,
-          height: SizeUtil().sh075 * 0.8, // todo 060 새로 만들기
+          width: SizeUtil().sw,
+          height: SizeUtil().sh10 * 0.9,
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(50),
@@ -117,8 +118,8 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(MaterialCommunityIcons.cached,size: 20,),//format_paint
-                      Text("Mode",style: TextStyle(color: Colors.deepPurple,fontSize: 10),)
+                      Icon(MaterialCommunityIcons.cached,size: 35,),//format_paint
+                      Text("Mode",style: TextStyle(color: Colors.deepPurple,fontSize: 12),)
                     ]
                     ,)
               ),
@@ -144,9 +145,9 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                           width: 1, // 테두리 두께
                         ),
                     elevation: 1,
-                    fixedSize : Size.fromHeight(1)
+                    // fixedSize : Size.fromHeight(50) // todo 수정하기
                   ),
-                  child: Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
+                  child: Align(child: Text(_selectedTimeText,style: TextStyle(fontSize: SizeUtil().sh10/2.5, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
               ),
               // ElevatedButton(onPressed: (){}, child: SizedBox()),
 
@@ -164,8 +165,8 @@ class _CreateTimerToolbarState extends State<CreateTimerToolbar> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(MaterialCommunityIcons.eye_off,size: 20,),
-                      Text("None",style: TextStyle(color: Colors.deepPurple,fontSize: 10),)
+                      Icon(MaterialCommunityIcons.eye_off,size: 35,),
+                      Text("None",style: TextStyle(color: Colors.deepPurple,fontSize: 12),)
                     ]
                     ,)
               ),

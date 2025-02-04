@@ -4,13 +4,13 @@ import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../models/timer_model.dart';
-import '../provider/create_timer_controller.dart';
-import '../utils/app_utils.dart';
-import '../utils/common_values.dart';
-import '../utils/size_util.dart';
-import 'dialog/select_color_dialog.dart';
-import 'dialog/select_time_config_dialog.dart';
+import '../../models/timer_model.dart';
+import '../../provider/create_timer_controller.dart';
+import '../../utils/app_utils.dart';
+import '../../utils/common_values.dart';
+import '../../utils/size_util.dart';
+import '../dialog/select_color_dialog.dart';
+import '../dialog/select_time_config_dialog.dart';
 
 
 class PresetToolbar extends StatefulWidget {
@@ -32,8 +32,8 @@ class _PresetToolbarState extends State<PresetToolbar> {
     TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel);
 
     return Container(
-          width: SizeUtil.get.sw,
-          height: SizeUtil.get.sh075,
+          width: SizeUtil().sw,
+          height: SizeUtil().sh075,
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
@@ -56,7 +56,7 @@ class _PresetToolbarState extends State<PresetToolbar> {
                 child: Icon(MaterialCommunityIcons.format_list_bulleted_type,size: SizeUtil().sh075/2,color: Colors.blueGrey,),
               ),
 
-              Align(child: Text("Group List",style: TextStyle(fontSize: SizeUtil().sh075/2, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
+              Align(child: Text("Timer Groups",style: TextStyle(fontSize: SizeUtil().sh075/2, fontWeight: FontWeight.bold, color: Colors.blueGrey), textAlign: TextAlign.center),),
               SizedBox(
                 width: SizeUtil().sh075,
                 height: SizeUtil().sh075,

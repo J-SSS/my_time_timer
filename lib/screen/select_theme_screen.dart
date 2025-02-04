@@ -6,6 +6,7 @@ import 'package:my_time_timer/utils/timer_utils.dart' as utils;
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../provider/app_config_controller.dart';
+import '../provider/create_timer_controller.dart';
 import '../widgets/timer_loader.dart';
 import 'create_timer_screen.dart';
 
@@ -19,21 +20,18 @@ class SelectThemeScreen extends StatelessWidget {
     AppManager.log("테마선택", type: "B");
     int activeIndex = 0;
 
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('테마 선택'),
-      ),
-      body: Column(
+      body: SafeArea(child: Column(
         children: [
           Container(
-            color: Colors.cyan.withOpacity(0.1),
-            height: safeSize.height * 0.1,
+            // color: Colors.cyan.withOpacity(0.1),
+            height: SizeUtil().sh10,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical : 0, horizontal : 8.0),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -53,11 +51,11 @@ class SelectThemeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-              ],),
+                ],),
             ),
           ),
           SizedBox(
-            height: safeSize.height * 0.8,
+            height: SizeUtil().sh80,
             child: Center(
               child: CarouselSlider(
                 options: CarouselOptions(
@@ -73,31 +71,32 @@ class SelectThemeScreen extends StatelessWidget {
                   },
                 ),
                 items: [
-                  SampleThemeCard(title: '기본형', content: 'pizza', safeSize: safeSize, isActive : activeIndex == 0),
-                  SampleThemeCard(title: '배터리', content: 'battery', safeSize: safeSize, isActive : activeIndex == 1),
-                  SampleThemeCard(title: '타입C', content: 'battery', safeSize: safeSize, isActive : activeIndex == 2),
-                  SampleThemeCard(title: '타입D', content: 'battery', safeSize: safeSize, isActive : activeIndex == 3),
+                  SampleThemeCard(title: '기본형', theme: 'pizza', safeSize: safeSize, isActive : activeIndex == 0),
+                  SampleThemeCard(title: '배터리', theme: 'battery', safeSize: safeSize, isActive : activeIndex == 1),
+                  SampleThemeCard(title: '기본형2', theme: 'pizzaB', safeSize: safeSize, isActive : activeIndex == 2),
+                  // SampleThemeCard(title: '타입D', theme: 'battery', safeSize: safeSize, isActive : activeIndex == 3),
                 ],
               ),
             ),
           ),
           Container(
-            color: Colors.green.withOpacity(0.2),
-              height: safeSize.height * 0.1
+              // color: Colors.green.withOpacity(0.2),
+              height: SizeUtil().sh10
           ),
         ],
-      ),
+      ))
+      ,
     );
   }
 }
 
 class SampleThemeCard extends StatelessWidget {
   final String title;
-  final String content;
+  final String theme;
   final Size safeSize;
   final bool isActive;
 
-  SampleThemeCard({required this.title, required this.content, required this.safeSize, required this.isActive});
+  SampleThemeCard({required this.title, required this.theme, required this.safeSize, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -110,10 +109,8 @@ class SampleThemeCard extends StatelessWidget {
         child: InkWell(
             borderRadius: BorderRadius.circular(8),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateTimerScreen()),
-              );
+              context.read<CreateTimerController>().refreshTimerModelWithTheme(theme);
+              Navigator.pop(context);
             },
             child: Padding(
               padding: const EdgeInsets.all(30),
@@ -141,7 +138,7 @@ class SampleThemeCard extends StatelessWidget {
                     Expanded(
                       flex: 9, // 하단 위젯: 3 비율
                       child: Center(
-                          child: TimerLoader().sampleTimerLoader(context, content, cardSize)
+                          child: TimerLoader().sampleTimerLoader(context, theme, cardSize)
                         //       // child: TimerLoader().timerLoader(context, "battery")
                       ),
                     ),

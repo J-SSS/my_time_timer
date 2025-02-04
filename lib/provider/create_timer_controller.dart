@@ -56,6 +56,12 @@ class CreateTimerController with ChangeNotifier {
     notifyListeners();
   }
 
+  /// TimerModel 갱신
+  void refreshTimerModelWithTheme(String theme){
+    _timerModel = _timerModel?.copyWith(theme:theme);
+    notifyListeners();
+  }
+
   get timerColorData => _timerColorData;
 
   get timerColorList => _timerColorList;

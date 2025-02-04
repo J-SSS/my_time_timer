@@ -85,7 +85,7 @@ void showOverlayText(BuildContext context, Size size, String msg) {
 void showOverlayInfo(BuildContext context, String msg) {
   TextPainter textPainter = getTextPainter(msg, overlayTextStyle);
   Size textBoxSize = textPainter.size;
-  Size size = SizeUtil.get.safeSize;
+  Size size = SizeUtil().safeSize;
   /* 기존 overlayEntry 있으면 삭제 */
   if(_overlayEntryTime != null){
     _overlayEntryTime?.remove();

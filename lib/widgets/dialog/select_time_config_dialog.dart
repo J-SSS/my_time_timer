@@ -13,7 +13,7 @@ import '../../utils/common_values.dart';
 class SelectTimeConfigDialog {
 
     void show(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     double dialogInnerPadding = safeSize.width * 0.8 * 0.05;
     double dialogSafeWidth = safeSize.width * 0.8 - safeSize.width * 0.8 * 0.1;
     // double dialogHeight40 = safeSize.height * 0.7 * 0.4;
@@ -98,7 +98,7 @@ class _TimerConfigSelectorState extends State<TimerConfigSelector> {
 
   @override
   Widget build(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
 
     TimerModel timerModel = context.select((CreateTimerController T) => T.timerModel);
 

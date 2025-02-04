@@ -8,7 +8,6 @@ import '../manager/app_manager.dart';
 
 
 class SizeUtil {
-  // SizeUtil._2():param = 1;
   SizeUtil._()
       :param = 1; // private 생성자
 
@@ -48,6 +47,7 @@ class SizeUtil {
   late double sh10;
   late double sh15;
   late double sh20;
+  late double sh65;
   late double sh70;
   late double sh75;
   late double sh80;
@@ -91,8 +91,7 @@ class SizeUtil {
     dh = mQ.size.height;
 
     // 안전영역 계산
-    sh = mQ.size.height - mQ.padding.top - mQ.padding.bottom; // 56은 AppBar 기본 높이 todo 맞는지 확인필요
-    // sh = mQ.size.height; // 56은 AppBar 기본 높이 todo 맞는지 확인필요
+    sh = mQ.size.height - mQ.padding.top - mQ.padding.bottom;
     sw = mQ.size.width - mQ.padding.left - mQ.padding.right;
     safeSize = Size(sw, sh);
 
@@ -102,6 +101,7 @@ class SizeUtil {
     sh10 = sh * 0.1;
     sh15 = sh * 0.15;
     sh20 = sh * 0.2;
+    sh65 = sh * 0.65;
     sh70 = sh * 0.7;
     sh75 = sh * 0.75;
     sh80 = sh * 0.8;
@@ -126,15 +126,12 @@ class SizeUtil {
 
   }
   // static get layout => _instance;
-  static get get => SizeUtil();
+  // static get get => SizeUtil();
   // static final SizeUtil to = SizeUtil._();
   // static final SizeUtil layout = SizeUtil._();
   // static final SizeUtil? layout = SizeUtil()._instance;
 }
 
-// FittedBox나 AutoSizeText로 공간에 맞춰 자동 축소/확대.
-// AutoSizeText로
-//
 // 1. 모바일 디바이스의 해상도 표준
 // 많은 디자이너가 모바일 UI 디자인을 할 때 가로 길이(예: 360px, 375px)를 기준으로 잡아요.
 // 이는 안드로이드/아이폰이 서로 다른 화면 비율을 갖더라도, 가로 폭이 UI 구조상 더 중요한 기준이 되기 때문이에요.
@@ -143,10 +140,10 @@ class SizeUtil {
 // 구글 Material Design에서도 레이아웃 그리드를 설계할 때 디바이스 너비를 기준으로 단계별 규칙을 제시해요.
 
 
-//     .w : 너비를 기준으로 배율을 적용한다.
+// .w : 너비를 기준으로 배율을 적용한다.
 // .h : 높이를 기준으로 배율을 적용한다.
 // .r : 너비와 높이 중 작은 값으로 배율을 적용한다.
-//     .sp : 화면 사이즈를 기준으로 font-size에 배율을 적용한다.
+// .sp : 화면 사이즈를 기준으로 font-size에 배율을 적용한다.
 //
 //  
 // 그 외에도 sw, sh 라는 속성도 있다.

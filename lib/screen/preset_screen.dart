@@ -5,7 +5,7 @@ import 'package:my_time_timer/models/group_model.dart';
 import 'package:my_time_timer/models/preset_model.dart';
 import 'package:my_time_timer/screen/select_theme_screen.dart';
 import 'package:my_time_timer/utils/size_util.dart';
-import 'package:my_time_timer/widgets/preset_toolbar.dart';
+import 'package:my_time_timer/widgets/topBar/preset_top_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:my_time_timer/viewModels/timer_view_model.dart';
 
@@ -52,11 +52,11 @@ class _PresetScreenState extends State<PresetScreen> {
           children: [
             Container(
               // color: Colors.green.withOpacity(0.5),
-              height: SizeUtil.get.sh075,
+              height: SizeUtil().sh075,
               child: PresetToolbar(),
             ),
             SizedBox(
-                height: SizeUtil.get.sh85,
+                height: SizeUtil().sh85,
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: SizeUtil().sh01, horizontal: 0),
                   child: PresetList(),
@@ -65,13 +65,13 @@ class _PresetScreenState extends State<PresetScreen> {
             ),
             SizedBox(
               // color: Colors.green.withOpacity(0.05),
-              height: SizeUtil.get.sh075,
+              height: SizeUtil().sh075,
               width: SizeUtil().sw,
 
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                height: SizeUtil.get.sh075/2,
+                height: SizeUtil().sh075/2,
                 alignment: Alignment.bottomCenter,
                 decoration: BoxDecoration(
                   color: Colors.white,

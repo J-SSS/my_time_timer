@@ -16,7 +16,8 @@ import '../utils/app_utils.dart';
 import '../utils/common_values.dart';
 import '../utils/timer_utils.dart';
 import '../viewModels/timer_view_model.dart';
-import '../widgets/create_timer_toolbar.dart';
+import '../widgets/bottomBar/create_timer_bottom_bar.dart';
+import '../widgets/topBar/create_timer_top_bar.dart';
 import '../widgets/timer_loader.dart';
 
 class CreateTimerScreen extends StatelessWidget {
@@ -34,6 +35,7 @@ class CreateTimerScreen extends StatelessWidget {
 
     int groupId = context.read<CreateTimerController>().groupId;
     print('그룹 아이디 : $groupId');
+    print('선택 테마 : ${timerModel.theme}');
     //
     // // ① 우선 텍스트를 그려서 폭(width)을 측정할 준비
     // final defaultStyle = style ?? DefaultTextStyle.of(context).style;
@@ -78,38 +80,28 @@ class CreateTimerScreen extends StatelessWidget {
     //         ],
     //       );
 
-    // print(SizeUtil.get.sw * 0.2);
+    // print(SizeUtil().sw * 0.2);
 
-    double verticalDividerIndent = SizeUtil.get.sh * 0.1 * 0.5 * 0.3;
-    double mainLRPadding = SizeUtil.get.sw075.roundToDouble(); // 가로 411 기준 약 31
+    double verticalDividerIndent = SizeUtil().sh * 0.1 * 0.5 * 0.3;
+    double mainLRPadding = SizeUtil().sw075.roundToDouble(); // 가로 411 기준 약 31
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        // appBar: AppBar(
-        //   leading: const SizedBox(),
-        //   // leading: Container(color: Colors.red,),
-        //   title: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-
-        //
-        //   // toolbarHeight: 56,
-        //   centerTitle: true,
-        // ),
-
+        backgroundColor: scaffoldBackgroundColorLight,
         body: SafeArea(
             child:Column(
               children: [
+                /// 앱바
                 Container( // 임시
-                    height: SizeUtil.get.sh * 0.075, // todo 여백 다시 맞추기
-                    width: SizeUtil.get.sw,
+                    height: SizeUtil().sh10, // todo 여백 다시 맞추기
+                    width: SizeUtil().sw,
                     // color: Colors.grey.withOpacity(0.55),
                     alignment: Alignment.center,
                     child: const CreateTimerToolbar()
                 ),
                 Container( // 임시
-                    height: SizeUtil.get.sh * 0.075,
-                    width: SizeUtil.get.sw,
+                    height: SizeUtil().sh10,
+                    width: SizeUtil().sw,
                     // color: Colors.blue.withOpacity(0.1),
                     alignment: Alignment.center,
                     child: Row(
@@ -117,19 +109,19 @@ class CreateTimerScreen extends StatelessWidget {
                       children: [
 
                       ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: 200), // 최대 너비 제한
-                        child: Text(timerModel.timerName,
+                        constraints: BoxConstraints(maxWidth: SizeUtil().sw90), // 최대 너비 제한
+                        child: Text(timerModel.timerName * 1,
                             maxLines: 1, // 최대 한 줄로 제한
                             overflow: TextOverflow.ellipsis, // 넘치는 텍스트를 생략(...)
                             style: TextStyle(
-                              fontSize: 25,
+                              fontSize: SizeUtil().sh10/2,
                               fontWeight: FontWeight.bold,
                               color: Colors.black54,
                               shadows: [
                                 Shadow(
-                                  offset: Offset(0, 3), // 그림자의 x, y 위치
+                                  offset: const Offset(0, 3), // 그림자의 x, y 위치
                                   blurRadius: 1.0, // 그림자 흐림 정도
-                                  color: Colors.grey.withOpacity(0.2), // 그림자 색상
+                                  color: Colors.grey.withOpacity(0.3), // 그림자 색상
                                 ),
                               ],))
                       ),
@@ -138,166 +130,30 @@ class CreateTimerScreen extends StatelessWidget {
                         onPressed: () {
                           _showModifyTimerNamePopup(context,timerModel);
                         },
-                        icon: Icon(MaterialCommunityIcons.pencil,size: 20,color: Colors.blueGrey,),
+                        icon: Icon(MaterialCommunityIcons.pencil,size: SizeUtil().sh10/2.5,color: Colors.blueGrey,),
                         // color: Colors.grey,
                       ),
                     ],)
-
-
-
-
-
                 ),
 
 
                 Container(
-                    height: SizeUtil.get.sh * 0.7,
-                    // color: Colors.red.withOpacity(0.1),
+                    height: SizeUtil().sh * 0.65,
+                    // color: Colors.blue.withOpacity(0.1),
                     child:  Padding(
                       padding: EdgeInsets.fromLTRB(mainLRPadding, 0, mainLRPadding, 0), // 좌우 7.5%씩 합 15%
                       child: Center(
-                          child: TimerLoader().timerLoader(context, "pizza", TimerScreenType.create)
-                        // child: TimerLoader().timerLoader(context, "battery", TimerScreenType.create)
-                      ),
-                    )
+                          child: TimerLoader().timerLoaderWithGesture(context, timerModel.theme, TimerScreenType.create)
+                      ),)
+                    // child: TimerLoader().timerLoaderWithGesture(context, timerModel.theme, TimerScreenType.create)
                 ),
 
 
                 Container(
-                  // color: Colors.red.withOpacity(0.55),// 임시
-                  width: SizeUtil.get.sw,
-                  height: SizeUtil.get.sh * 0.15,
-                  alignment: Alignment.center,
-                  child: Container(
-                      width: SizeUtil.get.sw * 0.9,
-                      height: SizeUtil.get.sh * 0.15 * 0.65,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.3),
-                            spreadRadius: 3,
-                            blurRadius: 1,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child:
-                            SizedBox(
-                              // width: SizeUtil.get.sw * 0.8 * 0.7,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  TextButton( /** 칼라 버튼 */
-                                      onPressed: () {
-                                        SelectColorDialog.show(context);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50), // 둥근 모서리
-                                          // side: BorderSide(
-                                          //   color: Colors.blueGrey, // 테두리 색상
-                                          //   width: 1, // 테두리 두께
-                                          // ),
-                                        ),
-                                        padding: EdgeInsets.all(0.0),
-                                        fixedSize: Size(50.0, 50.0),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            'assets/icon/btn_color.png',
-                                            width: 30,
-                                            height: 30,
-                                          ),
-                                          Text("Colors")
-                                        ]
-                                        ,)
-                                  ),
-                                  TextButton( /** 테마 버튼 */
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => SelectThemeScreen()),
-                                        );
-                                        showOverlayInfo(context,"초기화");
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        // padding: EdgeInsets.all(10.0),
-                                        // fixedSize: Size(55.0, 55.0),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(MaterialCommunityIcons.cards,size: 30,),//format_paint
-                                          Text("Theme")
-                                        ]
-                                        ,)
-                                  ),
-                                  TextButton( /** 알람 버튼 */
-                                      onPressed: () {
-                                        showOverlayInfo(context,"초기화");
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: const CircleBorder(),
-                                        // padding: EdgeInsets.all(10.0),
-                                        // fixedSize: Size(55.0, 55.0),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(MaterialCommunityIcons.alarm,size: 30,),//format_paint
-                                          Text("Alarm",style: TextStyle(color: Colors.deepPurple),)
-                                        ]
-                                        ,)
-                                  ),
-
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container( // 재생버튼 부분
-                            // color: Colors.redAccent.withOpacity(0.1),
-                            // width: SizeUtil.get.sw * 0.8 * 0.3,
-                            width: SizeUtil.get.sh * 0.2 * 0.5,
-                            child: TextButton(
-                              onPressed: () async {
-                                // if(timerModel.timerId == -1){ // 신규 생성인 경우
-                                //   timerModel = timerModel.copyWith(timerId: getUtc()); // 타이머아이디
-                                //   await context.read<TimerViewModel>().insertTimer(timerModel);
-                                //   // await asyncTest();
-                                // } else { // 업데이트 하는 경우
-                                //   context.read<TimerViewModel>().updateTimer(timerModel);
-                                // }
-                                // Navigator.pop(context); // 닫기 todo 메인으로 돌아가게 해야함
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: CircleBorder(),
-                                // padding: EdgeInsets.all(13.0),
-                                padding: EdgeInsets.all(0.0),
-                                // fixedSize: Size(90.0, 90.0),
-                              ),
-                              child:  Image.asset(
-                                'assets/icon/btn_save.png',fit: BoxFit.fill,
-                                // width: 200,
-                                // height: 200.0,
-                              ),
-                            ),
-                          ),
-
-
-                        ],
-                      )
-                  ),
-
+                  // color: Colors.green.withOpacity(0.1),// 임시
+                  height: SizeUtil().sh15,
+                  alignment: Alignment.bottomCenter,
+                  child: const CreateTimerBottomBar()
                 ),
 
 

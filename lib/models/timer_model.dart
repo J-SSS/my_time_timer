@@ -13,6 +13,8 @@ class TimerModel {
   final int sortOrder;
   /// 설정시간
   int setupTime = 45;
+  /// 테마 타입
+  String theme;
   /// 타이머 모드 (0 : 타이머형, 1 : 알람형)
   final int timerMode;
   /// 시간 단위 (0 : 초, 1 : 분)
@@ -50,6 +52,7 @@ class TimerModel {
       'timerId': timerId,
       'groupId': groupId,
       'sortOrder': sortOrder,
+      'theme': theme,
       'timerMode': timerMode,
       'timerName': timerName,
       'timeUnit': timeUnit,
@@ -64,6 +67,7 @@ class TimerModel {
     this.groupId = 0,
     this.timerName = "New Timer",
     this.sortOrder = 0,
+    this.theme = "pizza",
     this.timerMode = 0,
     this.timeUnit = 0,
     this.maxTime = 60,
@@ -81,6 +85,7 @@ class TimerModel {
     int? groupId,
     String? timerName,
     int? sortOrder,
+    String? theme,
     int? timerMode,
     int? timeUnit,
     int? maxTime,
@@ -92,6 +97,7 @@ class TimerModel {
       groupId : groupId ?? this.groupId,
       timerName : timerName ?? this.timerName,
       sortOrder : sortOrder ?? this.sortOrder,
+      theme : theme ?? this.theme,
       timerMode : timerMode ?? this.timerMode,
       timeUnit : timeUnit ?? this.timeUnit,
       maxTime : maxTime ?? this.maxTime,
@@ -115,7 +121,7 @@ class TimerModel {
 // 'timerName': "", // 타이머 이름
 // 'sortOrder': "", // 타이머 정렬 순서
 // 'setupTime': 45, // 설정 시간
-// 'uiType': 'pizza', // 디자인 타입
+// 'theme': 'pizza', // 테마 타입
 // 'timerMode': 0, // 타이머 타입 (0 : 타이머형, 1 : 알람형)
 // 'maxTime': 60, // 최대 시간
 // 'timeUnit': 0, // 시간 단위 (0 : 초, 1 : 분, 2 : 시간)

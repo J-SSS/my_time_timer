@@ -9,7 +9,7 @@ import '../../utils/size_util.dart';
 
 class SelectColorDialog {
   static void show(BuildContext context) {
-    Size safeSize = SizeUtil.get.safeSize;
+    Size safeSize = SizeUtil().safeSize;
     double dialogWidth = safeSize.width * 0.8;
     double dialogHeight = safeSize.height * 0.7 * 0.6;
     double dialogInnerPadding = dialogWidth * 0.05;

@@ -23,6 +23,8 @@ const colorAssignList = [
   [80, 60, 40, 20, 0] // ["~100%", "~80%", "~60%", "~40%", "~20%"]
 ];
 
+const scaffoldBackgroundColorLight = Color.fromRGBO(245, 245, 245, 1);
+
 // todo 사용 코드 추가하기
 const remainTimeIconist = [
   Icon(Icons.mode_edit),

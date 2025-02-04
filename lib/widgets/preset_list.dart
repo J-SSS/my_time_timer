@@ -90,8 +90,8 @@ class _PresetListState extends State<PresetList> {
                 Row(
                   children: [
                     SizedBox(
-                      width: SizeUtil.get.sh05,
-                      height: SizeUtil.get.sh05,
+                      width: SizeUtil().sh05,
+                      height: SizeUtil().sh05,
                       child: groupId != 0 ? IconButton(
                           padding: EdgeInsets.all(10.0),
                           onPressed: () {
@@ -104,8 +104,8 @@ class _PresetListState extends State<PresetList> {
                           iconSize: 20) : null,
                     ),
                     SizedBox(
-                      width: SizeUtil.get.sh05,
-                      height: SizeUtil.get.sh05,
+                      width: SizeUtil().sh05,
+                      height: SizeUtil().sh05,
                       child: groupId != 0 ? IconButton(
                           padding: EdgeInsets.all(0.0),
                           onPressed: () {
@@ -156,8 +156,8 @@ class _PresetListState extends State<PresetList> {
             },
             children: <Widget>[ // 목록의 하위 요소들
               SizedBox( // 이동 가능한 범위 (개별 요소 크기 아님)
-                height: timerModelList.length.toDouble() * SizeUtil.get.sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
-                width: SizeUtil.get.sw90,
+                height: timerModelList.length.toDouble() * SizeUtil().sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
+                width: SizeUtil().sw90,
                 child: ReorderableListView(
                   // physics: ClampingScrollPhysics(), // 스크롤 제약 조건 설정 찾아보기
                   //   padding: EdgeInsets.only(left: 16.0),
@@ -198,7 +198,7 @@ class _PresetListState extends State<PresetList> {
                           child: Container(
                               key: Key(timerId.toString()),
                               margin:  const EdgeInsets.only(bottom: 8), // 마진 줄 수 있음
-                              height: SizeUtil.get.sh075,
+                              height: SizeUtil().sh075,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25), // 원하는 곡선의 반지름 값 설정
                                 boxShadow: [
@@ -248,11 +248,11 @@ class _PresetListState extends State<PresetList> {
 
 
               SizedBox(
-                height: SizeUtil.get.sh05 / 3,
+                height: SizeUtil().sh05 / 3,
               ), // 추가 버튼 상단 여백
               Container( // 추가 버튼
-                  height: SizeUtil.get.sh05,
-                  width: SizeUtil.get.sw90,
+                  height: SizeUtil().sh05,
+                  width: SizeUtil().sw90,
                   decoration: BoxDecoration(
                     borderRadius:
                     BorderRadius.circular(15), // 원하는 곡선의 반지름 값 설정
@@ -273,11 +273,11 @@ class _PresetListState extends State<PresetList> {
                     icon: Icon(
                       Icons.add,
                       color: Colors.grey,
-                      size: SizeUtil.get.sw05,
+                      size: SizeUtil().sw05,
                     ),
                   )), // 추가 버튼
               SizedBox(
-                height: SizeUtil.get.sh05 / 3,
+                height: SizeUtil().sh05 / 3,
               ) // 추가 버튼 하단 여백
             ],
           ));
@@ -299,8 +299,8 @@ class _PresetListState extends State<PresetList> {
           //       Row(
           //         children: [
           //           SizedBox(
-          //             width: SizeUtil.get.sh05,
-          //             height: SizeUtil.get.sh05,
+          //             width: SizeUtil().sh05,
+          //             height: SizeUtil().sh05,
           //             child: groupId != 0 ? IconButton(
           //                 padding: EdgeInsets.all(10.0),
           //                 onPressed: () {
@@ -313,8 +313,8 @@ class _PresetListState extends State<PresetList> {
           //                 iconSize: 20) : null,
           //           ),
           //           SizedBox(
-          //             width: SizeUtil.get.sh05,
-          //             height: SizeUtil.get.sh05,
+          //             width: SizeUtil().sh05,
+          //             height: SizeUtil().sh05,
           //             child: groupId != 0 ? IconButton(
           //                 padding: EdgeInsets.all(0.0),
           //                 onPressed: () {
@@ -358,8 +358,8 @@ class _PresetListState extends State<PresetList> {
           //   },
           //   children: <Widget>[ // 목록의 하위 요소들
           //       SizedBox( // 이동 가능한 범위 (개별 요소 크기 아님)
-          //         height: timerModelList.length.toDouble() * SizeUtil.get.sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
-          //         width: SizeUtil.get.sw90,
+          //         height: timerModelList.length.toDouble() * SizeUtil().sh075 + 5, // 너무 딱 맞으면 드래그 할 때 오류남
+          //         width: SizeUtil().sw90,
           //         child: ReorderableListView(
           //           // physics: ClampingScrollPhysics(), // 스크롤 제약 조건 설정 찾아보기
           //           //   padding: EdgeInsets.only(left: 16.0),
@@ -400,7 +400,7 @@ class _PresetListState extends State<PresetList> {
           //                   child: Container(
           //                   key: Key(timerId.toString()),
           //                   margin:  const EdgeInsets.only(bottom: 8), // 마진 줄 수 있음
-          //                   height: SizeUtil.get.sh075,
+          //                   height: SizeUtil().sh075,
           //                   decoration: BoxDecoration(
           //                     borderRadius: BorderRadius.circular(25), // 원하는 곡선의 반지름 값 설정
           //                     boxShadow: [
@@ -450,11 +450,11 @@ class _PresetListState extends State<PresetList> {
           //
           //
           //     SizedBox(
-          //       height: SizeUtil.get.sh05 / 3,
+          //       height: SizeUtil().sh05 / 3,
           //     ), // 추가 버튼 상단 여백
           //     Container( // 추가 버튼
-          //         height: SizeUtil.get.sh05,
-          //         width: SizeUtil.get.sw90,
+          //         height: SizeUtil().sh05,
+          //         width: SizeUtil().sw90,
           //         decoration: BoxDecoration(
           //           borderRadius:
           //           BorderRadius.circular(15), // 원하는 곡선의 반지름 값 설정
@@ -475,11 +475,11 @@ class _PresetListState extends State<PresetList> {
           //           icon: Icon(
           //             Icons.add,
           //             color: Colors.grey,
-          //             size: SizeUtil.get.sw05,
+          //             size: SizeUtil().sw05,
           //           ),
           //         )), // 추가 버튼
           //     SizedBox(
-          //       height: SizeUtil.get.sh05 / 3,
+          //       height: SizeUtil().sh05 / 3,
           //     ) // 추가 버튼 하단 여백
           //   ],
           // );
