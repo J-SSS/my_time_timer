@@ -128,7 +128,7 @@ class CreateTimerScreen extends StatelessWidget {
 
                       IconButton(
                         onPressed: () {
-                          _showModifyTimerNamePopup(context,timerModel);
+                          _showModifyTimerNamePopup(context,timerModel); // todo showModalBottomSheet로 바꿔보기
                         },
                         icon: Icon(MaterialCommunityIcons.pencil,size: SizeUtil().sh10/2.5,color: Colors.blueGrey,),
                         // color: Colors.grey,
